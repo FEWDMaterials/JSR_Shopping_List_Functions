@@ -313,7 +313,7 @@
 
 			list = removeNItems(1, 1, list);
 
-			chai.assert.equal(list.length, 1)
+			chai.assert.equal(list.length, 2)
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
