@@ -23,6 +23,19 @@
 	*/
 
 	// implement function here
+	let newShoppingListItem = (item, price) => {
+		if (typeof item !== 'string') {
+			throw Error('Parameter item must be a string.');
+		}
+		if (typeof price !== 'number') {
+			throw Error('Parameter price must be a number.');
+		}
+
+		return {
+			item: item,
+			price: price,
+		};
+	};
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
