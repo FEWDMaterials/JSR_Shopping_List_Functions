@@ -153,6 +153,14 @@
 	*/
 
 	// implement function here
+	const removeFirstItem = (list) => {
+		if (!Array.isArray(list) || list.length === 0) {
+			return;
+		}
+
+		return list.splice(1, list.length);
+	};
+
 
 	// TEST
 	describe('4. removeFirstItem', () => {
