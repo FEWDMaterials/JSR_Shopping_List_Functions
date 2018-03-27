@@ -66,6 +66,17 @@
 	*/
 
 	// implement function here
+	const addToShoppingList = (item, list = []) => {
+		if (!list || !Array.isArray(list)) {
+			throw Error('Parameter list must be an Array');
+		}
+
+		if (!item.hasOwnProperty('item') || !item.hasOwnProperty('price')) {
+			throw Error('Invalid Item Object. Must contain price and item properties');
+		}
+		list.push(item);
+		return list;
+	};
 
 	// TEST
 	describe('2. addToShoppingList', () => {
