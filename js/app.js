@@ -199,6 +199,14 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list = []) => {
+		if (isNaN(i) || i < 0 || i >= list.length) {
+			throw new Error('Parameter i is out of bounds or not a number.');
+		}
+
+		list.splice(i, 1);
+		return list;
+	};
 
 	// TEST
 	describe('5. removeNthItem', () => {
