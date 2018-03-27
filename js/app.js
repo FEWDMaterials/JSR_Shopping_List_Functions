@@ -277,6 +277,22 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i, num, list = []) => {
+		if (isNaN(i) || isNaN(num)) {
+			throw new Error('Parameter i or num must be a number.');
+		}
+
+		if (i < 0 || i >= list.length) {
+			throw new Error('Parameter i is out of bounds.');
+		}
+
+		if (i + num > list.length || num > list.length) {
+			throw new Error('The parameters num and i are invalid');
+		}
+
+		const newList = list.splice(i, num);
+		return list;
+	};
 
 	// TEST
 	describe('6. removeNItems', () => {
