@@ -23,6 +23,18 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+
+		if (typeof item !== 'string' && typeof price !== "number") {
+			alert('item must be a string and price must be a number');
+			return;
+		}
+
+    return {
+      'item': item,
+      'price' : price
+    };
+	};
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
