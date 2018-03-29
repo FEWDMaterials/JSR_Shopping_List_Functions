@@ -360,8 +360,8 @@
 			list = smartRemoveItems(1, list);
 
 			chai.assert.equal(list.length, 2)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
+			chai.assert.equal(list[0].item, 'test2')
+			chai.assert.equal(list[0].price, 2)
 			chai.assert.equal(list[1].item, 'test3')
 			chai.assert.equal(list[1].price, 3)
 		});
