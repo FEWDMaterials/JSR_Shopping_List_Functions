@@ -1,5 +1,4 @@
 (function() { // protect the lemmings!
-
 	/* 1
 		@function newShoppingListItem
 		@param item {string}
@@ -23,7 +22,19 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+		if ( typeof item != 'string' ) { throw new Error ('The item is not a string.'); }
+		if ( item.length > 10) { throw new Error ('The item needs to have fewer than 10 characters.'); }	
+		if (typeof price != 'number') { throw new Error ('The price is not a number.'); }
+		//Find a way to validate how many decimal places.
 
+		return {
+			'item' : item,
+			'price' : price
+		}
+	}
+	const shoppingListItem = newShoppingListItem('test', 1);
+	
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +64,11 @@
 	*/
 
 	// implement function here
+	const addToShoppingList = ( item, list = [] ) => {
+		list.push(item);
+		return list;
+	}
+	const newList = addToShoppingList(shoppingListItem);
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +102,15 @@
 	*/
 
 	// implement function here
+	const removeFromShoppingList = ( list = [] ) => {
+		if(list.length === 0) {
+			return 
+		} else {
+			list.pop();
+			return list;
+		}
+	}
+	let list = removeFromShoppingList(addToShoppingList(shoppingListItem));
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
