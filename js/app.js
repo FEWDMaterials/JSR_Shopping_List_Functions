@@ -65,7 +65,7 @@
 	*/
 
 	// implement function here
-	list = [];
+	const list = [];
 	const addToShoppingList = (item, list) => {
 		item = newShoppingListItem('test', 1);
 		list = [item];
@@ -105,6 +105,16 @@
 	*/
 
 	// implement function here
+
+	const removeFromShoppingList = (list) => {
+		if (list.length === 0) {
+			return;
+		}
+		else if (list.length > 0) {
+			list.splice(1, -1)
+			return list;
+		}
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
