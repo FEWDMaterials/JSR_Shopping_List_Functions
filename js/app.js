@@ -65,10 +65,10 @@
 	*/
 
 	// implement function here
-	const list = [];
-	const addToShoppingList = (item, list) => {
-		item = newShoppingListItem('test', 1);
-		list = [item];
+
+	const addToShoppingList = (item, list = []) => {
+		
+		list.push(item);
 
 		return list;
 	}
@@ -111,7 +111,7 @@
 			return;
 		}
 		else if (list.length > 0) {
-			list.splice(1, -1)
+			list.pop();
 			return list;
 		}
 	}
@@ -149,6 +149,15 @@
 	*/
 
 	// implement function here
+    const removeFirstItem = (list) => {
+        if (list.length === 0) {
+            return;
+        }
+        else if (list.length > 0) {
+            list.shift();
+            return list;
+        }
+    }
 
 	// TEST
 	describe('4. removeFirstItem', () => {
