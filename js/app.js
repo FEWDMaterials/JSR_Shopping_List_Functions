@@ -25,15 +25,15 @@
 	// implement function here
 	const newShoppingListItem = (item, price) => {
 
-		if (typeof item !== 'string' && typeof price !== "number") {
-			alert('item must be a string and price must be a number');
-			return;
-		}
+        if (typeof item !== 'string' && typeof price !== "number") {
+            alert('item must be a string and price must be a number');
+            return;
+        }
 
-    return {
-      'item': item,
-      'price' : price
-    };
+		return {
+		  'item': item,
+		  'price' : price
+		};
 	};
 
 	// TEST
@@ -65,6 +65,13 @@
 	*/
 
 	// implement function here
+	list = [];
+	const addToShoppingList = (item, list) => {
+		item = newShoppingListItem('test', 1);
+		list = [item];
+
+		return list;
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
