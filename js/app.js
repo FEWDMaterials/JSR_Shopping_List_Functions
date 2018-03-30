@@ -24,6 +24,16 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item, price) => {
+		if ( typeof item !== 'string' || typeof price !== 'number') {
+			throw new Error('Parameter type error.') ;
+		}
+		return {item, price};
+	};
+
+	const newObject = newShoppingListItem('eggs', 19);
+	console.log(newObject);
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +63,14 @@
 	*/
 
 	// implement function here
+
+	const addToShoppingList = (item, list = []) => {
+		list.push(item);
+		return list;
+	};
+
+	const oneUpList = addToShoppingList(newObject);
+	console.log(oneUpList);
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +104,19 @@
 	*/
 
 	// implement function here
+
+	const removeFromShoppingList = (list) => {
+		if (list.length < 1) {
+			return list;
+		} else {
+			list.pop();
+			return list;
+		}
+	};
+
+	const oneDownList = removeFromShoppingList(oneUpList);
+	console.log(oneDownList);
+
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
