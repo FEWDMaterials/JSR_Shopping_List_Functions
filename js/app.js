@@ -371,7 +371,8 @@
 			list.pop();
 			return list;
 		} else if (i > 0) {
-			list.splice(0, -1);
+			list.splice(0, i);
+			return list;
 		}
 	}
 
