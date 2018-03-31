@@ -453,6 +453,14 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item, i, list = []) => {
+		if (item.hasOwnProperty('item') && item.hasOwnProperty('price')) {
+			list.splice(i, 0, item);
+			return list;
+		} else {
+      throw new Error('Item must have `item` and `price`');
+		}
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
