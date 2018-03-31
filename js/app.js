@@ -67,7 +67,7 @@
 	// implement function here
 
 	const addToShoppingList = (item, list = []) => {
-		
+
 		list.push(item);
 
 		return list;
@@ -196,6 +196,10 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list) => {
+		list.filter(i.length > list.length);
+		return list;
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
