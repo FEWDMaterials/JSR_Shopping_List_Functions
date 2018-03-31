@@ -25,9 +25,8 @@
 	// implement function here
 	const newShoppingListItem = (item, price) => {
 
-        if (typeof item !== 'string' && typeof price !== "number") {
-            alert('item must be a string and price must be a number');
-            return;
+        if (typeof item !== 'string' || typeof price !== "number") {
+            throw new Error();
         }
 
 		return {
@@ -198,7 +197,7 @@
 	// implement function here
 	const removeNthItem = (i, list) => {
     if (i > list.length || i < 0 || typeof i !== 'number') {
-      return error();
+      throw new Error();
     } else if (i < list.length) {
       list.splice(i, 1);
     }
@@ -275,6 +274,17 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i, num, list) => {
+    if ((i + num || num) > list.length || i < 0 || typeof i !== 'number' || typeof num !== 'number' ) {
+      throw new Error();
+    } else {
+      list.splice(i, num+i);
+		}
+
+    return list;
+
+	}
+
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -354,6 +364,16 @@
 	*/
 
 	// implement function here
+	const smartRemoveItems = (i, list) => {
+		if (i > list.length) {
+			return list;
+		} else if (i < 0) {
+			list.pop();
+			return list;
+		} else if (i > 0) {
+			list.splice(0, -1);
+		}
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
