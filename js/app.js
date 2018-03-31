@@ -528,6 +528,22 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list) => {
+		for (let i = 0; i < items.length; i++) {
+			if (items[i].hasOwnProperty('item') && items[i].hasOwnProperty('price')) {
+				list.splice(i, 0, items[i])
+        if (i > list.length){
+          list.push(items[i]);
+        } else if (i < 0) {
+          list.unshift(items[i])
+        }
+			} else {
+				throw new Error('wrong');
+			}
+    }
+
+		return list;
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
