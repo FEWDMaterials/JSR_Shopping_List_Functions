@@ -197,8 +197,13 @@
 
 	// implement function here
 	const removeNthItem = (i, list) => {
-		list.filter(i.length > list.length);
-		return list;
+    if (i > list.length || i < 0 || typeof i !== 'number') {
+      return error();
+    } else if (i < list.length) {
+      list.splice(i, 1);
+    }
+
+    return list;
 	}
 
 	// TEST
