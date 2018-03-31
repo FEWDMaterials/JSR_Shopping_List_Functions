@@ -624,6 +624,18 @@
 	*/
 
 	// implement function here
+	const combineLists = (items1, items2, list = []) => {
+		list = items1.concat(items2);
+		console.log(list);
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].hasOwnProperty('item') && list[i].hasOwnProperty('price')) {
+				console.log(list[i])
+      } else {
+        throw new Error('wrong');
+      }
+    }
+		return list;
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
