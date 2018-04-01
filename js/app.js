@@ -532,6 +532,26 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items = [], i, list = []) => {
+		if (Array.isArray(items) && items.length === 0) {
+			return list;
+		}
+
+		items.forEach(item => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+		});
+
+		if (i > list.length) {
+			list.push(...items);
+		} else if (i < 0) {
+			list.unshift(...items);
+		} else {
+			list.splice(i, 0, ...items);
+		}
+		return list;
+	};
 
 	// TEST
 	describe('9. spliceItems', () => {
