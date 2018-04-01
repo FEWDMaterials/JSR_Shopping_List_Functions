@@ -1,4 +1,5 @@
 (function () { // protect the lemmings!
+	const PRODUCT_ERROR_MESSAGE = 'Object must be a valid product. Properties missing: item (string), price (number)';
 
 	/* 1
 		@function newShoppingListItem
