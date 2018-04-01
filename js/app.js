@@ -1,6 +1,21 @@
 (function () { // protect the lemmings!
 	const PRODUCT_ERROR_MESSAGE = 'Object must be a valid product. Properties missing: item (string), price (number)';
 
+	/**
+	 * validateIsProduct - is used to validate that an object has a valid price and item property.
+	 * @param item
+	 * @returns {boolean}
+	 */
+	const validateIsProduct = function (item) {
+		return !!item &&
+			typeof item === 'object' &&
+			item.hasOwnProperty('item') &&
+			item.hasOwnProperty('price') &&
+			typeof item.price === 'number' &&
+			typeof item.item === 'string';
+	};
+
+
 	/* 1
 		@function newShoppingListItem
 		@param item {string}
@@ -72,7 +87,7 @@
 			throw Error('Parameter list must be an Array');
 		}
 
-		if (!item.hasOwnProperty('item') || !item.hasOwnProperty('price')) {
+		if (!validateIsProduct(item)) {
 			throw Error('Invalid Item Object. Must contain price and item properties');
 		}
 		list.push(item);
