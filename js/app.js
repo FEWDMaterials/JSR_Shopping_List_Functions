@@ -88,7 +88,7 @@
 		}
 
 		if (!validateIsProduct(item)) {
-			throw Error('Invalid Item Object. Must contain price and item properties');
+			throw Error(PRODUCT_ERROR_MESSAGE);
 		}
 		list.push(item);
 		return list;
