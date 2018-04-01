@@ -22,6 +22,17 @@
 					two decimal places
 	*/
 
+	const newShoppingListItem=(item,price)=>{
+		
+		let newItem = {
+   			item:  item,
+    		price: price
+    		};
+		return newItem;
+	};
+
+	console.log(newShoppingListItem('eggs',1.59));
+
 	// implement function here
 
 	// TEST
@@ -53,6 +64,30 @@
 	*/
 
 	// implement function here
+	
+	
+	let list=[];
+	const addToShoppingList=(item,list)=>{
+		
+		//if(typeof item === 'object'|typeof list === 'object')
+		//{
+
+			list.push(item);
+
+			return list;
+		/*}
+		else {
+        throw new Error("Wrong input type dummy");}
+	*/
+	};
+
+	addToShoppingList(newShoppingListItem('eggs',1.50),list);
+	addToShoppingList(newShoppingListItem('toast',2.50),list);
+	addToShoppingList(newShoppingListItem('ham',3.50),list);
+	addToShoppingList(newShoppingListItem('green',4.50),list);
+
+console.log(list);
+
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +122,28 @@
 
 	// implement function here
 
+	const removeFromShoppingList=(list)=>{
+		console.log(list);
+		if(list===[]){
+			return list;}
+		else{
+			return list.splice(list.length-1,1);}
+
+	
+		/*}
+		else {
+        throw new Error("Wrong input type dummy");}
+	*/
+	};
+
+	removeFromShoppingList(list);
+	removeFromShoppingList(list);
+	removeFromShoppingList(list);
+	removeFromShoppingList(list);
+	removeFromShoppingList(list);
+
+	console.log(list);
+	
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
