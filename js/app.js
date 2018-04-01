@@ -385,8 +385,22 @@
 			- if `i` > 0 remove i number of items
 				from START of list
 	*/
-
 	// implement function here
+	const smartRemoveItems = (i, list = []) => {
+		if (i > list.length) {
+			return list;
+		}
+
+		if (i < 0) {
+			// from end
+			list.splice(i, list.length + 1 - i);
+		} else {
+			// from start
+			list.splice(0, i);
+		}
+
+		return list;
+	};
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
