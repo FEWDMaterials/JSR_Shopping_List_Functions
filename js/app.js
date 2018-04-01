@@ -624,18 +624,19 @@
 	*/
 
 	// implement function here
-	const combineLists = (items1, items2, list = []) => {
-		list = items1.concat(items2);
-		console.log(list);
-    for (let i = 0; i < list.length; i++) {
-      if (list[i].hasOwnProperty('item') && list[i].hasOwnProperty('price')) {
-				console.log(list[i])
-      } else {
-        throw new Error('wrong');
+  const combineLists = (items1, items2) => {
+
+    const list = items1.concat(items2);
+
+    list.forEach(item => {
+      if(typeof item !== 'object' && !item.hasOwnProperty('item') && !item.hasOwnProperty('price') &&
+          typeof item.price !== 'number' && typeof item.item !== 'string') {
+        throw new Error('Not a valid item');
+        return;
       }
-    }
-		return list;
-	}
+    });
+    return list;
+  }
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -652,7 +653,7 @@
 		});
 
 		it('should return single list with items of both lists', () => {
-			const newList = combineLists([{
+			const list = combineLists([{
 					'item': 'test',
 					'price': 1,
 				}], [{
