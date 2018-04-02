@@ -689,6 +689,25 @@
 	*/
 
 	// implement function here
+  const splitListAt = (i, list) => {
+  	const list1 = [];
+  	const list2 = [];
+    if(list.length <= i) {
+      		list1.push(item);
+      	} else if (item.length > i) {
+      		list2.push(item)
+      	}
+		// list.forEach(item => {
+		// 	if(item.length <= i) {
+		// 		list1.push(item);
+		// 	} else if (item.length > i) {
+		// 		list2.push(item)
+		// 	}
+    //
+		// })
+    return list = [list1, list2];
+
+  }
 
 	// TEST
 	describe('11. splitListAt', () => {
