@@ -24,6 +24,15 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item, price) => {
+		//if (typeof item === string)
+		let entry = {
+			item: item,
+			price: price
+					}
+		return entry;
+	}
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +62,12 @@
 	*/
 
 	// implement function here
+
+	const addToShoppingList = (object, list=[]) => {
+		list.push(object);
+		return list;
+	}
+
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +102,15 @@
 
 	// implement function here
 
+
+	const removeFromShoppingList = (list) => {
+		if (list.length === 0) {return list;}
+		else {
+			list.pop();
+			return list;
+		}
+	}
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +144,14 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = (list) => {
+		if (list.length === 0) {return list;}
+		else {
+			list.shift();
+			return list;
+			}
+		}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +190,15 @@
 	*/
 
 	// implement function here
+
+	const removeNthItem = (i, list) => {
+		if (i > list.length || i < 0 || typeof i !== "number") {throw new Error("Not a valid index.");}
+		else {
+			list.splice(i, 1);
+			return list;
+		}
+	}
+
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +269,18 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i , num, list) => {
+		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || i+num > list.length || num > length.list) {
+			throw new Error("invalid parameters");
+		}
+		else {
+			list.splice(i, num+i);
+			return list;	
+		}
+		
+	}
+
+
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -308,6 +361,17 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list) => {
+		if (i<0 && i*(-1) < list.length) {
+			list.splice(list.length + i, list.length);
+		}
+		else if (i>0 && i < list.length) {
+			list.splice(0, i);
+		}
+
+		return list;
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -386,6 +450,17 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list) => {
+		if (typeof item !== "object" || typeof item.item !== "string" || typeof item.price !== "number") {
+			throw new Error("Invalid item format.");
+		}
+		else if (i < 0) {list.unshift(item);}
+			else if (i > list.length) {list.push(item);}
+				else {list.splice(i, 1, item);}
+		return list;
+	}
+
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -453,8 +528,35 @@
 
 	// implement function here
 
+	const spliceItems = (items, i, list) => 
+	{
+		for (let n = 0; n < items.length; n++) 
+		{
+			if (typeof items[n] !== "object" || typeof items[n].item !== "string" || typeof items[n].price !== "number") 
+					{
+						throw new Error("Invalid item format."); 
+					}
+		}
+		if (items.length===0) 
+		{}
+			else if (i < 0) 
+				{
+					list = [...items, ...list];
+				}
+			else if (i > list.length) 	
+					{
+						list = [...list, ...items];
+					}
+				else 
+					{
+						list.splice(i, items.length, ...items);
+					}
+		return list;
+	}
+
+
 	// TEST
-	describe('9. spliceItems', () => {
+describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
 			chai.assert.throws(() => {
 				spliceItems([{
@@ -514,6 +616,7 @@
 		})
 	});
 
+
 	/* 10
 		@function combineLists
 		@param items1 {list}
@@ -532,6 +635,27 @@
 	*/
 
 	// implement function here
+
+	const combineLists = (items1, items2) => 
+	{
+		for (let n = 0; n < items1.length; n++) 
+		{
+			if (typeof items1[n] !== "object" || typeof items1[n].item !== "string" || typeof items1[n].price !== "number") 
+					{
+						throw new Error("Invalid item format."); 
+					}
+		}
+		for (let n = 0; n < items2.length; n++) 
+		{
+			if (typeof items2[n] !== "object" || typeof items2[n].item !== "string" || typeof items2[n].price !== "number") 
+					{
+						throw new Error("Invalid item format."); 
+					}
+		}
+		return [...items1, ...items2];
+		//return list;
+	}
+
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -556,10 +680,10 @@
 					'price': 2,
 				}]);
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)	
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)	
+			chai.assert.equal(newList[0].item, 'test')
+			chai.assert.equal(newList[0].price, 1)	
+			chai.assert.equal(newList[1].item, 'test2')
+			chai.assert.equal(newList[1].price, 2)	
 		});
 	});
 
@@ -584,6 +708,27 @@
 	*/
 
 	// implement function here
+
+	const splitListAt = (i, list) => 
+	{
+		let list1 = [];
+		let list2 = [];
+		if (i<0) {list1 = list;}
+		else if (i>list.length) {list2 = list;}
+			else {
+					for (let n = 0; n <= i; n++) 
+						{
+							list1.push(list[n]);
+						}
+					for (let n = i+1; n < list.length; n++) 
+						{
+							list2.push(list[n]);
+						}
+				}
+		list = [list1, list2];
+		return list;
+	}
+
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -665,6 +810,11 @@
 
 	// implement function here
 
+	const canExpressCheckout = (list) => {
+		return (list.length < 10);
+	}
+
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -692,6 +842,15 @@
 	*/
 
 	// implement function here
+
+	const computeSum = (list) => {
+		let sumOut = 0;
+		for (let i = 0; i < list.length; i++) {
+			sumOut = sumOut + list[i].price;
+		}
+		return sumOut
+	}
+
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -726,6 +885,12 @@
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (list, taxRate) => {
+		let totalSum = computeSum(list);
+		return totalSum + totalSum*(taxRate/100);
+	}
+
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -762,6 +927,22 @@
 	*/
 
 	// implement function here
+
+	const computeSumInRange = (i, j, list) => {
+		if (i > j) {throw new Error("Wrong index values.")}
+			else if (i<0 || i> list.length || j<0 || j> list.length) {
+				throw new Error("Index values are invalid.")
+			}
+			else
+				{
+					let newSum = 0;
+					for (let n=i; n<j+1; n++) {
+						newSum = newSum + list[n].price;
+					}
+					return newSum;
+				}
+	}
+
 
 	// TEST
 	describe('15. computeSumInRange', () => {
