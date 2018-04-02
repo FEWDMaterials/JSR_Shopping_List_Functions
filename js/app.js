@@ -685,10 +685,10 @@
 				'price': 2,
 			}]);
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
+			chai.assert.equal(newList[0].item, 'test')
+			chai.assert.equal(newList[0].price, 1)
+			chai.assert.equal(newList[1].item, 'test2')
+			chai.assert.equal(newList[1].price, 2)
 		});
 	});
 
