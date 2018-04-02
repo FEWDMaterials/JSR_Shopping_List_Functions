@@ -378,7 +378,7 @@
 
 	const smartRemoveItems = (i, list) => {
 		if (i < 0) {
-			list.splice(list.length - i, i);
+			list.splice(list.length + i, -i);
 			return list;
 		}
 		if (i > list.length) {
