@@ -896,6 +896,10 @@
 	*/
 
 	// implement function here
+	const computeSumWithTax = (list = [], taxRate = 8.125) => {
+		const sum = computeSum(list);
+		return (sum * (taxRate / 100) + sum)
+	};
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
