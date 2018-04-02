@@ -854,6 +854,14 @@
 	*/
 
 	// implement function here
+	const computeSum = (list = []) => {
+		return list.reduce((accumulator, item) => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+			return accumulator += item.price;
+		}, 0);
+	};
 
 	// TEST
 	describe('13. computeSum', () => {
