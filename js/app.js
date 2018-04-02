@@ -936,6 +936,23 @@
 	*/
 
 	// implement function here
+	const computeSumInRange = (i, j, list = []) => {
+		if (i > list.length || j > list.length) {
+			throw new Error('Start or end index is our of bounds.');
+		}
+		if (i > j) {
+			throw new Error('Start index cannot be bigger than end index');
+		}
+
+		let sum = 0;
+		for (let start = i; start <= j; start++) {
+			if (!validateIsProduct(list[start])) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+			sum = sum + list[start].price;
+		}
+		return sum;
+	};
 
 	// TEST
 	describe('15. computeSumInRange', () => {
