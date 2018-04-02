@@ -67,24 +67,21 @@
 	
 	
 	let list=[];
-	const addToShoppingList=(item,list)=>{
+	const addToShoppingList=(item,list=[])=>{
 		
-		//if(typeof item === 'object'|typeof list === 'object')
-		//{
-
 			list.push(item);
 
 			return list;
-		/*}
-		else {
-        throw new Error("Wrong input type dummy");}
-	*/
 	};
 
 	addToShoppingList(newShoppingListItem('eggs',1.50),list);
 	addToShoppingList(newShoppingListItem('toast',2.50),list);
 	addToShoppingList(newShoppingListItem('ham',3.50),list);
-	addToShoppingList(newShoppingListItem('green',4.50),list);
+	addToShoppingList(newShoppingListItem('greeneggs',4.50),list);
+	addToShoppingList(newShoppingListItem('phone',500),list);
+	addToShoppingList(newShoppingListItem('laptop',1500),list);
+	addToShoppingList(newShoppingListItem('coffee',1.50),list);
+
 
 console.log(list);
 
@@ -129,17 +126,8 @@ console.log(list);
 		else{
 			return list.splice(list.length-1,1);}
 
-	
-		/*}
-		else {
-        throw new Error("Wrong input type dummy");}
-	*/
 	};
 
-	removeFromShoppingList(list);
-	removeFromShoppingList(list);
-	removeFromShoppingList(list);
-	removeFromShoppingList(list);
 	removeFromShoppingList(list);
 
 	console.log(list);
@@ -178,6 +166,17 @@ console.log(list);
 
 	// implement function here
 
+	const removeFirstItem=(list)=>{
+		console.log(list);
+		if(list===[]){
+			return list;}
+		else{
+			return list.splice(0,1);}
+
+	};
+
+removeFirstItem(list);
+
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -215,6 +214,18 @@ console.log(list);
 	*/
 
 	// implement function here
+const removeNthItem=(i,list)=>{
+
+		if(i<0|i>list.length|typeof i != 'number'){
+			return 'error';}
+		else{
+			return list.splice(i,1);}
+
+	};
+
+
+removeNthItem(1,list);
+
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -285,6 +296,19 @@ console.log(list);
 	*/
 
 	// implement function here
+
+	const removeNthItems=(i,num,list)=>{
+
+		if(i<0|(i+num)>list.length|typeof i != 'number'|typeof num!='number'){
+			return 'error';}
+		else{
+			return list.splice(i,num);}
+
+	};
+
+
+removeNthItems(0,2,list);
+console.log(list);
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -365,6 +389,23 @@ console.log(list);
 
 	// implement function here
 
+	const smartRemoveItems=(i,list)=>{
+
+		if(typeof i != 'number'){
+			return 'error';}
+		else if (i<0){
+			return list.splice(list.length-1,-i);}
+		else if (i>list.length){
+			return list;}
+		else{
+			return list.splice(0,i);}
+
+	};
+
+smartRemoveItems(-1,list);
+console.log(list);
+
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -442,6 +483,19 @@ console.log(list);
 	*/
 
 	// implement function here
+
+		const spliceItems=(i,list)=>{
+
+		if(typeof i != 'number'){
+			throw new Error ('error');}
+		else if (i<0){
+			return list.splice(list.length-1,-i);}
+		else if (i>list.length){
+			return list;}
+		else{
+			return list.splice(0,i);}
+
+	};
 
 	// TEST
 	describe('8. spliceItem', () => {
