@@ -479,6 +479,21 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item, i, list = []) => {
+		if (!validateIsProduct(item)) {
+			throw new Error(PRODUCT_ERROR_MESSAGE);
+		}
+
+		if (i >= list.length) {
+			list.push(item);
+		} else if (i <= 0) {
+			list.unshift(item);
+		} else {
+			list.splice(i, 0, item);
+		}
+
+		return list;
+	};
 
 	// TEST
 	describe('8. spliceItem', () => {
