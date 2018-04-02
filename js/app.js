@@ -1,5 +1,4 @@
-(function() { // protect the lemmings!
-
+(function () { // protect the lemmings!
 	/* 1
 		@function newShoppingListItem
 		@param item {string}
@@ -21,10 +20,33 @@
 				- validate that price is less than 100 and has only
 					two decimal places
 	*/
-
+    
+    //Tests the validity of a shopping item name & price sma 032818
+    const validNamePrice = (name, price) => {
+        let errText = "";
+        if (typeof name != "string") {
+            errText = "argument 'item' != string|item:"+name;
+        } else if (name.length >= 10) {
+            errText = "item.length must be < 10|item.length:"+name.length;   
+        } else if (typeof price != "number") {
+            errText = "argument 'price' != number|price:"+price;
+        } else if (price >= 100) {
+            errText = "price must be < 100|price:"+price;
+        } else if (Math.round(price * 100) / 100 != price) {
+            errText = "price may not exceed hundredths|price:"+price;
+        }
+        
+        if (errText.length != 0) {
+            console.log(errText);
+            throw error;
+        } else {
+            return true;
+        }
+    }
+    
 	// implement function here
     const newShoppingListItem = (item, price) => {
-        if (testItem(item) && testPrice(price)) {        
+        if (validNamePrice(item, price)) {       
             return {
                 item:  item,
                 price: price
@@ -32,28 +54,6 @@
         }
     }
 
-    const testItem = (val) => {
-        if (typeof val != "string") {
-            throw "argument 'item' != string";
-        } else if (val.length >= 10) {
-            throw "item.length must be < 10";      
-        } else {
-            return true
-        }
-    }
-
-    const testPrice = (val) => {
-        if (typeof val != "number") {
-            throw "argument 'price' != number";      
-        } else if (val >= 100) {
-            throw "price must be < 100";      
-        } else if (Math.round(val * 100) / 100 != val) {
-            throw "price may not exceed hundredths";      
-        } else {
-            return true
-        }
-    } 
-    
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -81,26 +81,47 @@
 				- if shoppingList item is not passed in, throw error 
 	*/
 
-	// implement function here
-    const testListItem = (val) => {
-        const lstKeys = Object.keys(val);
-        if (lstKeys[0] != "item" || lstKeys[1] != "price" || lstKeys.length != 2) {
-            throw "list item is not valid";   
-        } if (testItem(val.item) && testPrice(val.price)) {
+    //Tests a shopping item to make sure it conains a name & price sma 032818
+    const validItem = (val) => {
+        let errText = "";
+        const lstKeys = Object.keys(val);    
+        if (lstKeys[0] != "item") {
+            errText = "key[0] is not 'item'|key[0]:"+lstKeys[0];
+        } else if (lstKeys[1] != "price") {
+            errText = "key[1] is not 'price'|key[1]:"+lstKeys[1];  
+        } else if (lstKeys.length != 2) {
+            errText = "list must contain 2 keys|count:"+lstKeys.length;
+        }
+        
+        if (errText.length != 0) {
+            //console.log(errText);
+            throw error;
+        } else if (validNamePrice(val.item, val.price)) {
+            return true;
+        }        
+        
+    }
+
+    //Tests the validity of each item's name & price sma 032818
+    const validListItem = (val, testVal) => { 
+        if (Array.isArray(val)) {
+            val.forEach(function (d) {
+                testVal(d)
+            });
             return true
+        } else {
+            return testVal(val)
         }
     } 
 
+	// implement function here
+
     const addToShoppingList = (item, list = []) => {
-        if (testListItem(item)) {
+        if (validListItem(item, validItem)) {
             list.push(item); 
             return list;
         }
     }
-
-    let myList = addToShoppingList(newShoppingListItem("eggs", 1.59));
-    addToShoppingList({item: "butter", price: 3.69}, myList);
-    console.log(myList);
     
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -141,7 +162,6 @@
         return list;
     }
 
-    console.log(removeFromShoppingList(myList))
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -181,8 +201,6 @@
         }
         return list;
     }
-
-    console.log(removeFirstItem(myList))
     
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -220,30 +238,39 @@
 			^^ return error
 	*/
 
-	// implement function here
-    const testNumber = (val, min, max) => {
+    //Tests the validity various numbers used to manipulate lists sma 032818
+    const validNumber = (val, num, min, max) => {
+        let errText = "";
         if (typeof val != "number") {
-            throw "argument 'val' != number";      
-        } else if (val < min) {
-            throw "val must be >= " + min;      
-        } else if (val > max) {
-            throw "val must be <= " + max;      
+            errText = "argument 'val' != number|val:"+val;
+        } else if (typeof num != "number") {
+            errText = "argument 'num' != number|num:"+num;
+        } else if (typeof min != "number") {
+            errText = "argument 'num' != number|num:"+min;
+        } else if (typeof max != "number") {
+            errText = "argument 'num' != number|num:"+max;
         } else if (Math.round(val) != val) {
-            throw "val must be whole number";      
+            errText = "val must be whole number|val:"+val;
+        } else if (val < min) {
+            errText = "val must be >= " + min+ "|val:"+val;
+        } else if (val > max) {
+            errText = "val must be <= " + max+ "|val:"+val;
+        } else if (val + num > max) {
+            errText = "val + num must be <= " + max + "|val:"+val + "|num:"+num
+        } 
+        
+        if (errText.length != 0) {
+            //console.log(errText);
+            throw error;
         } else {
-            return true
+            return true;
         }
-    }
-
+    }    
+    
+	// implement function here
     const removeNthItem = (i, list) => {
-        if(list.length != 0 && testNumber(i,0,list.length)) {
-            list.splice(i,1);
-        }
-        return list
-
+        return removeNItems(i, 0, list)
     }
-
-    console.log(removeNthItem(2, myList));
 
     // TEST
 	describe('5. removeNthItem', () => {
@@ -313,8 +340,14 @@
 			^^ return error
 	*/
 
-	// implement function here
-
+	// implement function here 
+    const removeNItems = (i, num, list) => {
+        if(validNumber(i, num, 0,list.length)) {
+            list.splice(i,num+1);
+        }
+        return list
+    }
+    
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
@@ -394,6 +427,18 @@
 
 	// implement function here
 
+    const smartRemoveItems = (i, list) => {
+        const num = Math.abs(i);
+        if(list[0] != undefined && validNumber(0, num, 0,list.length)) {
+            if (i < 0) {
+                list.splice(list.length + i, num);
+            } else if (i > 0) {
+                list.splice(0, num);
+            }
+        }
+        return list
+    }
+    
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -446,8 +491,8 @@
 			list = smartRemoveItems(1, list);
 
 			chai.assert.equal(list.length, 2)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
+			chai.assert.equal(list[0].item, 'test2') //Made edits to the original file sma 032818
+			chai.assert.equal(list[0].price, 2)      //Made edits to the original file sma 032818
 			chai.assert.equal(list[1].item, 'test3')
 			chai.assert.equal(list[1].price, 3)
 		});
@@ -471,6 +516,18 @@
 	*/
 
 	// implement function here
+    const spliceItem = (item, i, list) => {
+        if (validListItem(item, validItem)) {
+            if (i < 0) {
+                list.unshift(item);
+            } else if (i > list.length) {
+                list.push(item);
+            } else {
+                list.splice(i, 0, item);   
+            }
+        }
+        return list
+    }
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -536,10 +593,32 @@
 			- if i < 0, just prepend
 			- if `items` is empty, return list
 	*/
-
+    
+    //Builds an array based on the unique criteria sma 032818
+    const buildArray = (arr, list, state, i) => {
+        arr.forEach(function (d) {
+            if (state === -1) {list.unshift(d)}
+            else if (state === 0) {list.push(d)}
+            else if (state === 1) {list.splice(i, 0, d)}
+        })
+    }
+    
 	// implement function here
-
+    const spliceItems = (item, i, list) => {
+        if (validListItem(item, validItem)) {
+            if (i < 0) {
+                buildArray(item, list, -1)
+            } else if (i > item.length) {
+                buildArray(item, list, 0)
+            } else {
+                buildArray(item.reverse(), list, 1, i)
+            }
+        }
+        return list
+    }
+    
 	// TEST
+  
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
 			chai.assert.throws(() => {
@@ -562,10 +641,10 @@
 				'price': 3,
 			}])
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
+			chai.assert.equal(list[0].item, 'test')  //Made edits to the original file sma 032818
+			chai.assert.equal(list[0].price, 1)      //Made edits to the original file sma 032818
+			chai.assert.equal(list[1].item, 'test2') //Made edits to the original file sma 032818
+			chai.assert.equal(list[1].price, 2)      //Made edits to the original file sma 032818
 		});
 
 		it('should append to the end if i > length of list', () => {
@@ -597,7 +676,7 @@
 		it('should return list if items is empty', () => {
 			const list = spliceItems([], 0, []);
 			chai.assert.equal(list.length, 0)
-		})
+		})      
 	});
 
 	/* 10
@@ -618,7 +697,15 @@
 	*/
 
 	// implement function here
-
+    const combineLists = (items1, items2) => {
+        if (validListItem(items1, validItem) && validListItem(items2, validItem)) {
+            items2.forEach(function(itm) {
+                items1.push(itm);
+            });
+        }
+        return items1
+    }
+    
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -642,10 +729,10 @@
 					'price': 2,
 				}]);
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)	
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)	
+			chai.assert.equal(newList[0].item, 'test')
+			chai.assert.equal(newList[0].price, 1)
+			chai.assert.equal(newList[1].item, 'test2')
+			chai.assert.equal(newList[1].price, 2)
 		});
 	});
 
@@ -670,7 +757,21 @@
 	*/
 
 	// implement function here
-
+    const splitListAt = (i, list) => {
+        let list1 = [];
+        let list2 = [];
+        
+        if (i < 0) {
+            list1 = list;
+        } else if (i > list.length) {
+            list2 = list;
+        } else {
+            list2 = list.slice(i + 1);
+            list1 = list.splice(0, i + 1)
+        }
+        return [list1, list2]
+    }
+    
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -681,12 +782,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
+
 			chai.assert.equal(list1[0].item, 'test')
 			chai.assert.equal(list1[0].price, 1)	
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
@@ -750,7 +851,10 @@
 	*/	
 
 	// implement function here
-
+    const canExpressCheckout = (list) => {
+        return list.length < 10;
+    }
+    
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -778,7 +882,14 @@
 	*/
 
 	// implement function here
-
+    const computeSum = (list) => {
+        let tot = 0;
+        list.forEach(function(itm) {
+                tot += itm.price;
+            });
+        return tot;
+    }
+    
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -812,7 +923,10 @@
 	*/
 
 	// implement function here
-
+    const computeSumWithTax = (list, taxRate) => {
+        return computeSum(list) * ((100 + taxRate)/100)
+    }
+    
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
@@ -848,6 +962,21 @@
 	*/
 
 	// implement function here
+    const computeSumInRange = (i, j, list) => {
+        const len = list.length;
+        let tot = 0;
+        if (i > j || i > len || j > len) {
+            //console.log("value error", "i:"+i, "j:"+j, "length:"+len); 
+            throw error
+        } else {
+            list.forEach(function (d, x) {
+                if (x >= i && x < j + 1) {
+                    tot += d.price;
+                }
+            });
+        }
+        return tot;
+    }
 
 	// TEST
 	describe('15. computeSumInRange', () => {
@@ -881,7 +1010,7 @@
 			}, Error)
 		})
 
-		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
+        it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
 			const sum =  computeSumInRange(1, 3, [
 				newShoppingListItem('test', 1),
 				newShoppingListItem('test2', 2),
@@ -890,7 +1019,7 @@
 			]);
 
 			chai.assert.equal(sum, 9)
-		})		
+		})	
 	});
 	
 })();
