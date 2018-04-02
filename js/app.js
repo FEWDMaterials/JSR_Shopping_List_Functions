@@ -24,6 +24,40 @@
 
 	// implement function here
 
+	const check1 = (item, price) {
+		if(typeof item === "string" && typeof price === "number"){
+			return true;
+		} else{
+			throw new Error("Check the argument types.");
+		}
+	}
+	const check2 = (item) {
+		if(item.length < 10){
+			return true
+		} else {
+			throw new Error("The length of the item should be less than 10 characters");
+		}
+	}
+
+	const check3 = (price) {
+		if(price < 100 && price.toString().split(".")[1].length < 3){
+			return true
+		} else{
+			throw new Error("The price should be less than 100 and should not have more than two decimal points")
+		}
+	}
+	const newShoppingListItem = (item, price){
+		const out = {};
+
+		if(check1(item, price)){
+			out.item = item;
+			out.price = price;
+			return out	
+		}
+		
+
+	}
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
