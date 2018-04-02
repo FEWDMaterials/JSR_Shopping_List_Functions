@@ -728,6 +728,21 @@
 	*/
 
 	// implement function here
+	const splitListAt = (i, list = []) => {
+		let listA = [];
+		let listB = [];
+
+		if (i <= 0) {
+			listA = list;
+		} else if (i >= list.length) {
+			listB = list;
+		} else {
+			listA = list.slice(0, i + 1);
+			listB = list.slice(i + 1, list.length);
+		}
+
+		return [listA, listB]
+	};
 
 	// TEST
 	describe('11. splitListAt', () => {
