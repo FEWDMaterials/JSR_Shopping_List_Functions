@@ -24,14 +24,14 @@
 
 	// implement function here
 
-	const check1 = (item, price) {
+	const check1 = (item, price) => {
 		if(typeof item === "string" && typeof price === "number"){
 			return true;
 		} else{
 			throw new Error("Check the argument types.");
 		}
 	}
-	const check2 = (item) {
+	const check2 = (item) => {
 		if(item.length < 10){
 			return true
 		} else {
@@ -39,17 +39,17 @@
 		}
 	}
 
-	const check3 = (price) {
-		if(price < 100 && price.toString().split(".")[1].length < 3){
+	const check3 = (price) => {
+		if(price < 100 && (price % 1 !== 0 ? (price.toString().split(".")[1].length < 3) : true)){
 			return true
 		} else{
 			throw new Error("The price should be less than 100 and should not have more than two decimal points")
 		}
 	}
-	const newShoppingListItem = (item, price){
+	const newShoppingListItem = (item, price) => {
 		const out = {};
 
-		if(check1(item, price)){
+		if(check1(item, price) && check2(item) && check3(price)){
 			out.item = item;
 			out.price = price;
 			return out	
