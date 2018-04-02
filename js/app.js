@@ -1,11 +1,27 @@
-(function() { // protect the lemmings!
+(function () { // protect the lemmings!
+	const PRODUCT_ERROR_MESSAGE = 'Object must be a valid product. Properties missing: item (string), price (number)';
+
+	/**
+	 * validateIsProduct - is used to validate that an object has a valid price and item property.
+	 * @param item
+	 * @returns {boolean}
+	 */
+	const validateIsProduct = function (item) {
+		return !!item &&
+			typeof item === 'object' &&
+			item.hasOwnProperty('item') &&
+			item.hasOwnProperty('price') &&
+			typeof item.price === 'number' &&
+			typeof item.item === 'string';
+	};
+
 
 	/* 1
 		@function newShoppingListItem
 		@param item {string}
 		@param price {number}
 		@returns {object}
-		@description 
+		@description
 			given an item and a price, return
 			an object that looks like this:
 			{
@@ -23,6 +39,19 @@
 	*/
 
 	// implement function here
+	let newShoppingListItem = (item, price) => {
+		if (typeof item !== 'string') {
+			throw Error('Parameter item must be a string.');
+		}
+		if (typeof price !== 'number') {
+			throw Error('Parameter price must be a number.');
+		}
+
+		return {
+			item: item,
+			price: price,
+		};
+	};
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -49,10 +78,21 @@
 			list is to DEFAULT to []
 			OPTIONAL:
 				- validate that the item is indeed a shoppingList item
-				- if shoppingList item is not passed in, throw error 
+				- if shoppingList item is not passed in, throw error
 	*/
 
 	// implement function here
+	const addToShoppingList = (item, list = []) => {
+		if (!list || !Array.isArray(list)) {
+			throw Error('Parameter list must be an Array');
+		}
+
+		if (!validateIsProduct(item)) {
+			throw Error(PRODUCT_ERROR_MESSAGE);
+		}
+		list.push(item);
+		return list;
+	};
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +126,14 @@
 	*/
 
 	// implement function here
+	const removeFromShoppingList = (list = []) => {
+		if (!Array.isArray(list) || list.length === 0) {
+			return;
+		}
+
+		list.pop();
+		return list;
+	};
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -120,6 +168,14 @@
 	*/
 
 	// implement function here
+	const removeFirstItem = (list) => {
+		if (!Array.isArray(list) || list.length === 0) {
+			return;
+		}
+
+		return list.splice(1, list.length);
+	};
+
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +214,14 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list = []) => {
+		if (isNaN(i) || i < 0 || i >= list.length) {
+			throw new Error('Parameter i is out of bounds or not a number.');
+		}
+
+		list.splice(i, 1);
+		return list;
+	};
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +292,22 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i, num, list = []) => {
+		if (isNaN(i) || isNaN(num)) {
+			throw new Error('Parameter i or num must be a number.');
+		}
+
+		if (i < 0 || i >= list.length) {
+			throw new Error('Parameter i is out of bounds.');
+		}
+
+		if (i + num > list.length || num > list.length) {
+			throw new Error('The parameters num and i are invalid');
+		}
+
+		const newList = list.splice(i, num);
+		return list;
+	};
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -248,7 +328,7 @@
 
 			list = removeNItems(1, 1, list);
 
-			chai.assert.equal(list.length, 1)
+			chai.assert.equal(list.length, 2)
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
@@ -305,8 +385,22 @@
 			- if `i` > 0 remove i number of items
 				from START of list
 	*/
-
 	// implement function here
+	const smartRemoveItems = (i, list = []) => {
+		if (i > list.length) {
+			return list;
+		}
+
+		if (i < 0) {
+			// from end
+			list.splice(i, list.length + 1 - i);
+		} else {
+			// from start
+			list.splice(0, i);
+		}
+
+		return list;
+	};
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -385,6 +479,21 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item, i, list = []) => {
+		if (!validateIsProduct(item)) {
+			throw new Error(PRODUCT_ERROR_MESSAGE);
+		}
+
+		if (i >= list.length) {
+			list.push(item);
+		} else if (i <= 0) {
+			list.unshift(item);
+		} else {
+			list.splice(i, 0, item);
+		}
+
+		return list;
+	};
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -439,7 +548,7 @@
 		@param list {array, []}
 		@returns list
 		@description
-			- *EACH* item in `items` must be an object 
+			- *EACH* item in `items` must be an object
 			that looks like this:
 			{
 				'item': 'eggs',
@@ -452,6 +561,26 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items = [], i, list = []) => {
+		if (Array.isArray(items) && items.length === 0) {
+			return list;
+		}
+
+		items.forEach(item => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+		});
+
+		if (i > list.length) {
+			list.push(...items);
+		} else if (i < 0) {
+			list.unshift(...items);
+		} else {
+			list.splice(i, 0, ...items);
+		}
+		return list;
+	};
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -460,7 +589,7 @@
 				spliceItems([{
 					'item': 'test',
 					'price': 1,
-				},'invalidItem'], 0, [])
+				}, 'invalidItem'], 0, [])
 			}, Error);
 		});
 
@@ -521,17 +650,32 @@
 		@returns list
 		@description
 			given two lists of items
-			- *EACH* item in `items` must be an object 
+			- *EACH* item in `items` must be an object
 			that looks like this:
 			{
 				'item': 'eggs',
 				'price': 1.59
 			} (else throw error)
-			- return ONE list that contains items in 
+			- return ONE list that contains items in
 			items1 THEN items in items2 as a single array
 	*/
 
 	// implement function here
+	const combineLists = (items1 = [], items2 = []) => {
+		items1.forEach(item => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+		});
+
+		items2.forEach(item => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+		});
+
+		return items1.concat(items2);
+	};
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -540,7 +684,7 @@
 				combineLists([{
 					'item': 'test',
 					'price': 1,
-				},'invalidItem'], [{
+				}, 'invalidItem'], [{
 					'item': 'test2',
 					'price': 2,
 				}])
@@ -549,17 +693,17 @@
 
 		it('should return single list with items of both lists', () => {
 			const newList = combineLists([{
-					'item': 'test',
-					'price': 1,
-				}], [{
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}], [{
+				'item': 'test2',
+				'price': 2,
+			}]);
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)	
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)	
+			chai.assert.equal(newList[0].item, 'test')
+			chai.assert.equal(newList[0].price, 1)
+			chai.assert.equal(newList[1].item, 'test2')
+			chai.assert.equal(newList[1].price, 2)
 		});
 	});
 
@@ -570,83 +714,98 @@
 		@returns list
 		@description
 			given a number i that is within bounds of
-			`list`, break it into two lists where 
+			`list`, break it into two lists where
 			`list1` has all items less than or equal to i
 			and `list2` has all items > i
-			- if `i` < 0, `list1` has all items and `list2` 
+			- if `i` < 0, `list1` has all items and `list2`
 				is empty list
-			- if `i` > length of list, list1 is empty and `list2` 
+			- if `i` > length of list, list1 is empty and `list2`
 				has all items
-			
+
 			- always return a list that looks like this:
 				[list1, list2]
-		
+
 	*/
 
 	// implement function here
+	const splitListAt = (i, list = []) => {
+		let listA = [];
+		let listB = [];
+
+		if (i <= 0) {
+			listA = list;
+		} else if (i >= list.length) {
+			listB = list;
+		} else {
+			listA = list.slice(0, i + 1);
+			listB = list.slice(i + 1, list.length);
+		}
+
+		return [listA, listB]
+	};
 
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-			
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)	
+			chai.assert.equal(list1[0].price, 1)
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
 		it('should put all items into list1 if i < 0', () => {
 			const [list1, list2] = splitListAt(-1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-			
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)	
+			chai.assert.equal(list1[0].price, 1)
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
 		it('should put all items into list2 if i > length of list', () => {
 			const [list1, list2] = splitListAt(100, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
-			
-			chai.assert.equal(list1.length, 0)	
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
+
+			chai.assert.equal(list1.length, 0)
 			chai.assert.equal(list2[0].item, 'test')
-			chai.assert.equal(list2[0].price, 1)	
+			chai.assert.equal(list2[0].price, 1)
 			chai.assert.equal(list2[1].item, 'test2')
 			chai.assert.equal(list2[1].price, 2)
-			
+
 
 		});
 
 		it('should return two lists', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.isArray(list1)
 			chai.assert.isArray(list2)
@@ -661,20 +820,23 @@
 		@description
 			if there are fewer than 10 items
 			in list, return true
-	*/	
+	*/
 
 	// implement function here
+	const canExpressCheckout = (list = []) => {
+		return list.length < 10;
+	};
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
 			chai.assert.equal(canExpressCheckout([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]), true);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]), true);
 		})
 	});
 
@@ -692,17 +854,25 @@
 	*/
 
 	// implement function here
+	const computeSum = (list = []) => {
+		return list.reduce((accumulator, item) => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+			return accumulator += item.price;
+		}, 0);
+	};
 
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
 			const sum = computeSum([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(sum, 3);
 		});
@@ -726,23 +896,27 @@
 	*/
 
 	// implement function here
+	const computeSumWithTax = (list = [], taxRate = 8.125) => {
+		const sum = computeSum(list);
+		return (sum * (taxRate / 100) + sum)
+	};
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
 			const sum = computeSumWithTax([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}], 10);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}], 10);
 
 			// stupid hack to prevent the 3.3000000000000003 error...
-			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
+			chai.assert.equal(Math.floor(100 * sum) / 100, 3.3);
 		});
 	});
-	
+
 	/* 15
 		@function computeSumInRange
 		@param i {number}
@@ -756,12 +930,29 @@
 				'price': 1.59
 			}
 			- sum all the price items FROM start index `i` and
-				end index `j` and return value 
+				end index `j` and return value
 			- if i > j, throw error
 			- if i or j not in range, throw error
 	*/
 
 	// implement function here
+	const computeSumInRange = (i, j, list = []) => {
+		if (i > list.length || j > list.length) {
+			throw new Error('Start or end index is our of bounds.');
+		}
+		if (i > j) {
+			throw new Error('Start index cannot be bigger than end index');
+		}
+
+		let sum = 0;
+		for (let start = i; start <= j; start++) {
+			if (!validateIsProduct(list[start])) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+			sum = sum + list[start].price;
+		}
+		return sum;
+	};
 
 	// TEST
 	describe('15. computeSumInRange', () => {
@@ -796,7 +987,7 @@
 		})
 
 		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
-			const sum =  computeSumInRange(1, 3, [
+			const sum = computeSumInRange(1, 3, [
 				newShoppingListItem('test', 1),
 				newShoppingListItem('test2', 2),
 				newShoppingListItem('test3', 3),
@@ -804,7 +995,7 @@
 			]);
 
 			chai.assert.equal(sum, 9)
-		})		
+		})
 	});
-	
+
 })();
