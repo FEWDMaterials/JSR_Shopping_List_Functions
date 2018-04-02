@@ -823,6 +823,9 @@
 	*/
 
 	// implement function here
+	const canExpressCheckout = (list = []) => {
+		return list.length < 10;
+	};
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
