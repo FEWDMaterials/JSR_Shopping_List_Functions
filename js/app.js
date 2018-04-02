@@ -661,6 +661,21 @@
 	*/
 
 	// implement function here
+	const combineLists = (items1 = [], items2 = []) => {
+		items1.forEach(item => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+		});
+
+		items2.forEach(item => {
+			if (!validateIsProduct(item)) {
+				throw new Error(PRODUCT_ERROR_MESSAGE);
+			}
+		});
+
+		return items1.concat(items2);
+	};
 
 	// TEST
 	describe('10. combineLists', () => {
