@@ -5,7 +5,7 @@
 		@param item {string}
 		@param price {number}
 		@returns {object}
-		@description 
+		@description
 			given an item and a price, return
 			an object that looks like this:
 			{
@@ -23,6 +23,43 @@
 	*/
 
 	// implement function here
+
+	const newShoppingListItem = (item = "", price = 0) => {
+		if (typeof item !== "string") {
+			throw new TypeError("Item not a string");
+		} else if (typeof price !== "number" && price <= 0){
+			throw new RangeError("Item not a positive number");
+		}else {
+			let listItem = {
+				'item': item,
+				'price': price
+			}
+			return listItem;
+		}
+	}
+
+	const validateShoppingListItem = (newItem, validatingItem) => {
+		if (typeof newItem !== "object" || typeof validatingItem !== "object" ){
+			throw new Error("Arguments are not objects.");
+		}else{
+			let newItemKeys = Object.keys(newItem).sort();
+  		let validatingItemKeys = Object.keys(validatingItem).sort();
+  		return JSON.stringify(newItemKeys) === JSON.stringify(validatingItemKeys);
+		}
+	}
+
+	const validateShoppingListItems = (newItems, validatingItem) => {
+		if (typeof newItems !== "object" || typeof validatingItem !== "object" ){
+			throw new Error("Arguments are not objects.");
+		}else if (!Array.isArray(newItems)){
+			throw new Error("Items is not an Array.");
+		}else if (newItems.length === 0){
+			return true;
+		}else{
+			let boolItems = newItems.map((item)=> {return validateShoppingListItem(item, newShoppingListItem())});
+			return boolItems.reduce((acc, curr) => {return acc && curr});
+		}
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -49,10 +86,18 @@
 			list is to DEFAULT to []
 			OPTIONAL:
 				- validate that the item is indeed a shoppingList item
-				- if shoppingList item is not passed in, throw error 
+				- if shoppingList item is not passed in, throw error
 	*/
 
 	// implement function here
+const addToShoppingList = (item = {}, list = []) => {
+	if (!validateShoppingListItem(item,newShoppingListItem())){
+		throw new TypeError("Item not a valid shoppingList item");
+	} else {
+		list.push(item);
+		return list
+	}
+}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +132,15 @@
 
 	// implement function here
 
+	const removeFromShoppingList = (list) => {
+		if (list === []){
+			return list;
+		} else {
+			list.pop();
+			return list;
+		}
+	}
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +174,15 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = (list) => {
+		if (list === []){
+			return list;
+		} else {
+			list.shift();
+			return list;
+		}
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +221,16 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list) => {
+		if ((typeof i !== "number") || (list.length < Math.abs(i)) || (i < 0)) {
+			throw new Error("index not a positive number and greater than length of list");
+		} else {
+			list.splice(i, 1);
+			return list;
+		}
+	}
+
+
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +301,18 @@
 	*/
 
 	// implement function here
+const removeNItems = (i, num = 0, list) => {
+	if (typeof i !== 'number' || i < 0 ){
+		throw new Error ('i not a positive number');
+	}else if (typeof num !== 'number' || num < i) {
+		throw new Error (' num is not number greater than i');
+	}else if (num > list.length || (i + num) > list.length){
+		throw new Error ('number and index + number is greater than list');
+	}else {
+		list.splice(i, 1 + num);
+		return list;
+	}
+}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -307,6 +392,19 @@
 	*/
 
 	// implement function here
+const smartRemoveItems = (i, list) => {
+	if (typeof i !== "number"){
+		throw new Error("i is not a number");
+	}else if (Math.abs(i) > list.length || i === 0){
+		return list;
+	}else if (i < 0){
+		list.splice(list.length+i, Math.abs(i));
+		return list;
+	}else{
+		list.splice(0, i);
+		return list;
+	}
+}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -385,6 +483,22 @@
 	*/
 
 	// implement function here
+const spliceItem = (item, i, list) => {
+	if (!validateShoppingListItem(item, newShoppingListItem())){
+		throw new TypeError("Item not a shoppinglist item");
+	} else if (i > list.length){
+		addToShoppingList(item, list);
+		return list;
+	} else if (i < 0) {
+		list.unshift(item);
+		return list;
+	} else {
+		list.splice( i, 1, item)
+		return list;
+	}
+}
+
+
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -439,7 +553,7 @@
 		@param list {array, []}
 		@returns list
 		@description
-			- *EACH* item in `items` must be an object 
+			- *EACH* item in `items` must be an object
 			that looks like this:
 			{
 				'item': 'eggs',
@@ -452,6 +566,23 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list) => {
+		if (!validateShoppingListItems(items, newShoppingListItem())) {
+			throw new TypeError("Item not a shoppinglist item");
+		} else if (items.length === 0){
+			return list;
+		} else if (i > list.length){
+			return [...list, ...items];
+		} else if (i < 0) {
+			return [...items, ...list]
+		} else {
+			for (let k = 0; k < items.length; k++){
+				list.splice(i, 0, items[k]);
+				i++;
+			}
+			return list;
+		}
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -521,17 +652,28 @@
 		@returns list
 		@description
 			given two lists of items
-			- *EACH* item in `items` must be an object 
+			- *EACH* item in `items` must be an object
 			that looks like this:
 			{
 				'item': 'eggs',
 				'price': 1.59
 			} (else throw error)
-			- return ONE list that contains items in 
+			- return ONE list that contains items in
 			items1 THEN items in items2 as a single array
 	*/
 
 	// implement function here
+
+	const combineLists = (items1, items2) => {
+		if (!validateShoppingListItems(items1, newShoppingListItem()) &&
+				!validateShoppingListItems(items2, newShoppingListItem())){
+					throw new Error("Items do not have valid objects");
+				}
+		else {
+			return [...items1, ...items2];
+		}
+	}
+
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -556,10 +698,10 @@
 					'price': 2,
 				}]);
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)	
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)	
+			chai.assert.equal(newList[0].item, 'test')
+			chai.assert.equal(newList[0].price, 1)
+			chai.assert.equal(newList[1].item, 'test2')
+			chai.assert.equal(newList[1].price, 2)
 		});
 	});
 
@@ -570,20 +712,36 @@
 		@returns list
 		@description
 			given a number i that is within bounds of
-			`list`, break it into two lists where 
+			`list`, break it into two lists where
 			`list1` has all items less than or equal to i
 			and `list2` has all items > i
-			- if `i` < 0, `list1` has all items and `list2` 
+			- if `i` < 0, `list1` has all items and `list2`
 				is empty list
-			- if `i` > length of list, list1 is empty and `list2` 
+			- if `i` > length of list, list1 is empty and `list2`
 				has all items
-			
+
 			- always return a list that looks like this:
 				[list1, list2]
-		
+
 	*/
 
 	// implement function here
+	const splitListAt = (i, list) => {
+		let list1 = [];
+		let list2 = [];
+		if (typeof i !== "number" && !Array.is(list)){
+			throw new Error ("i is not a number and list is not an array  ");
+		}else if (i < 0) {
+			return [list, []];
+		}else if (i > list.length) {
+			return [[], list];
+		}else {
+			list1 = list.slice(0, i+1);
+			list2 = list.slice(i, list.length - 1);
+			return [list1, list2];
+		}
+	}
+
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -595,12 +753,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
+
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)	
+			chai.assert.equal(list1[0].price, 1)
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
@@ -612,12 +770,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
+
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)	
+			chai.assert.equal(list1[0].price, 1)
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
@@ -629,13 +787,13 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
-			chai.assert.equal(list1.length, 0)	
+
+			chai.assert.equal(list1.length, 0)
 			chai.assert.equal(list2[0].item, 'test')
-			chai.assert.equal(list2[0].price, 1)	
+			chai.assert.equal(list2[0].price, 1)
 			chai.assert.equal(list2[1].item, 'test2')
 			chai.assert.equal(list2[1].price, 2)
-			
+
 
 		});
 
@@ -661,10 +819,16 @@
 		@description
 			if there are fewer than 10 items
 			in list, return true
-	*/	
+	*/
 
 	// implement function here
-
+	const canExpressCheckout = (list) => {
+		if (!Array.isArray(list)){
+			throw new Error('List is not an array');
+		}else {
+			return list.length < 10;
+		}
+	}
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -692,7 +856,15 @@
 	*/
 
 	// implement function here
-
+	const computeSum = (list) => {
+		if (!Array.isArray(list) && validateShoppingListItems(list, newShoppingListItem())) {
+			throw new Error("List is not an array with valid items");
+		}else if (list.length === 0){
+			return 0;
+		}else {
+			return list.map((item) => item.price).reduce((acc, curr) => acc + curr);
+		}
+	}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -705,6 +877,16 @@
 				}]);
 
 			chai.assert.equal(sum, 3);
+		});
+		it('should sum all the price of large list and return value', () => {
+			const sum =  computeSum([
+				newShoppingListItem('test', 1),
+				newShoppingListItem('test2', 2),
+				newShoppingListItem('test3', 3),
+				newShoppingListItem('test4', 4)
+			]);
+
+			chai.assert.equal(sum, 10)
 		});
 	});
 
@@ -726,7 +908,13 @@
 	*/
 
 	// implement function here
-
+	const computeSumWithTax = (list, taxRate) => {
+		if (typeof taxRate !== "number"){
+			throw new Error('taxRate is not a number');
+		}else {
+			return computeSum(list) * (1+(taxRate/100));
+		}
+	}
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
@@ -742,7 +930,7 @@
 			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
 		});
 	});
-	
+
 	/* 15
 		@function computeSumInRange
 		@param i {number}
@@ -756,12 +944,30 @@
 				'price': 1.59
 			}
 			- sum all the price items FROM start index `i` and
-				end index `j` and return value 
+				end index `j` and return value
 			- if i > j, throw error
 			- if i or j not in range, throw error
 	*/
 
 	// implement function here
+	const computeSumInRange = (i, j, list) => {
+		const listlen = list.length;
+		if (!validateShoppingListItems(list, newShoppingListItem()) &&
+				typeof i === "number" &&
+				typeof j === "number") {
+					throw new TypeError("List is not valid, i and j are not numbers");
+		} else if (i > j) {
+			throw new Error("i is greater than j");
+		} else if (i < 0 || j < 0){
+			throw new Error("i or j is less than 0");
+		} else if (i > listlen || j > listlen){
+			throw new Error("i or j is longer than list");
+		} else {
+			let range = list.slice(i, j);
+			range.push(list[j]);
+			return computeSum(range);
+		}
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
@@ -804,7 +1010,7 @@
 			]);
 
 			chai.assert.equal(sum, 9)
-		})		
+		})
 	});
-	
+
 })();
