@@ -119,7 +119,7 @@ console.log(list);
 
 	// implement function here
 
-	const removeFromShoppingList=(list)=>{
+	const removeFromShoppingList=(list=[])=>{
 		console.log(list);
 		if(list===[]){
 			return list;}
@@ -166,7 +166,7 @@ console.log(list);
 
 	// implement function here
 
-	const removeFirstItem=(list)=>{
+	const removeFirstItem=(list=[])=>{
 		console.log(list);
 		if(list===[]){
 			return list;}
@@ -214,7 +214,7 @@ removeFirstItem(list);
 	*/
 
 	// implement function here
-const removeNthItem=(i,list)=>{
+const removeNthItem=(i,list=[])=>{
 
 		if(i<0|i>list.length|typeof i != 'number'){
 			return 'error';}
@@ -297,7 +297,7 @@ removeNthItem(1,list);
 
 	// implement function here
 
-	const removeNthItems=(i,num,list)=>{
+	const removeNthItems=(i,num,list=[])=>{
 
 		if(i<0|(i+num)>list.length|typeof i != 'number'|typeof num!='number'){
 			return 'error';}
@@ -389,7 +389,7 @@ console.log(list);
 
 	// implement function here
 
-	const smartRemoveItems=(i,list)=>{
+	const smartRemoveItems=(i,list=[])=>{
 
 		if(typeof i != 'number'){
 			return 'error';}
@@ -484,18 +484,21 @@ console.log(list);
 
 	// implement function here
 
-		const spliceItems=(i,list)=>{
+	const spliceItem=(item,i,list=[])=>{
 
-		if(typeof i != 'number'){
+		if(typeof i != 'number'|typeof item!='object'){
 			throw new Error ('error');}
 		else if (i<0){
-			return list.splice(list.length-1,-i);}
+			return list.unshift(item);}
 		else if (i>list.length){
-			return list;}
+			return list.push(item);}
 		else{
-			return list.splice(0,i);}
+			return list.splice(i,0,item);}
 
 	};
+
+	spliceItem(newShoppingListItem('dog',20.00),1,list);
+	console.log(list);
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -563,6 +566,28 @@ console.log(list);
 	*/
 
 	// implement function here
+
+	const spliceItems=(items,i,list=[])=>{
+		console.log(items.length);
+		for (let j=0; j<items.length; j++){
+
+		if(typeof i != 'number'|typeof items[j]!='object'){
+			throw new Error ('error');}
+		else if (i<0){
+			 list.unshift(items[j]);}
+		else if (i>list.length){
+			 list.push(items[j]);}
+		else{
+		list.splice(i+j,0,items[j]);}}
+
+		return list;
+
+	};
+
+	const newItems=[newShoppingListItem('milk',4.99),newShoppingListItem('OJ',5.99)];
+
+	spliceItems(newItems,1,list);
+	console.log(list);
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -643,6 +668,30 @@ console.log(list);
 	*/
 
 	// implement function here
+	const combineLists=(items1,items2)=>{
+
+		for (let i=0; i<items1.length; i++){
+
+		if(typeof items1[i]!='object'){
+			throw new Error ('error');}}
+
+		for (let j=0; j<items2.length; j++){
+
+		if(typeof items2[j]!='object'){
+			throw new Error ('error');}}
+
+
+		return list=items1.concat(items2);
+
+	};
+
+	const items1=[newShoppingListItem('milk',4.99),newShoppingListItem('OJ',5.99)];
+	const items2=[newShoppingListItem('antelope',2.99),newShoppingListItem('cantaloupe',5.99),newShoppingListItem('melon',5.99)];
+
+	combineLists(items1,items2);
+	console.log(list);
+
+
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -695,6 +744,37 @@ console.log(list);
 	*/
 
 	// implement function here
+
+
+
+	const splitListAt=(i,list=[])=>{
+		if(typeof i != 'number'|typeof list!='object'){
+			throw new Error ('error');}
+		else if (i<0){
+			list1=list;
+			list2=[];
+
+			return list=[list1,list2];}
+
+		else if (i>list.length){
+			list1=[];
+			list2=list;
+			return list=[list1,list2];}
+
+		else{
+			list1=list.slice(0,i);
+			list2=list.slice(i,list.length);
+
+			return list=[list1,list2]};
+
+	};
+
+	const items=[newShoppingListItem('milk',4.99),newShoppingListItem('OJ',5.99),newShoppingListItem('antelope',2.99),newShoppingListItem('cantaloupe',5.99),newShoppingListItem('melon',5.99)];
+	
+
+	console.log(splitListAt(1,items));
+
+
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -776,7 +856,17 @@ console.log(list);
 
 	// implement function here
 
-	// TEST
+const canExpressCheckout=(list=[])=>{
+		if(list.length<10){
+			return true;}
+		else {
+			
+			return false;}
+	};
+	
+
+	console.log(canExpressCheckout(items));
+// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
 			chai.assert.equal(canExpressCheckout([{
@@ -803,6 +893,24 @@ console.log(list);
 	*/
 
 	// implement function here
+
+	const computeSum=(list=[])=>{
+		
+		let total = 0
+
+		if(typeof list!='object'){
+			throw new Error ('error');}
+		
+		else{
+			
+    		for ( i = 0; i < list.length; i++ ) {
+        	total += list[i].price
+    }
+    	return total
+		};
+	};
+	
+	console.log(computeSum(items));
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -837,6 +945,20 @@ console.log(list);
 	*/
 
 	// implement function here
+
+	const computeSumWithTax=(list=[],taxRate)=>{
+		
+		let total = 0
+
+			
+    	for ( i = 0; i < list.length; i++ ) {
+        total += (list[i].price)*(1+(taxRate/100))
+    	
+		};
+		return total
+	};
+	
+	console.log(computeSumWithTax(items,8.125));
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -873,6 +995,25 @@ console.log(list);
 	*/
 
 	// implement function here
+
+	const computeSumInRange=(i,j,list=[])=>{
+		
+		let total = 0;
+		let range= list.slice(i,j+1);
+		console.log(range);
+		if(typeof range!='object'|i>j|i<0|i>list.length|j>list.length){
+			throw new Error ('error');}
+		
+		else{
+			
+    		for ( i = 0; i < range.length; i++ ) {
+        	total += (range[i].price)
+    }
+    	return total
+		};
+	};
+	
+	console.log(computeSumInRange(2,4,items));
 
 	// TEST
 	describe('15. computeSumInRange', () => {
