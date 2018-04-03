@@ -24,6 +24,13 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item, price) => {
+		return {
+			'item': item,
+			'price': price
+		};
+	};
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +60,10 @@
 	*/
 
 	// implement function here
+	const addToShoppingList = (item, list = []) => {
+		list.push(item);
+		return list;
+	};
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +98,13 @@
 
 	// implement function here
 
+	const removeFromShoppingList = (list = []) => {
+		if (list.length > 0) {
+			list.pop();
+		}
+		return list;
+	};
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +138,13 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = (list = []) => {
+		if (list.length > 0) {
+			list.shift();
+		}
+		return list;
+	};
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +183,15 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list = []) => {
+		if (i > list.length || i < 0 || typeof i !== 'number') {
+			throw new Error();
+		}
+		else if (i < list.length) {
+			list.splice(i, i);
+		}
+		return list;
+	};
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -226,6 +260,15 @@
 				- `num` > length of list
 			^^ return error
 	*/
+
+	const removeNItems = (i, num, list = []) => {
+		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || (i + num) > list.length || num > list.length) {
+			throw new Error;
+		} else {
+			list.splice(i, i + num);
+		}
+		return list;
+	}
 
 	// implement function here
 
@@ -307,6 +350,17 @@
 	*/
 
 	// implement function here
+	const smartRemoveItems = (i, list = []) => {
+		if (i < 0) {
+			list.splice(i, Math.abs(i));
+			return list;
+		} else if (i > list.length) {
+			return list;
+		} else if (i > 0) {
+			list.splice(0, i);
+			return list;
+		}
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -343,7 +397,7 @@
 			chai.assert.equal(list[1].price, 2)
 		});
 
-		it('should remove i number from START if list if i > 0', () => {
+		it('should remove i number from START of list if i > 0', () => {
 			let list = addToShoppingList({
 				'item': 'test',
 				'price': 1
@@ -385,6 +439,16 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item, i, list = []) => {
+		if (typeof item !== 'object') {
+			throw new Error('item must be an object');
+		} else if(!item.hasOwnProperty('item') || !item.hasOwnProperty('price')) {
+			throw new Error('must contain item and price');
+		} else {
+			list.splice(i, 0, item);
+		}
+		return list;
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -452,6 +516,28 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list = []) => {
+		items.forEach((curr) => {
+			if (!curr.hasOwnProperty('item') || !curr.hasOwnProperty('price')) {
+				throw new Error('must have item and price');
+			}
+		});
+
+		if (i > list.length) {
+			items.forEach((curr) => {
+				list.push(curr);
+			});
+		} else if (i < 0) {
+			items.forEach((curr) => {
+				list.unshift(curr);
+			});
+		} else {
+			items.forEach((curr) => {
+				list.splice(i - 1, 0, curr);
+			});
+		}
+		return list;
+	};
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -532,6 +618,19 @@
 	*/
 
 	// implement function here
+	const combineLists = (items1, items2) => {
+		items1.forEach((curr) => {
+			if (!curr.hasOwnProperty('item') || !curr.hasOwnProperty('price')) {
+				throw new Error('must have item and price');
+			}
+		});
+		items2.forEach((curr) => {
+			if (!curr.hasOwnProperty('item') || !curr.hasOwnProperty('price')) {
+				throw new Error('must have item and price');
+			}
+		});
+		return items1.concat(items2);
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -584,6 +683,22 @@
 	*/
 
 	// implement function here
+	const splitListAt = (i, list = []) => {
+		let list1 = [];
+		let list2 = [];
+		let combinedList = [];
+		if (i < 0) {
+			list1 = list;
+		} else if (i > (list.length - 1)) {
+			list2 = list;
+		} else {
+			//first part of array
+			list1 = list.slice(0, (i + 1));
+			//rest of array
+			list2 = list.slice(i + 1);
+		}
+		return [list1, list2];
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -664,6 +779,11 @@
 	*/
 
 	// implement function here
+	const canExpressCheckout = (list = []) => {
+		if (list.length < 10) {
+			return true;
+		}
+	}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -692,6 +812,13 @@
 	*/
 
 	// implement function here
+	const computeSum = (list = []) => {
+		let priceItem = 0;
+		for (let i = 0; i < list.length; i++) {
+			priceItem += list[i].price;
+		}
+		return priceItem;
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -726,6 +853,14 @@
 	*/
 
 	// implement function here
+	const computeSumWithTax = (list = [], taxRate) => {
+		let preTax = 0;
+		let total = 0;
+		let taxConversion = taxRate / 100;
+		preTax = computeSum(list);
+		total = (taxConversion * preTax) + preTax;
+		return total;
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -762,6 +897,20 @@
 	*/
 
 	// implement function here
+	const computeSumInRange = (i, j, list = []) => {
+		let sum = 0;
+
+		if (i > j || i < 0 || j > list.length) {
+			throw new Error('i or j must be in list range');
+		} else {
+			let range = list.slice(i, j + 1);
+
+			for (let k = 0; k < range.length; k++) {
+				sum += range[k].price;
+			}
+		}
+		return sum;
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
