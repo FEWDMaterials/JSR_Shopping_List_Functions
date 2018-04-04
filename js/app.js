@@ -23,6 +23,17 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+
+        if (typeof item !== 'string' || typeof price !== "number") {
+            throw new Error();
+        }
+
+		return {
+		  'item': item,
+		  'price' : price
+		};
+	};
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -53,6 +64,13 @@
 	*/
 
 	// implement function here
+
+	const addToShoppingList = (item, list = []) => {
+
+		list.push(item);
+
+		return list;
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +105,16 @@
 
 	// implement function here
 
+	const removeFromShoppingList = (list) => {
+		if (list.length === 0) {
+			return;
+		}
+		else if (list.length > 0) {
+			list.pop();
+			return list;
+		}
+	}
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +148,15 @@
 	*/
 
 	// implement function here
+    const removeFirstItem = (list) => {
+        if (list.length === 0) {
+            return;
+        }
+        else if (list.length > 0) {
+            list.shift();
+            return list;
+        }
+    }
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +195,15 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list) => {
+    if (i > list.length || i < 0 || typeof i !== 'number') {
+      throw new Error();
+    } else if (i < list.length) {
+      list.splice(i, 1);
+    }
+
+    return list;
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +274,17 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i, num, list) => {
+    if ((i + num || num) > list.length || i < 0 || typeof i !== 'number' || typeof num !== 'number' ) {
+      throw new Error();
+    } else {
+      list.splice(i, num+i);
+		}
+
+    return list;
+
+	}
+
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -307,6 +364,17 @@
 	*/
 
 	// implement function here
+	const smartRemoveItems = (i, list) => {
+		if (i > list.length) {
+			return list;
+		} else if (i < 0) {
+			list.pop();
+			return list;
+		} else if (i > 0) {
+			list.splice(0, i);
+			return list;
+		}
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -385,6 +453,14 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item, i, list = []) => {
+		if (item.hasOwnProperty('item') && item.hasOwnProperty('price')) {
+			list.splice(i, 0, item);
+			return list;
+		} else {
+      throw new Error('Item must have `item` and `price`');
+		}
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -452,6 +528,22 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list) => {
+		for (let i = 0; i < items.length; i++) {
+			if (items[i].hasOwnProperty('item') && items[i].hasOwnProperty('price')) {
+				list.splice(i, 0, items[i])
+        if (i > list.length){
+          list.push(items[i]);
+        } else if (i < 0) {
+          list.unshift(items[i])
+        }
+			} else {
+				throw new Error('wrong');
+			}
+    }
+
+		return list;
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -532,6 +624,19 @@
 	*/
 
 	// implement function here
+  const combineLists = (items1, items2) => {
+
+    const list = items1.concat(items2);
+
+    list.forEach(item => {
+      if(typeof item !== 'object' && !item.hasOwnProperty('item') && !item.hasOwnProperty('price') &&
+          typeof item.price !== 'number' && typeof item.item !== 'string') {
+        throw new Error('Not a valid item');
+        return;
+      }
+    });
+    return list;
+  }
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -584,6 +689,25 @@
 	*/
 
 	// implement function here
+  const splitListAt = (i, list) => {
+  	const list1 = [];
+  	const list2 = [];
+    if(list.length <= i) {
+      		list1.push(item);
+      	} else if (item.length > i) {
+      		list2.push(item)
+      	}
+		// list.forEach(item => {
+		// 	if(item.length <= i) {
+		// 		list1.push(item);
+		// 	} else if (item.length > i) {
+		// 		list2.push(item)
+		// 	}
+    //
+		// })
+    return list = [list1, list2];
+
+  }
 
 	// TEST
 	describe('11. splitListAt', () => {
