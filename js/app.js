@@ -5,7 +5,7 @@
 		@param item {string}
 		@param price {number}
 		@returns {object}
-		@description 
+		@description
 			given an item and a price, return
 			an object that looks like this:
 			{
@@ -23,6 +23,16 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+		let obj = {
+			"item": item,
+			"price": price,
+		}
+
+		return obj;
+	};
+
+	console.log(newShoppingListItem('eggs',1.59))
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -49,10 +59,17 @@
 			list is to DEFAULT to []
 			OPTIONAL:
 				- validate that the item is indeed a shoppingList item
-				- if shoppingList item is not passed in, throw error 
+				- if shoppingList item is not passed in, throw error
 	*/
 
 	// implement function here
+	const addToShoppingList = (item, list = []) => {
+		list.push(item)
+
+		return list;
+	};
+
+	console.log(addToShoppingList({'item': 'eggs','price': 1.59}))
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +103,17 @@
 	*/
 
 	// implement function here
+	const removeFromShoppingList = (list = []) => {
+		if (list.length<1) {
+			list = [];
+		} else {
+			list.splice(-1, 1);
+		}
+
+		return list;
+	};
+
+	console.log(removeFromShoppingList(['eggs','bread']))
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -120,6 +148,17 @@
 	*/
 
 	// implement function here
+	const removeFirstItem = (list = []) => {
+		if (list.length<1) {
+			list = [];
+		} else {
+			list.splice(0, 1);
+		}
+
+		return list;
+	};
+
+	console.log(removeFirstItem(['eggs','bread','milk']))
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +197,17 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i,list = []) => {
+		if (i<list.length && i>0 && Number.isInteger(i) == true) {
+			list.splice(i, 1);
+		} else {
+			throw new Error('error')
+		}
+
+		return list;
+	};
+
+	console.log(removeNthItem(2,['meat','cheese','fruit']))
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +278,17 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i,num,list = []) => {
+		if (i+num<list.length && i>0 && Number.isInteger(i) == true) {
+			list.splice(i, i+num);
+		} else {
+			throw new Error('error')
+		}
+
+		return list;
+	};
+
+	console.log(removeNItems(2,1,['apples','oranges','lemons','mangoes','kiwis','peaches']))
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -307,6 +368,18 @@
 	*/
 
 	// implement function here
+	const smartRemoveItems = (i,list = []) => {
+		if (i<0) {
+			list.splice(-1, -i);
+		} else if (i>0) {
+			list.splice(0, i);
+		}
+
+		return list;
+	};
+
+	console.log(smartRemoveItems(2,['cats','dogs','birds','owls','ducks']))
+
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -360,8 +433,8 @@
 			list = smartRemoveItems(1, list);
 
 			chai.assert.equal(list.length, 2)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
+			chai.assert.equal(list[0].item, 'test2')
+			chai.assert.equal(list[0].price, 2)
 			chai.assert.equal(list[1].item, 'test3')
 			chai.assert.equal(list[1].price, 3)
 		});
@@ -385,6 +458,18 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item,i,list = []) => {
+		if (typeof item === 'object') {
+			list.splice(i,0,item);
+		} else {
+			throw new Error('error');
+		}
+
+
+		return list;
+	};
+
+	console.log(spliceItem({'item': 'pasta','price': 2.32},2,[{'item': 'eggs','price': 1.59},{'item': 'fish','price': 2.75},{'item': 'meat','price': 19.99}]))
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -439,7 +524,7 @@
 		@param list {array, []}
 		@returns list
 		@description
-			- *EACH* item in `items` must be an object 
+			- *EACH* item in `items` must be an object
 			that looks like this:
 			{
 				'item': 'eggs',
@@ -452,8 +537,23 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items,i,list = []) => {
+		if (i>list.length) {
+			list.splice(-1,0,items);
+			//console.log('greater than list length')
+		} else if (i<0) {
+			list.splice(0,0,items);
+		} else {
+			list.splice(i,0,items);
+		}
 
-	// TEST
+
+		return list;
+	};
+
+	console.log(spliceItems({'item': 'rice','price': 1.39},2,[{'item': 'eggs','price': 1.59},{'item': 'fish','price': 2.75},{'item': 'meat','price': 19.99}]))
+
+	//TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
 			chai.assert.throws(() => {
@@ -521,17 +621,24 @@
 		@returns list
 		@description
 			given two lists of items
-			- *EACH* item in `items` must be an object 
+			- *EACH* item in `items` must be an object
 			that looks like this:
 			{
 				'item': 'eggs',
 				'price': 1.59
 			} (else throw error)
-			- return ONE list that contains items in 
+			- return ONE list that contains items in
 			items1 THEN items in items2 as a single array
 	*/
 
 	// implement function here
+	const combineLists = (items1,items2) => {
+		let list = items1.concat(items2);
+
+		return list;
+	};
+
+	console.log(combineLists([{'item': 'rice','price': 1.39}],[{'item': 'potatoes','price': 2.55}]))
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -557,9 +664,9 @@
 				}]);
 
 			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)	
+			chai.assert.equal(list[0].price, 1)
 			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)	
+			chai.assert.equal(list[1].price, 2)
 		});
 	});
 
@@ -570,20 +677,42 @@
 		@returns list
 		@description
 			given a number i that is within bounds of
-			`list`, break it into two lists where 
+			`list`, break it into two lists where
 			`list1` has all items less than or equal to i
 			and `list2` has all items > i
-			- if `i` < 0, `list1` has all items and `list2` 
+			- if `i` < 0, `list1` has all items and `list2`
 				is empty list
-			- if `i` > length of list, list1 is empty and `list2` 
+			- if `i` > length of list, list1 is empty and `list2`
 				has all items
-			
+
 			- always return a list that looks like this:
 				[list1, list2]
-		
+
 	*/
 
 	// implement function here
+	const splitListAt = (i,list = []) => {
+		if (i<0) {
+			let firstList = list;
+			let secondList = [];
+			list = [];
+			list.push(firstList,secondList)
+		} else if (i>list.length) {
+			let firstList = [];
+			let secondList = list;
+			list = [];
+			list.push(firstList,secondList)
+		} else {
+			let firstList = list.slice(0, i + 1);
+			let secondList = list.slice(i + 1, list.length);
+			list = [];
+			list.push(firstList,secondList)
+		}
+
+		return list;
+	};
+
+	console.log(splitListAt(2,['apples','oranges','lemons','mangoes','kiwis','peaches']))
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -595,12 +724,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
+
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)	
+			chai.assert.equal(list1[0].price, 1)
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
@@ -612,12 +741,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
+
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)	
+			chai.assert.equal(list1[0].price, 1)
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)	
+			chai.assert.equal(list2.length, 0)
 
 		});
 
@@ -629,13 +758,13 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-			
-			chai.assert.equal(list1.length, 0)	
+
+			chai.assert.equal(list1.length, 0)
 			chai.assert.equal(list2[0].item, 'test')
-			chai.assert.equal(list2[0].price, 1)	
+			chai.assert.equal(list2[0].price, 1)
 			chai.assert.equal(list2[1].item, 'test2')
 			chai.assert.equal(list2[1].price, 2)
-			
+
 
 		});
 
@@ -661,9 +790,17 @@
 		@description
 			if there are fewer than 10 items
 			in list, return true
-	*/	
+	*/
 
 	// implement function here
+	const canExpressCheckout = (list = []) => {
+		if (list.length<10) {
+			return true;
+		}
+	};
+
+	console.log(canExpressCheckout(['apples','oranges','lemons','mangoes','kiwis','peaches']))
+
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -692,6 +829,15 @@
 	*/
 
 	// implement function here
+	const computeSum = (list = []) => {
+		//I know if need to use filter in this problem and the next two, just didn't have time to figure it out
+		for (let i = 0; i < list.length; i++) {
+    		console.log(list[i]);
+		}
+	};
+
+	console.log(computeSum([{'item': 'rice','price': 1.39},{'item': 'potatoes','price': 2.55}]));
+
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -742,7 +888,7 @@
 			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
 		});
 	});
-	
+
 	/* 15
 		@function computeSumInRange
 		@param i {number}
@@ -756,7 +902,7 @@
 				'price': 1.59
 			}
 			- sum all the price items FROM start index `i` and
-				end index `j` and return value 
+				end index `j` and return value
 			- if i > j, throw error
 			- if i or j not in range, throw error
 	*/
@@ -804,7 +950,7 @@
 			]);
 
 			chai.assert.equal(sum, 9)
-		})		
+		})
 	});
-	
+
 })();
