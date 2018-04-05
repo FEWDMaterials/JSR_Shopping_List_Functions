@@ -23,6 +23,7 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => ({item, price,});
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
