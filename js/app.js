@@ -1,5 +1,4 @@
 (function() { // protect the lemmings!
-
 	/* 1
 		@function newShoppingListItem
 		@param item {string}
@@ -23,7 +22,19 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+		if ( typeof item != 'string' ) { throw new Error ('The item is not a string.'); }
+		if ( item.length > 10) { throw new Error ('The item needs to have fewer than 10 characters.'); }	
+		if (typeof price != 'number') { throw new Error ('The price is not a number.'); }
+		//Find a way to validate how many decimal places.
 
+		return {
+			'item' : item,
+			'price' : price
+		}
+	}
+	const shoppingListItem = newShoppingListItem('test', 1);
+	
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +64,11 @@
 	*/
 
 	// implement function here
+	const addToShoppingList = ( item, list = [] ) => {
+		list.push(item);
+		return list;
+	}
+	const newList = addToShoppingList(shoppingListItem);
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +102,13 @@
 	*/
 
 	// implement function here
+	const removeFromShoppingList = ( list = [] ) => {
+		if(list.length >= 0) {
+			list.pop();
+		}
+		return list;
+	}
+	let list = removeFromShoppingList(addToShoppingList(shoppingListItem));
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -120,6 +143,13 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = ( list = [] ) => {
+		if (list.length > 0) { 
+			list.shift();
+		};
+		return list;
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +188,14 @@
 	*/
 
 	// implement function here
+
+	const removeNthItem = (i, list = '' )  => {
+		if (i < 0) { throw new Error ('i has to be bigger than -1'); }
+		if (i > list.length) { throw new Error ('i cannot exceed the length of the array'); }
+		if (typeof i !== 'number') {throw new Error ('i has to be a number');}
+		list.splice(i, i);
+		return list;
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +266,18 @@
 	*/
 
 	// implement function here
+
+	const removeNItems = (i, num, list = '' )  => {
+		if (i < 0) { throw new Error ('i has to be bigger than -1'); }
+		if (num > list.length) { throw new Error ('num cannot exceed the length of the array'); }
+		if ((i + num )> list.length) { throw new Error ('i + num cannot exceed the length of the array'); }
+		if (typeof i !== 'number') {throw new Error ('i and num has to be a number');}
+		if (typeof num !== 'number') {throw new Error ('num and num has to be a number');}
+
+		list.splice(i, i+num);
+		return list;
+	}
+
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -308,6 +358,17 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list = []) => {
+		if (i > list.length) {
+			return list;
+		} else if (i < 0 ) {
+			list.splice( i )
+		} else if (i > 0) {
+			list.splice (0, i);
+		} 
+		return list;
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -385,6 +446,16 @@
 	*/
 
 	// implement function here
+	const spliceItem = ( item, i, list = [] ) => {
+		if (typeof item !== 'object') {
+			throw new Error('Item must be an object.');
+		} else if(!item.hasOwnProperty('item') || !item.hasOwnProperty('price')) {
+			throw new Error('List must contain item and price.');
+		} else {
+			list.splice(i, 0, item);
+		}
+		return list;
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -452,6 +523,32 @@
 	*/
 
 	// implement function here
+
+	const spliceItems = (items, i, list) => {
+		items.forEach( (curr) => {
+			if( !curr.hasOwnProperty('item') || !curr.hasOwnProperty('price') ) {
+				throw new Error('List must contain item and price.');
+			}
+		});
+
+
+
+		if( i > list.length) {
+			items.forEach((curr)=> {
+				list.push(curr);
+			});
+		} else if ( i < 0 ) {
+			items.forEach((curr)=> {
+				list.unshift(curr);
+			});
+		} else {
+			items.forEach((curr) => {
+				list.splice(i - 1, 0, curr);
+			});
+		}
+		return list;
+
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -533,6 +630,22 @@
 
 	// implement function here
 
+	const combineLists = (items1, items2) => {
+		items1.forEach( (curr1) => {
+			if( !curr1.hasOwnProperty('item') || !curr1.hasOwnProperty('price') ) {
+				throw new Error('List must contain item and price.');
+			}
+		});
+		items2.forEach( (curr2) => {
+			if( !curr2.hasOwnProperty('item') || !curr2.hasOwnProperty('price') ) {
+				throw new Error('List must contain item and price.');
+			}
+		});		
+		let items = items1.concat(items2);
+		return items;
+		//Test still failing.
+	}
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -584,6 +697,20 @@
 	*/
 
 	// implement function here
+
+	const splitListAt = (i, list) => {
+		let list1 = [];
+		let list2 = [];
+		if(i < 0 ) {
+			list1 = list;
+		} else if ( i > list.length) {
+			list2 = list;
+		} else {
+			list1 = list.slice(0, i + 1);
+			list2 = list.slice(i + 1);
+		}
+		return [list1, list2]
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -665,6 +792,13 @@
 
 	// implement function here
 
+	const canExpressCheckout = (list) => {
+		if(list.length < 10) {
+			return true;
+		}
+		return false;
+	}
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -692,6 +826,14 @@
 	*/
 
 	// implement function here
+
+	const computeSum = (list) => {
+		let sum = 0;
+		for(let i = 0; i < list.length; i++) {
+			sum += list[i].price;
+		}
+		return sum;
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -726,6 +868,18 @@
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (taxRate = 8.125, list) => {
+		let total = 0;
+		let preTaxSum = 0;
+		let tax = 0;
+		tax = (taxRate / 100);
+		preTaxSum = computeSum(list);
+		total = (tax * preTaxSum ) + preTaxSum;
+		return total;
+		//Doesnt Pass test but it looks right. computeSum is the function above; 13
+
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -762,7 +916,23 @@
 	*/
 
 	// implement function here
+	const computeSumInRange = (i, j, list) => {
+		let sum = 0;
+		if (i > j) {
+			throw new Error('i cannot be greater than j');
+		} else if ( i < 0 ) {
+			throw new Error('i cannot be lower than o');
+		} else  if (j > list.length) {
+			throw new Error('j must be in list range');
+		} else {
+			let range = list.slice(i, j + 1);
 
+			for (let k = 0; k < range.length; k++) {
+				sum += range[k].price;
+			}
+		}
+		return sum;
+	}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
