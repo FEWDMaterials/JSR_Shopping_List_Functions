@@ -5,7 +5,7 @@
 		@param item {string}
 		@param price {number}
 		@returns {object}
-		@description
+		@description 
 			given an item and a price, return
 			an object that looks like this:
 			{
@@ -21,6 +21,7 @@
 				- validate that price is less than 100 and has only
 					two decimal places
 	*/
+	const newShoppingListItem = (item,price) => ({item, price,})
 
 	// implement function here
 
@@ -49,10 +50,11 @@
 			list is to DEFAULT to []
 			OPTIONAL:
 				- validate that the item is indeed a shoppingList item
-				- if shoppingList item is not passed in, throw error
+				- if shoppingList item is not passed in, throw error 
 	*/
 
 	// implement function here
+	const addToShoppingList = (item,list=[]) => list.concat([item]);
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +88,7 @@
 	*/
 
 	// implement function here
+	const removeFromShoppingList = (list=[]) => list.slice(0, -1);
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -120,6 +123,7 @@
 	*/
 
 	// implement function here
+	const removeFirstItem = (list=[]) => list.slice(1);
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +162,14 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i,list = []) => {
+        if (i<list.length && i>0 && Number.isInteger(i) == true) {
+            list.splice(i, 1);
+        } else {
+            throw new Error('error')
+        }
+        return list;
+    };
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +240,13 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i, num, list=[]) => {
+		if (i < 0 || isNaN(num) || isNaN(i) || i+num > list.length || num > list.length) {
+			throw new Error('invalid')
+		}
+
+		return list.slice(0, i).concat(list.slice(i+num+1))
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -247,6 +266,7 @@
 
 
 			list = removeNItems(1, 1, list);
+			console.log(list)
 
 			chai.assert.equal(list.length, 1)
 
@@ -307,6 +327,12 @@
 	*/
 
 	// implement function here
+	const smartRemoveItems = (i, list=[]) => {
+		if (i > list.length) return []
+		if (i < 0) return list.slice(0, i)
+
+		return list.slice(i)
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -385,6 +411,16 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item, i, list = []) => {
+		if (typeof item.item === "undefined" || typeof item.price === "undefined") {
+			throw new Error('invalid item')
+		}
+
+		if (i > list.length) return addToShoppingList(item, list)
+		if (i < 0) return [item].concat(list)
+
+		return list.slice(0, i).concat([item]).concat(list.slice(i))
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -439,7 +475,7 @@
 		@param list {array, []}
 		@returns list
 		@description
-			- *EACH* item in `items` must be an object
+			- *EACH* item in `items` must be an object 
 			that looks like this:
 			{
 				'item': 'eggs',
@@ -452,6 +488,23 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list=[]) => {
+		if (!Array.isArray(items)) throw new Error('items is not array!')
+		items.forEach((item) => {
+			if (typeof item.item === "undefined" || typeof item.price === "undefined") {
+				throw new Error('invalid item')
+			}
+		})
+		if (items.length === 0) return list
+		if (i > list.length) return list.concat(items)
+		if (i < 0) return items.concat(list)
+		return list.slice(0, i).concat(items).concat(list.slice(i))
+	}
+
+	// NOTE: we can actually define spliceItem (number 8) in terms of this ^^^ problem:
+	/*
+	const spliceItem = (item, i, list=[]) => spliceItems([item], i, list);
+	*/
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -521,17 +574,23 @@
 		@returns list
 		@description
 			given two lists of items
-			- *EACH* item in `items` must be an object
+			- *EACH* item in `items` must be an object 
 			that looks like this:
 			{
 				'item': 'eggs',
 				'price': 1.59
 			} (else throw error)
-			- return ONE list that contains items in
+			- return ONE list that contains items in 
 			items1 THEN items in items2 as a single array
 	*/
 
 	// implement function here
+	const combineLists = (items1, items2) => {
+		const v1 = items1.filter(item => item.item && item.price);
+		if (v1.length != items1.length) throw new Error('invalid items1')
+
+		return items1.concat(items2)
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -548,7 +607,7 @@
 		});
 
 		it('should return single list with items of both lists', () => {
-			const list = combineLists([{
+			const newList = combineLists([{
 					'item': 'test',
 					'price': 1,
 				}], [{
@@ -556,10 +615,10 @@
 					'price': 2,
 				}]);
 
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
+			chai.assert.equal(newList[0].item, 'test')
+			chai.assert.equal(newList[0].price, 1)	
+			chai.assert.equal(newList[1].item, 'test2')
+			chai.assert.equal(newList[1].price, 2)	
 		});
 	});
 
@@ -570,20 +629,26 @@
 		@returns list
 		@description
 			given a number i that is within bounds of
-			`list`, break it into two lists where
+			`list`, break it into two lists where 
 			`list1` has all items less than or equal to i
 			and `list2` has all items > i
-			- if `i` < 0, `list1` has all items and `list2`
+			- if `i` < 0, `list1` has all items and `list2` 
 				is empty list
-			- if `i` > length of list, list1 is empty and `list2`
+			- if `i` > length of list, list1 is empty and `list2` 
 				has all items
-
+			
 			- always return a list that looks like this:
 				[list1, list2]
-
+		
 	*/
 
 	// implement function here
+	const splitListAt = (i, list=[]) => {
+		if (i < 0) return [list, []]
+		if (i > list.length) return [[], list]
+
+		return [list.slice(0, i+1), list.slice(i+1)]
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -595,12 +660,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-
+			
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)
+			chai.assert.equal(list1[0].price, 1)	
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)
+			chai.assert.equal(list2.length, 0)	
 
 		});
 
@@ -612,12 +677,12 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-
+			
 			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)
+			chai.assert.equal(list1[0].price, 1)	
 			chai.assert.equal(list1[1].item, 'test2')
 			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)
+			chai.assert.equal(list2.length, 0)	
 
 		});
 
@@ -629,13 +694,13 @@
 					'item': 'test2',
 					'price': 2,
 				}]);
-
-			chai.assert.equal(list1.length, 0)
+			
+			chai.assert.equal(list1.length, 0)	
 			chai.assert.equal(list2[0].item, 'test')
-			chai.assert.equal(list2[0].price, 1)
+			chai.assert.equal(list2[0].price, 1)	
 			chai.assert.equal(list2[1].item, 'test2')
 			chai.assert.equal(list2[1].price, 2)
-
+			
 
 		});
 
@@ -661,9 +726,10 @@
 		@description
 			if there are fewer than 10 items
 			in list, return true
-	*/
+	*/	
 
 	// implement function here
+	const canExpressCheckout = (list=[]) => list.length < 10
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -692,6 +758,7 @@
 	*/
 
 	// implement function here
+	const computeSum = (list=[]) => list.reduce((sum, curr) => sum += curr.price, 0);
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -724,7 +791,8 @@
 			- note that tax is passed in as percent not decimal
 
 	*/
-
+	const computeSumWithTax = (list = [], taxRate = 8.125) => computeSum(list) * (1 + taxRate/100)
+	
 	// implement function here
 
 	// TEST
@@ -742,7 +810,7 @@
 			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
 		});
 	});
-
+	
 	/* 15
 		@function computeSumInRange
 		@param i {number}
@@ -756,12 +824,23 @@
 				'price': 1.59
 			}
 			- sum all the price items FROM start index `i` and
-				end index `j` and return value
+				end index `j` and return value 
 			- if i > j, throw error
 			- if i or j not in range, throw error
 	*/
 
 	// implement function here
+	const computeSumInRange = (i, j, list=[]) => {
+		if (i > j || i < 0 || i > list.length || j < 0 || j > list.length) {
+			throw new Error('Not in range')
+		}
+		return list.reduce((sum, curr, index) => {
+			if (index >= i && index <= j) {
+				sum += curr.price;
+			}
+			return sum;
+		}, 0);
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
@@ -804,7 +883,7 @@
 			]);
 
 			chai.assert.equal(sum, 9)
-		})
+		})		
 	});
-
+	
 })();
