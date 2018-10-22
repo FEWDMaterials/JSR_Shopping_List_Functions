@@ -1,4 +1,4 @@
-(function() { // protect the lemmings!
+(function () { // protect the lemmings!
 
 	/* 1
 		@function newShoppingListItem
@@ -22,7 +22,24 @@
 					two decimal places
 	*/
 
-	// implement function here
+	const newShoppingListItem = (item, price) => {
+
+		if (typeof item !== "string" || item.length > 10){
+			throw new Error ("Invalid input for item")
+		}
+
+		if (isNaN(price) || !(price < 100 || price === price.toFixed(2))) {
+			throw new Error ("Invalid input for price")
+		}
+
+		else {
+            const shoppingListItem = {'item': item,
+                                      'price': price}
+		}
+		
+
+		return shoppingListItem
+    }
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -52,7 +69,8 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	const addToShoppingList = (item, list = []) => {
+    }
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -85,7 +103,7 @@
 				and then return the array
 	*/
 
-	// implement function here
+	
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
