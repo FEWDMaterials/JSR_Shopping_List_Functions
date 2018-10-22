@@ -23,6 +23,9 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+		console.log("LOL this is a bad attempt at this problem")
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
