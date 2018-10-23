@@ -28,17 +28,12 @@
 			throw new Error ("Invalid input for item")
 		}
 
-		if (isNaN(price) || !(price < 100 || price === price.toFixed(2))) {
+		if (isNaN(price) || price >= 100 || price !== price.toFixed(2)) {
 			throw new Error ("Invalid input for price")
 		}
 
-		else {
-            const shoppingListItem = {'item': item,
-                                      'price': price}
-		}
-		
-
-		return shoppingListItem
+		return ({'item': item,
+        		 'price': price})
     }
 
 	// TEST
@@ -70,6 +65,9 @@
 	*/
 
 	const addToShoppingList = (item, list = []) => {
+
+		
+
     }
 
 	// TEST
