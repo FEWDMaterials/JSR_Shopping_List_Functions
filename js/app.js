@@ -23,8 +23,21 @@
 	*/
 
 	// implement function here
+/* 
+	const newShoppingListItem = (item, price) => {
+	const shoppinglist = { 
+		'item' : item,
+		'price' : price
+	};
+	return shoppinglist;
+} 
+*/
 
-	// TEST
+const newShoppingListItem = (item, price) => {
+	return {item, price};
+}
+
+	//TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
 			const shoppingListItem = newShoppingListItem('test', 1)
@@ -808,3 +821,4 @@
 	});
 
 })();
+
