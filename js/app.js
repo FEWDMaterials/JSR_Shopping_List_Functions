@@ -23,16 +23,24 @@
 	*/
 
 	// implement function here
-
+	const newShoppingListItem = (item, price) =>{
+		return {
+			item: item,
+			price: price
+		}
+	}
 	// TEST
-	describe('1. newShoppingListItem', () => {
+	console.log(newShoppingListItem('eggs', 1.59));
+
+	describe('1.newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
 			const shoppingListItem = newShoppingListItem('test', 1)
 			chai.assert.equal(shoppingListItem.item, 'test');
 			chai.assert.equal(shoppingListItem.price, 1);
+	
 		});
 	});
-
+ 
 
 	/* 2
 		@function addToShoppingList
