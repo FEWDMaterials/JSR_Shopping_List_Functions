@@ -185,6 +185,19 @@
 
 	// implement function here
 
+	const removeNthItem = (i, list = []) => {
+		if (typeof i === 'number' && i >= 0 && i < list.length){
+			if (i === list.length -1){
+			list.pop();
+			return list
+			}
+			let temp = list.slice(0, i);
+			return temp.concat(list.slice(i+1));
+		}
+
+		throw  new Error ('index entered is invalid');
+	}
+
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
