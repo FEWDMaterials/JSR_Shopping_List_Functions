@@ -336,14 +336,113 @@ GO into function.js folder
 	return list.slice(0, i).concat(list.slice( num + i + 1));
 
 	}
-	// console.log(removeNItems(1,3,[5,6,7,8,9,10,11,12])) //return 1,5
-	// 1 - starts at 6, 			3 - ends at 8
-	//should return [5,9,10,11,12]
+	// console.log(removeNItems(1,3,[5,6,7,8,9,10,11,12])) 
 	
 
 	// TEST
-	describe('6. removeNItems', () => {
-		it('should remove i-th item from list', () => {
+	// describe('6. removeNItems', () => {
+	// 	it('should remove i-th item from list', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
+	// 		list = addToShoppingList({
+	// 			'item': 'test3',
+	// 			'price': 3
+	// 		}, list);
+
+
+	// 		list = removeNItems(1, 1, list);
+
+	// 		chai.assert.equal(list.length, 1)
+
+	// 		chai.assert.equal(list[0].item, 'test')
+	// 		chai.assert.equal(list[0].price, 1)
+	// 	});
+
+	// 	it('should throw error if i + num < 0', () => {
+	// 		// if i < 0
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(-1, 0, [])
+	// 		}, Error);
+	// 	});
+
+	// 	it('should throw error if i + num > length of list', () => {
+	// 		// if i > length of array
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(1, 2, ['a', 'b'])
+	// 		}, Error);
+	// 	});
+
+	// 	it('should throw error if i is not a number', () => {
+
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNItems('adfas', 1, [])
+	// 		}, Error);
+	// 	})
+
+	// 	it('should throw error if num is not a number', () => {
+
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(1, 'asasdfa', [])
+	// 		}, Error);
+	// 	})
+
+	// 	it('should throw error if num > length of list', () => {
+
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(1, 8, [])
+	// 		}, Error);
+	// 	})
+	// });
+
+	/* 7
+		@function smartRemoveItems
+		@param i {number}
+		@param list {array, []}
+		@returns list
+		@description
+			- if `i` is < 0, remove i number of items
+				from END of list
+			- if `i` > length of list, return list immediately
+			- if `i` > 0 remove i number of items
+				from START of list
+	*/
+
+	// implement function here
+	let smartRemoveItems = (i, list) => {
+		if(i < 0){
+			list.pop()
+			return list;
+		} else if(i > list.arr){
+			return list;
+		} else if(i > 0){
+			list.shift()
+			return list;
+		}
+	}
+
+
+	// TEST
+	describe('7. smartRemoveItems', () => {
+		it('should return list if i > length of list', () => {
+			let list = [];
+			list = smartRemoveItems(1, list);
+
+			// [] is initial state of list
+			// we expect `list` to also be length 0
+			// ...or, empty essentially
+			chai.assert.equal(list.length, 0);
+		});
+
+		it('should remove i number from end of list if i < 0', () => {
 			let list = addToShoppingList({
 				'item': 'test',
 				'price': 1
@@ -357,192 +456,124 @@ GO into function.js folder
 				'price': 3
 			}, list);
 
+			list = smartRemoveItems(-1, list);
 
-			list = removeNItems(1, 1, list);
+			chai.assert.equal(list.length, 2)
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+			chai.assert.equal(list[1].item, 'test2')
+			chai.assert.equal(list[1].price, 2)
+		});
 
-			chai.assert.equal(list.length, 1)
+		it('should remove i number from START if list if i > 0', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
+			list = addToShoppingList({
+				'item': 'test3',
+				'price': 3
+			}, list);
+
+			list = smartRemoveItems(1, list);
+
+			chai.assert.equal(list.length, 2)
+			chai.assert.equal(list[0].item, 'test2')
+			chai.assert.equal(list[0].price, 2)
+			chai.assert.equal(list[1].item, 'test3')
+			chai.assert.equal(list[1].price, 3)
+		});
+	});
+
+	/* 8
+		@function spliceItem
+		@para item {object}
+		@param i {number}
+		@param list {array, []}
+		@returns list
+		@description
+			- item must be an object that looks like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			} (else throw error)
+			- insert item into the ith index of the list
+			- if i > length of list, just append //adding item to the end of list
+			- if i < 0, just prepend //adds item to beginning of list 
+	*/
+
+	// implement function here
+	const spliceItem = (item , i, list) => {
+			if (typeof item != 'object'){
+				throw new Error ('Invalid Input')
+			} 
+
+			let newObject = {item, price}
+
+			if(i > list.length){
+				// return list.push(item)
+				return list.splice(arr.length - 1,0, newObject)
+			} 
+			else if(i < 0){
+				// return list.unshift(item)
+				return list.splice(0,0,newObject)
+			}
+
+			// let newObject = {item, price}
+
+			return list.splice(i,0,newObject)
+
+		}
+
+	// TEST
+	describe('8. spliceItem', () => {
+		it('should throw an error if item is not valid', () => {
+			chai.assert.throws(() => {
+				spliceItem('invalidItem', 0, [])
+			}, Error);
+		});
+
+		it('should insert item to the ith index of the list', () => {
+			const list = spliceItem({
+				'item': 'test',
+				'price': 1,
+			}, 0, [])
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
 		});
 
-		it('should throw error if i + num < 0', () => {
-			// if i < 0
-			chai.assert.throws(() => {
-				removeNItems(-1, 0, [])
-			}, Error);
+		it('should append to the end if i > length of list', () => {
+			const list = spliceItem({
+				'item': 'test',
+				'price': 1,
+			}, 9, [{
+				'item': 'test0',
+				'price': 0,
+			}])
+
+			chai.assert.equal(list[1].item, 'test')
+			chai.assert.equal(list[1].price, 1)
 		});
 
-		it('should throw error if i + num > length of list', () => {
-			// if i > length of array
-			chai.assert.throws(() => {
-				removeNItems(1, 2, ['a', 'b'])
-			}, Error);
+		it('should prepend if i < 0', () => {
+			const list = spliceItem({
+				'item': 'test',
+				'price': 1,
+			}, -1, [{
+				'item': 'test0',
+				'price': 0,
+			}])
+
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
 		});
 
-		it('should throw error if i is not a number', () => {
-
-			// if i is not a number
-			chai.assert.throws(() => {
-				removeNItems('adfas', 1, [])
-			}, Error);
-		})
-
-		it('should throw error if num is not a number', () => {
-
-			// if i is not a number
-			chai.assert.throws(() => {
-				removeNItems(1, 'asasdfa', [])
-			}, Error);
-		})
-
-		it('should throw error if num > length of list', () => {
-
-			// if i is not a number
-			chai.assert.throws(() => {
-				removeNItems(1, 8, [])
-			}, Error);
-		})
 	});
-
-// 	/* 7
-// 		@function smartRemoveItems
-// 		@param i {number}
-// 		@param list {array, []}
-// 		@returns list
-// 		@description
-// 			- if `i` is < 0, remove i number of items
-// 				from END of list
-// 			- if `i` > length of list, return list immediately
-// 			- if `i` > 0 remove i number of items
-// 				from START of list
-// 	*/
-
-// 	// implement function here
-
-// 	// TEST
-// 	describe('7. smartRemoveItems', () => {
-// 		it('should return list if i > length of list', () => {
-// 			let list = [];
-// 			list = smartRemoveItems(1, list);
-
-// 			// [] is initial state of list
-// 			// we expect `list` to also be length 0
-// 			// ...or, empty essentially
-// 			chai.assert.equal(list.length, 0);
-// 		});
-
-// 		it('should remove i number from end of list if i < 0', () => {
-// 			let list = addToShoppingList({
-// 				'item': 'test',
-// 				'price': 1
-// 			});
-// 			list = addToShoppingList({
-// 				'item': 'test2',
-// 				'price': 2
-// 			}, list);
-// 			list = addToShoppingList({
-// 				'item': 'test3',
-// 				'price': 3
-// 			}, list);
-
-// 			list = smartRemoveItems(-1, list);
-
-// 			chai.assert.equal(list.length, 2)
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 			chai.assert.equal(list[1].item, 'test2')
-// 			chai.assert.equal(list[1].price, 2)
-// 		});
-
-// 		it('should remove i number from START if list if i > 0', () => {
-// 			let list = addToShoppingList({
-// 				'item': 'test',
-// 				'price': 1
-// 			});
-// 			list = addToShoppingList({
-// 				'item': 'test2',
-// 				'price': 2
-// 			}, list);
-// 			list = addToShoppingList({
-// 				'item': 'test3',
-// 				'price': 3
-// 			}, list);
-
-// 			list = smartRemoveItems(1, list);
-
-// 			chai.assert.equal(list.length, 2)
-// 			chai.assert.equal(list[0].item, 'test2')
-// 			chai.assert.equal(list[0].price, 2)
-// 			chai.assert.equal(list[1].item, 'test3')
-// 			chai.assert.equal(list[1].price, 3)
-// 		});
-// 	});
-
-// 	/* 8
-// 		@function spliceItem
-// 		@para item {object}
-// 		@param i {number}
-// 		@param list {array, []}
-// 		@returns list
-// 		@description
-// 			- item must be an object that looks like this:
-// 			{
-// 				'item': 'eggs',
-// 				'price': 1.59
-// 			} (else throw error)
-// 			- insert item into the ith index of the list
-// 			- if i > length of list, just append
-// 			- if i < 0, just prepend
-// 	*/
-
-// 	// implement function here
-
-// 	// TEST
-// 	describe('8. spliceItem', () => {
-// 		it('should throw an error if item is not valid', () => {
-// 			chai.assert.throws(() => {
-// 				spliceItem('invalidItem', 0, [])
-// 			}, Error);
-// 		});
-
-// 		it('should insert item to the ith index of the list', () => {
-// 			const list = spliceItem({
-// 				'item': 'test',
-// 				'price': 1,
-// 			}, 0, [])
-
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 		});
-
-// 		it('should append to the end if i > length of list', () => {
-// 			const list = spliceItem({
-// 				'item': 'test',
-// 				'price': 1,
-// 			}, 9, [{
-// 				'item': 'test0',
-// 				'price': 0,
-// 			}])
-
-// 			chai.assert.equal(list[1].item, 'test')
-// 			chai.assert.equal(list[1].price, 1)
-// 		});
-
-// 		it('should prepend if i < 0', () => {
-// 			const list = spliceItem({
-// 				'item': 'test',
-// 				'price': 1,
-// 			}, -1, [{
-// 				'item': 'test0',
-// 				'price': 0,
-// 			}])
-
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 		});
-
-// 	});
 
 // 	/* 9
 // 		@function spliceItems
