@@ -23,7 +23,12 @@
 	*/
 
 	// implement function here
-
+const newShoppingListItem =(item, price) => {
+	return{
+		item: item,
+		price : price
+	}
+}
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
