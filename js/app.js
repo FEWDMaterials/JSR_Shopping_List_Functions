@@ -23,7 +23,15 @@
 	*/
 
 	// implement function here
-
+	const newShoppingListItem = (item,price) => {
+		if(typeof item !== "string"){
+			   throw new Error ("Invalid items, please try again!")
+		}
+		if(price !== price || price === isNaN){
+			throw new Error ("invalid price, please try again!"); 
+		}
+        return {item,price}
+	}
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
