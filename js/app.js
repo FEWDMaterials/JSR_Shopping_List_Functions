@@ -58,6 +58,9 @@ const newShoppingListItem =(item, price) => {
 	*/
 
 	// implement function here
+	let addToShoppingList = (item={}, list=[]) => {
+		return list.concat(item);
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
