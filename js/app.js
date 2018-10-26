@@ -23,7 +23,14 @@
 	*/
 
 	// implement function here
+	
+	const newShoppingListItem = (item = 'unkown', price = 0.00) => {
 
+		return {
+			item,
+			price
+		}
+	}
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
