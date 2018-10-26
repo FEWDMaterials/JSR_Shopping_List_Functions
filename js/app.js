@@ -62,6 +62,12 @@
 
 	// implement function here
 
+	const addToShoppingList = (item={}, list=[]) => {
+		return list.concat(item);
+	}
+
+	// console.log(addToShoppingList('eggs', 1.59));
+
 	// TEST
 	describe('2. addToShoppingList', () => {
 
@@ -94,6 +100,13 @@
 	*/
 
 	// implement function here
+
+	const removeFromShoppingList = (list=[]) => {
+		if (list === []) {
+			return list;
+		}
+		else return list.pop(item);
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -128,6 +141,10 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = (list=[]) => {
+		return list.shift();
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
