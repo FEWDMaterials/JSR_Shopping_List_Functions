@@ -1,4 +1,4 @@
-    /*
+    /* NOTES:
 Needs to run in browser
 Using real TDD
 Don't do any of the optionals
@@ -37,7 +37,8 @@ GO into function.js folder
 	*/
 
 	// implement function here
-	const newShoppingListItem = (item, price) => {
+	const newShoppingListItem = (item, price) => { return {item : item, price : price }; }
+		
 		// if(typeof item != 'string' && typeof price != 'number'){
 		// 	return 'throw error'
 		// } 
@@ -49,11 +50,9 @@ GO into function.js folder
 		// }
 
 
-	return {item : item, price : price };
+	
 
-	}
-
-	console.log(newShoppingListItem('apples',5.99)) //item: apples, price: 5.99
+	// console.log(newShoppingListItem('apples',5.99)) //item: apples, price: 5.99
 	// console.log(newShoppingListItem('applestewn1',5.99)) //item needs less than 10 characters
 	// console.log(newShoppingListItem('applesssswww',500.99)) //item needs less than 10 characters
 	// console.log(newShoppingListItem('apples',500.99)) //number must be less than 100, 
@@ -97,7 +96,7 @@ GO into function.js folder
 		return list.concat(item);
 	}
 
-	console.log(addToShoppingList(newShoppingListItem('eggs',1.59)))
+	// console.log(addToShoppingList(newShoppingListItem('eggs',1.59)))
 
 	// TEST
 	// describe('2. addToShoppingList', () => {
@@ -131,21 +130,30 @@ GO into function.js folder
 // 	*/
 
 // 	// implement function here
-	const removeFromShoppingList = (list ) => {
+	const removeFromShoppingList = (list) => {
 		if (list.length === 0 ){
 			return list} 
 			
 			else if (list.length > 0){
 				list.pop()
 				return list;
+
+				//How to write it so it returns a new array, not mutated one
+				//Is map or reduce better?
+				//Should I write it this way or is the list.pop() , return list; more effcient?
+
+				// return list.map(currentElement => {
+				// 	list.pop(currentElement)
+				// 	return list;
+				// })
+				
 			}
-		
 
 	}
-	console.log(removeFromShoppingList([])) 
-	console.log(removeFromShoppingList(['apple','orange','banana','mango'])) 
+	// console.log(removeFromShoppingList([])) 
+	// console.log(removeFromShoppingList(['apple','orange','banana','mango'])) 
 
-	// // TEST
+	// TEST
 	// describe('3. removeFromShoppingList', () => {
 	// 	it('should remove from the end of the list', () => {
 	// 		let list = addToShoppingList({
@@ -178,178 +186,222 @@ GO into function.js folder
 	*/
 
 	// implement function here
+	const removeFirstItem = list => {
+		if(list.length === 0){
+			return list
+		}
 
-// 	// TEST
-// 	describe('4. removeFirstItem', () => {
-// 		it('should remove from the end of the list', () => {
-// 			let list = addToShoppingList({
-// 				'item': 'test',
-// 				'price': 1
-// 			});
-// 			list = addToShoppingList({
-// 				'item': 'test2',
-// 				'price': 2
-// 			}, list);
-// 			list = removeFirstItem(list);
+		list.shift()
+		return list;
+	}
 
-// 			chai.assert.equal(list.length, 1)
-// 			// asert only item in list is 'test2' with price 2
-// 			chai.assert.equal(list[0].item, 'test2')
-// 			chai.assert.equal(list[0].price, 2)
-// 		})
-// 	});
+	// console.log(removeFirstItem([]))
+	// console.log(removeFirstItem(['peach','strawberry','lychee']))
 
-// 	/* 5
-// 		@function removeNthItem
-// 		@param i {number}
-// 		@param list {array, []}
-// 		@returns list
-// 		@description
-// 			given `i`, an index < length of list
-// 			remove that item from list and return the
-// 			resulting list
-// 			if...
-// 				- what if `i` > length of list
-// 				- `i` is < 0
-// 				- `i` is not number
-// 			^^ return error
-// 	*/
+ 	// TEST
+	// describe('4. removeFirstItem', () => {
+	// 	it('should remove from the end of the list', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
+	// 		list = removeFirstItem(list);
 
-// 	// implement function here
+	// 		chai.assert.equal(list.length, 1)
+	// 		// asert only item in list is 'test2' with price 2
+	// 		chai.assert.equal(list[0].item, 'test2')
+	// 		chai.assert.equal(list[0].price, 2)
+	// 	})
+	// });
 
-// 	// TEST
-// 	describe('5. removeNthItem', () => {
-// 		it('should remove i-th item from list', () => {
-// 			let list = addToShoppingList({
-// 				'item': 'test',
-// 				'price': 1
-// 			});
-// 			list = addToShoppingList({
-// 				'item': 'test2',
-// 				'price': 2
-// 			}, list);
-// 			list = addToShoppingList({
-// 				'item': 'test3',
-// 				'price': 3
-// 			}, list);
+	/* 5
+		@function removeNthItem
+		@param i {number}
+		@param list {array, []}
+		@returns list
+		@description
+			given `i`, an index < length of list
+			remove that item from list and return the
+			resulting list
+			if...
+				- what if `i` > length of list
+				- `i` is < 0
+				- `i` is not number
+			^^ return error
+	*/
 
+	// implement function here
+	const removeNthItem = (i, list) => {
+		// if(isNaN(i) || i > list.length || i < 0 ){
+		// 	return 'Error';}
 
-// 			list = removeNthItem(1, list);
+			if(isNaN(i) || i > list.length || i < 0 ){
+				throw new Error ("Invalid input")
+			}
 
-// 			chai.assert.equal(list.length, 2)
+			//Why isnt this working? throw new Error(['Invalid input'])
+		
+		return list.slice(0, i).concat(list.slice(i + 1));
+		//What if I'm removing the 0 index or the last index?
+	}
+	// console.log(removeNthItem(3,[45, 56, 33, 43, 76])) //returns [45, 56, 33, 76]
+	// console.log(removeNthItem(2,[45, 56, 33, 43, 76])) //returns [45, 56, 43, 76]
+	// console.log(removeNthItem(8,[45, 56, 33, 43, 76])) //returns error
+	// console.log(removeNthItem(-1,[45, 56, 33, 43, 76])) //returns error
+	// console.log(removeNthItem('lol',[45, 56, 33, 43, 76])) //returns error
 
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-
-// 			chai.assert.equal(list[1].item, 'test3')
-// 			chai.assert.equal(list[1].price, 3)
-// 		});
-
-// 		it('should throw error if i < 0', () => {
-// 			// if i < 0
-// 			chai.assert.throws(() => {
-// 				removeNthItem(-1, [])
-// 			}, Error);
-// 		});
-
-// 		it('should throw error if i > length of list', () => {
-// 			// if i > length of array
-// 			chai.assert.throws(() => {
-// 				removeNthItem(1, [])
-// 			}, Error);
-// 		});
-
-// 		it('should throw error if i is not a number', () => {
-
-// 			// if i is not a number
-// 			chai.assert.throws(() => {
-// 				removeNthItem('adfas', [])
-// 			}, Error);
-// 		})
-// 	});
-
-// 	/* 6
-// 		@function removeNItems
-// 		@param i {number}
-// 		@param num {number}
-// 		@param list {array, []}
-// 		@returns list
-// 		@description
-// 			same as above but now we wish to remove ALL
-// 			items from i to i+num and return the resulting list
-// 			if...
-// 				- `i` < 0
-// 				- `i` or `num` is not a number
-// 				- `i+num` > length of list
-// 				- `num` > length of list
-// 			^^ return error
-// 	*/
-
-// 	// implement function here
-
-// 	// TEST
-// 	describe('6. removeNItems', () => {
-// 		it('should remove i-th item from list', () => {
-// 			let list = addToShoppingList({
-// 				'item': 'test',
-// 				'price': 1
-// 			});
-// 			list = addToShoppingList({
-// 				'item': 'test2',
-// 				'price': 2
-// 			}, list);
-// 			list = addToShoppingList({
-// 				'item': 'test3',
-// 				'price': 3
-// 			}, list);
+	// TEST 
+	// describe('5. removeNthItem', () => {
+	// 	it('should remove i-th item from list', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
+	// 		list = addToShoppingList({
+	// 			'item': 'test3',
+	// 			'price': 3
+	// 		}, list);
 
 
-// 			list = removeNItems(1, 1, list);
+	// 		list = removeNthItem(1, list);
 
-// 			chai.assert.equal(list.length, 1)
+	// 		chai.assert.equal(list.length, 2)
 
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 		});
+	// 		chai.assert.equal(list[0].item, 'test')
+	// 		chai.assert.equal(list[0].price, 1)
 
-// 		it('should throw error if i + num < 0', () => {
-// 			// if i < 0
-// 			chai.assert.throws(() => {
-// 				removeNItems(-1, 0, [])
-// 			}, Error);
-// 		});
+	// 		chai.assert.equal(list[1].item, 'test3')
+	// 		chai.assert.equal(list[1].price, 3)
+	// 	});
 
-// 		it('should throw error if i + num > length of list', () => {
-// 			// if i > length of array
-// 			chai.assert.throws(() => {
-// 				removeNItems(1, 2, ['a', 'b'])
-// 			}, Error);
-// 		});
+	// 	it('should throw error if i < 0', () => {
+	// 		// if i < 0
+	// 		chai.assert.throws(() => {
+	// 			removeNthItem(-1, [])
+	// 		}, Error);
+	// 	});
 
-// 		it('should throw error if i is not a number', () => {
+	// 	it('should throw error if i > length of list', () => {
+	// 		// if i > length of array
+	// 		chai.assert.throws(() => {
+	// 			removeNthItem(1, [])
+	// 		}, Error);
+	// 	});
 
-// 			// if i is not a number
-// 			chai.assert.throws(() => {
-// 				removeNItems('adfas', 1, [])
-// 			}, Error);
-// 		})
+	// 	it('should throw error if i is not a number', () => {
 
-// 		it('should throw error if num is not a number', () => {
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNthItem('adfas', [])
+	// 		}, Error);
+	// 	})
+	// });
 
-// 			// if i is not a number
-// 			chai.assert.throws(() => {
-// 				removeNItems(1, 'asasdfa', [])
-// 			}, Error);
-// 		})
+	/* 6
+		@function removeNItems
+		@param i {number}
+		@param num {number}
+		@param list {array, []}
+		@returns list
+		@description
+			same as above but now we wish to remove ALL
+			items from i to i+num and return the resulting list
+			if...
+				- `i` < 0
+				- `i` or `num` is not a number
+				- `i+num` > length of list
+				- `num` > length of list
+			^^ return error
+	*/
 
-// 		it('should throw error if num > length of list', () => {
+	// implement function here
+	const removeNItems = (i, num, list) => {
+		
+		if(isNaN(i) || isNaN(num) ||i + num > list.length || num > list.length || i > list.length || i < 0 ){
+			throw new Error ("Invalid input")
+		}
 
-// 			// if i is not a number
-// 			chai.assert.throws(() => {
-// 				removeNItems(1, 8, [])
-// 			}, Error);
-// 		})
-// 	});
+		//Why isnt this working? throw new Error(['Invalid input'])
+	
+	return list.slice(i, i + num).concat(list.slice(i + num + 1));
+
+	}
+	// console.log(removeNItems(1,3,[5,6,7,8,9,10,11,12])) //return 1,5
+	// 1 - start; starts at 6, 3 - end; ends at 8
+	//should return 
+	
+
+	// TEST
+	// describe('6. removeNItems', () => {
+	// 	it('should remove i-th item from list', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
+	// 		list = addToShoppingList({
+	// 			'item': 'test3',
+	// 			'price': 3
+	// 		}, list);
+
+
+	// 		list = removeNItems(1, 1, list);
+
+	// 		chai.assert.equal(list.length, 1)
+
+	// 		chai.assert.equal(list[0].item, 'test')
+	// 		chai.assert.equal(list[0].price, 1)
+	// 	});
+
+	// 	it('should throw error if i + num < 0', () => {
+	// 		// if i < 0
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(-1, 0, [])
+	// 		}, Error);
+	// 	});
+
+	// 	it('should throw error if i + num > length of list', () => {
+	// 		// if i > length of array
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(1, 2, ['a', 'b'])
+	// 		}, Error);
+	// 	});
+
+	// 	it('should throw error if i is not a number', () => {
+
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNItems('adfas', 1, [])
+	// 		}, Error);
+	// 	})
+
+	// 	it('should throw error if num is not a number', () => {
+
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(1, 'asasdfa', [])
+	// 		}, Error);
+	// 	})
+
+	// 	it('should throw error if num > length of list', () => {
+
+	// 		// if i is not a number
+	// 		chai.assert.throws(() => {
+	// 			removeNItems(1, 8, [])
+	// 		}, Error);
+	// 	})
+	// });
 
 // 	/* 7
 // 		@function smartRemoveItems
