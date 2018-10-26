@@ -61,6 +61,11 @@
 
 	// implement function here
 
+	const addToShoppingList = (item = {}, list = []) => {
+		list.push(item)
+		return list
+	}	
+
 	// TEST
 	describe('2. addToShoppingList', () => {
 
