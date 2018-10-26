@@ -66,6 +66,11 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
+const addToShoppingList = (item = {}, list = []) => {
+	return list.concat(item);
+}
+
+
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -99,6 +104,15 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
+const removeFromShoppingList = (list = [])  => {
+	list(list.pop())
+	return list
+}
+
+/*
+
+
+*/
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
