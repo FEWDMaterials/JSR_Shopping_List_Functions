@@ -24,6 +24,14 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item, price) => {
+		if (typeof item !== 'string' || typeof price !== 'number') {
+			throw error('Values not set properly!');
+		} else {
+			return {item: item, price: price};
+		}
+	}
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +61,15 @@
 	*/
 
 	// implement function here
+
+	const addToShoppingList = (item, list=[]) => {
+		if (typeof item === 'object' && typeof item.item === 'string' && typeof item.price === 'number') {
+			list.push(item);
+			return list;
+		} else {
+			throw error('Not a valid shoppingList item!');
+		}
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +103,13 @@
 	*/
 
 	// implement function here
+
+	const removeFromShoppingList = (list) => {
+		if (list.length > 0) {
+			list.pop()
+			return list;
+		}
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
