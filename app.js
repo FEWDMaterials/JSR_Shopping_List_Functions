@@ -140,7 +140,17 @@ const addToShoppingList = (item, list = [])=> {
 	*/
 
 	// implement function here
+const removeFirstItem = (list = []) => {
+    if (list >= 0  ){
+		return list 
+  }      
+  if (!Array.isArray(list)){
+		return NaN; 
+  }         
+		list.shift()
 
+	return list; 
+}
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
