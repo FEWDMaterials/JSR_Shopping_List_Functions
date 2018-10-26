@@ -58,7 +58,10 @@ const newShoppingListItem = (item, price) => {
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	const addToShoppingList = (item, list=[]) => {
+		list.push(item);
+		return list;
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -91,7 +94,14 @@ const newShoppingListItem = (item, price) => {
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFromShoppingList = (list=[]) => {
+		if(list.length === 0){
+			return list;
+		}
+		else if(list.length >= 1){ 
+			return list.pop();
+		}
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
