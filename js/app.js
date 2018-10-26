@@ -99,6 +99,13 @@
 
 	// implement function here
 
+	const removeFromShoppingList = (list) => {
+		if (list.length !== 0){
+			list.pop();
+		}
+		return list
+	}
+	
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
