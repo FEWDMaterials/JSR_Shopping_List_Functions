@@ -258,7 +258,14 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNItems = (i, num, list= []) => {
+		if (i < 0 || typeof (i + num) !== 'number' || (i+num) > list.length){	
+			throw new Error('Why isn\'t this working!!!!')
+		}
+		let newList = []
+		newList = newList.concat((list.slice(0,i)),(list.slice(i+num+1)))
+      	return newList
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
