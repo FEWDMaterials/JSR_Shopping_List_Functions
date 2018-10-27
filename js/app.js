@@ -22,7 +22,13 @@
 					two decimal places
 	*/
 
-	// implement function here
+	const newShoppingListItem = (item, price) => {
+		let list = {
+			item,
+			price
+		}
+		return list
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -52,7 +58,11 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	const addToShoppingList = (item, list = []) => {
+		list.push(item)
+		return list
+	}
+
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -85,8 +95,10 @@
 				and then return the array
 	*/
 
-	// implement function here
-
+	const removeFromShoppingList = (list = []) => {
+		list.pop()
+		return list
+	}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -119,7 +131,10 @@
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFirstItem = (list = []) => {
+		list.shift()
+		return list
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -157,9 +172,19 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNthItem = (i, list = []) => {
+		if (i > list.length || i <0 || typeof i != "number")
+			throw new Error ('i has to be a number');
+		
+		
+		list.splice(i,i); 
+			return list; 
+	
+
+	}
 
 	// TEST
+	
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
 			let list = addToShoppingList({
