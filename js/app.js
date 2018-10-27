@@ -262,6 +262,20 @@ return newList;
 	*/
 
 	// implement function here
+	const removeNItems = (i,num,list = []) => {
+		if (i < 0 ||
+		typeof i !== 'number' ||
+		typeof num !== 'number' ||
+		(i + num) > list.length ||
+		num > list.length) {
+		  throw new Error ('Check your params');
+		} 
+		let newList = [];
+    newList = newList.concat(list.slice(0,i))
+    newList = newList.concat(list.slice(i + num + 1));
+    return newList;
+	  }
+
 
 	// TEST
 	describe('6. removeNItems', () => {
