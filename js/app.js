@@ -93,7 +93,15 @@
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFromShoppingList = (list) => {
+		if (list === []){
+			return list;
+		} else if (list !== []){
+			let newList = [...list]
+			newList.pop()
+			return newList
+		}
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
