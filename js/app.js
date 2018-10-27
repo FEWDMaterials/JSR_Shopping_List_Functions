@@ -178,6 +178,19 @@
 
 	// implement function here
 
+	const removeNthItem = (i,list=[]) => {
+
+		if (i < 0 || i > list.length || typeof i !== "number"){
+			 throw new Error('Invalid input.');
+		}
+		let firstHalf = list.slice(0,i);
+			let secondHalf = list.slice(i+1)
+		for(i = 0; i <list.length; i++){
+			return firstHalf.concat(secondHalf);
+		}
+	}
+	
+
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
