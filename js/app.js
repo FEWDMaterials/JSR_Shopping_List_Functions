@@ -56,7 +56,10 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	const addToShoppingList=( item, list=[])=> { 
+		list.push(item)
+				return list
+		}
 	
 
 	// TEST
