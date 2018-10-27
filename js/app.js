@@ -115,7 +115,7 @@ const removeFromShoppingList = (list = [])  => {
 */
 
 const removeFromShoppingList = (list) => {
-	if (list === "[]") {
+	if (list === '[]') {
 		return []
 	}
 	else if (list.pop()) {
@@ -204,8 +204,13 @@ const removeFirstItem = (list) => {
 
 	// implement function here
 
-const removeNthItem = (i , list) => {
-	return 
+const removeNthItem = (i , list = []) => {
+	if(( i > list.length ) || (i < 0) || (typeof i !== "number")) {
+		throw new Error ("Error!")
+	}
+	list.splice(i, 1);
+	
+	return list 
 }
 
 	// TEST
