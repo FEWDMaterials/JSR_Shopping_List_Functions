@@ -22,7 +22,16 @@
 					two decimal places
 	*/
 
+
+ 
+
 	// implement function here
+	const newShoppingListItem =(item, price) => {
+		return {
+			'item': item,
+			'price': price
+		}
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -53,7 +62,10 @@
 	*/
 
 	// implement function here
-
+	const addToShoppingList = (item, list = []) => {
+		list.push(item);
+		return list;
+	  }
 	// TEST
 	describe('2. addToShoppingList', () => {
 
