@@ -142,6 +142,13 @@ return list
 	*/
 
 	// implement function here
+const removeFirstItem = (list)=>{
+	if (list.length > 0){
+		list.shift()
+	}
+	return list
+}
+
 
 	// TEST
 	describe('4. removeFirstItem', () => {
