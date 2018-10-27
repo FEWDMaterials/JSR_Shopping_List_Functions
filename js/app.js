@@ -268,6 +268,24 @@
 
 	// implement function here
 
+	
+	const removeNItems = (i, num, list) => {
+		if (typeof num !== 'number' || num < 0 || num > list.length){
+			throw  new Error ('ending index is invalid');
+		}
+		if (typeof i === 'number' && i >= 0 && i < list.length){
+			if((i + num) > list.length){
+				throw  new Error ('index range is invalid');
+			}
+
+			let temp = list.slice(0, i);
+			return temp.concat(list.slice((i+num)+1));
+		}
+
+		throw  new Error ('index entered is invalid');
+	}
+	
+
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
