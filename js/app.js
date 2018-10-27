@@ -509,7 +509,7 @@ GO into function.js folder
 	// implement function here
 	const spliceItem = (item , i, list) => {
 
-			if (typeof item != 'object'){
+			if (typeof item !== 'object'){
 				throw new Error ('Invalid Input')
 			}
 			
@@ -521,26 +521,37 @@ GO into function.js folder
 
 			if(i > list.length){
 				// return list.push(item)
-				// return list.splice(list.length - 1,0, item)
-				return list.concat(item)
+				// return list.concat(item)
+
+			
+				//Greater than array,
+				list.splice(i,0, item)
+				return list;
+				
+				
 			} 
 			else if(i < 0){
-				let emptyArray = []
-				let insertItem = emptyArray.concat(item)
-				return insertItem.concat(list)
-				// return list.splice(0,0,item)
+				// let emptyArray = []
+				// let insertItem = emptyArray.concat(item)
+				// return insertItem.concat(list)
+
+				list.splice(0,0,item)
+				return list;
 				// return list.unshift(item)
 	
 			}
 
 			//What's a shorter way to write this
-			let insertAtIthIndex = list.slice(0,i)
-			let newArray= insertAtIthIndex.concat(item)
-      		let secondHalfArray = list.slice(i, list.length)
+			// let insertAtIthIndex = list.slice(0,i)
+			// let newArray= insertAtIthIndex.concat(item)
+      		// let secondHalfArray = list.slice(i, list.length)
 
-			return newArray.concat(secondHalfArray);
+			  
+			// return newArray.concat(secondHalfArray);
 
-			// return list.splice(i,0,item)
+			
+			list.splice(i,0,item)
+			return list;
 			
 
 		}
@@ -616,38 +627,40 @@ GO into function.js folder
 
 	// implement function here
 		let spliceItems = (items, i, list) => {
-			if (typeof item != 'object'){
+			if (typeof items !== 'object'){
 				throw new Error ('Invalid Input')
 			}
+
+			items.forEach((currentElement) => {
+				if(typeof currentElement !== 'object'){
+					throw new Error ('Invalid Input')
+				}
+
+			})
+
 			
-			if (item['item'] == null) {
-				throw new Error ('Invalid Input')
-			} else if(item['price'] == null) {
-				throw new Error ('Invalid Input')
+			if(items.length === 0){
+				return list;
 			}
 
+			if(i >= list.length){
+				//  list.splice(i,0, items)
+				//  list.push(items)
 
-			if(i > list.length){
-				// return list.push(item)
-				// return list.splice(list.length - 1,0, item)
-				return list.concat(item)
+				let newList =list.concat(items)
+				 return newList;
+				
 			} 
 			else if(i < 0){
-				let emptyArray = []
-				let insertItem = emptyArray.concat(item)
-				return insertItem.concat(list)
-				// return list.splice(0,0,item)
-				// return list.unshift(item)
+				// list.splice(0,0,items)
+
+				let newList2 = items.concat(list);
+				return newList2;
 			}
+
+			// list.splice(i,0,items)
+			  return list.slice(0,i).concat(items).concat(list.slice(i))
 			
-
-			//What's a shorter way to write this
-			// let insertAtIthIndex = list.slice(0,i)
-			// let newArray= insertAtIthIndex.concat(item)
-      		// let secondHalfArray = list.slice(i, list.length)
-
-			// return newArray.concat(secondHalfArray);
-
 
 		}
 
@@ -853,29 +866,36 @@ GO into function.js folder
 
 // 	});
 
-// 	/* 12
-// 		@function canExpressCheckout
-// 		@param list {array, []}
-// 		@returns {boolean}
-// 		@description
-// 			if there are fewer than 10 items
-// 			in list, return true
-// 	*/
+	/* 12
+		@function canExpressCheckout
+		@param list {array, []}
+		@returns {boolean}
+		@description
+			if there are fewer than 10 items
+			in list, return true
+	*/
 
-// 	// implement function here
+	// implement function here
+	const canExpressCheckout = (list) => list.length < 10 ? true : false;
+		// if(list.length < 10){
+		// 	return true
+		// }
+		// return false
+		
+	
 
 // 	// TEST
-// 	describe('12. canExpressCheckout', () => {
-// 		it('should return true if num items < 10', () => {
-// 			chai.assert.equal(canExpressCheckout([{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]), true);
-// 		})
-// 	});
+	describe('12. canExpressCheckout', () => {
+		it('should return true if num items < 10', () => {
+			chai.assert.equal(canExpressCheckout([{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}]), true);
+		})
+	});
 
 // 	/* 13
 // 		@function computeSum
