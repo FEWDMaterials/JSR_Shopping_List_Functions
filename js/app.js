@@ -356,7 +356,13 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	const smartRemoveItems = (i, list) => {
-		
+		 if(i < 0){
+			return list.slice(0, i)
+		 }	if(i > list.length){
+			 return list;
+		 }	if(i > 0){
+			 return list.slice(i);
+		 }
 	}
 
 	// TEST
@@ -435,7 +441,21 @@ const newShoppingListItem = (item, price) => {
 			- if i < 0, just prepend
 	*/
 
-	// implement function here
+	const spliceItem = (item, i, list) => {
+		if(!(typeof item === 'object')){
+			throw new Error('Invalid data type.')
+		}
+		if(i > list.length){
+			list.splice(i, 0, item);
+			return list;
+		} if(i < 0){
+			list.splice(0, 0, item);
+			return list;
+		}
+		list.splice(i, 0, item);
+		return list;
+	}
+
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -502,7 +522,16 @@ const newShoppingListItem = (item, price) => {
 			- if `items` is empty, return list
 	*/
 
-	// implement function here
+	const spliceItems = (items, i, list) => {
+		if(!(typeof item === 'object')){
+			throw new Error('Invalid data type')
+		}
+
+		if(i > list.length){
+			list.push(items);
+		}
+
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -714,7 +743,7 @@ const newShoppingListItem = (item, price) => {
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout = list => list.length < 10 ? true:false;
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
