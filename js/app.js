@@ -23,7 +23,12 @@
 	*/
 
 	// implement function here
-
+	function newShoppingListItem(string,number){
+		const newItem = {};
+		newItem['item'] = string;
+		newItem['price'] = number;
+		return newItem;
+	} 		
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,7 +58,9 @@
 	*/
 
 	// implement function here
-
+	function addToShoppingList(object,array=[]){
+		return array.concat(object)
+	}
 	// TEST
 	describe('2. addToShoppingList', () => {
 
@@ -86,7 +93,10 @@
 	*/
 
 	// implement function here
-
+	function removeFromShoppingList(array){
+		if(array.length === 0 ) return array
+		else return array.slice(0,array.length-1)
+	}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,7 +130,10 @@
 	*/
 
 	// implement function here
-
+	function removeFirstItem(array){
+		if(array.length === 0) return array
+		return array.splice(1,)
+	}
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
