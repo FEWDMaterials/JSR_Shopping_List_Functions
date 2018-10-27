@@ -23,7 +23,8 @@
 	*/
 
 	// implement function here
-/* 
+
+/* 1st Method
 	const newShoppingListItem = (item, price) => {
 	const shoppinglist = { 
 		'item' : item,
@@ -32,7 +33,7 @@
 	return shoppinglist;
 } 
 */
-
+//Better Practice Method
 const newShoppingListItem = (item, price) => {
 	return {item, price};
 }
@@ -66,6 +67,7 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
+
 const addToShoppingList = (item = {}, list = []) => {
 	return list.concat(item);
 }
@@ -104,15 +106,22 @@ const addToShoppingList = (item = {}, list = []) => {
 	*/
 
 	// implement function here
+
+/*
 const removeFromShoppingList = (list = [])  => {
 	list(list.pop())
 	return list
 }
-
-/*
-
-
 */
+
+const removeFromShoppingList = (list) => {
+	if (list === "[]") {
+		return []
+	}
+	else if (list.pop()) {
+		return list
+	}
+}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -147,6 +156,15 @@ const removeFromShoppingList = (list = [])  => {
 	*/
 
 	// implement function here
+
+const removeFirstItem = (list) => {
+	if (list === "[]") {
+		return []
+	}
+	else if (list.shift()) {
+			return list
+	}
+}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -185,6 +203,10 @@ const removeFromShoppingList = (list = [])  => {
 	*/
 
 	// implement function here
+
+const removeNthItem = (i , list) => {
+	return 
+}
 
 	// TEST
 	describe('5. removeNthItem', () => {
