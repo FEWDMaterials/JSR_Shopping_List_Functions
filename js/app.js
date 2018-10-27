@@ -660,7 +660,6 @@ GO into function.js folder
 
 			// list.splice(i,0,items)
 			  return list.slice(0,i).concat(items).concat(list.slice(i))
-			
 
 		}
 
@@ -726,143 +725,166 @@ GO into function.js folder
 		})
 	});
 
-// 	/* 10
-// 		@function combineLists
-// 		@param items1 {list}
-// 		@param items2 {list}
-// 		@returns list
-// 		@description
-// 			given two lists of items
-// 			- *EACH* item in `items` must be an object
-// 			that looks like this:
-// 			{
-// 				'item': 'eggs',
-// 				'price': 1.59
-// 			} (else throw error)
-// 			- return ONE list that contains items in
-// 			items1 THEN items in items2 as a single array
-// 	*/
+	/* 10
+		@function combineLists
+		@param items1 {list}
+		@param items2 {list}
+		@returns list
+		@description
+			given two lists of items
+			- *EACH* item in `items` must be an object
+			that looks like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			} (else throw error)
+			- return ONE list that contains items in
+			items1 THEN items in items2 as a single array
+	*/
 
-// 	// implement function here
+	// implement function here
+	const combineLists = (items1, items2) => {
+		if (typeof items1 !== 'object' || typeof items2 !== 'object'){
+			throw new Error ('Invalid Input')
+		}
 
-// 	// TEST
-// 	describe('10. combineLists', () => {
-// 		it('should throw an error if item is not valid', () => {
-// 			chai.assert.throws(() => {
-// 				combineLists([{
-// 					'item': 'test',
-// 					'price': 1,
-// 				},'invalidItem'], [{
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}])
-// 			}, Error);
-// 		});
+		items1.forEach((currentElement) => {
+			if(typeof currentElement !== 'object'){
+				throw new Error ('Invalid Input')
+			}
+		})
+		items2.forEach((currentElement) => {
+			if(typeof currentElement !== 'object'){
+				throw new Error ('Invalid Input')
+			}
+		})
+		
+		return items1.concat(items2)
 
-// 		it('should return single list with items of both lists', () => {
-// 			const list = combineLists([{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}], [{
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]);
+	}
 
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 			chai.assert.equal(list[1].item, 'test2')
-// 			chai.assert.equal(list[1].price, 2)
-// 		});
-// 	});
+	// TEST
+	describe('10. combineLists', () => {
+		it('should throw an error if item is not valid', () => {
+			chai.assert.throws(() => {
+				combineLists([{
+					'item': 'test',
+					'price': 1,
+				},'invalidItem'], [{
+					'item': 'test2',
+					'price': 2,
+				}])
+			}, Error);
+		});
 
-// 	/* 11
-// 		@function splitListAt
-// 		@param i {number}
-// 		@param list {array, []}
-// 		@returns list
-// 		@description
-// 			given a number i that is within bounds of
-// 			`list`, break it into two lists where
-// 			`list1` has all items less than or equal to i
-// 			and `list2` has all items > i
-// 			- if `i` < 0, `list1` has all items and `list2`
-// 				is empty list
-// 			- if `i` > length of list, list1 is empty and `list2`
-// 				has all items
+		it('should return single list with items of both lists', () => {
+			const list = combineLists([{
+					'item': 'test',
+					'price': 1,
+				}], [{
+					'item': 'test2',
+					'price': 2,
+				}]);
 
-// 			- always return a list that looks like this:
-// 				[list1, list2]
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+			chai.assert.equal(list[1].item, 'test2')
+			chai.assert.equal(list[1].price, 2)
+		});
+	});
 
-// 	*/
+	/* 11
+		@function splitListAt
+		@param i {number}
+		@param list {array, []}
+		@returns list
+		@description
+			given a number i that is within bounds of
+			`list`, break it into two lists where
+			`list1` has all items less than or equal to i
+			and `list2` has all items > i
+			- if `i` < 0, `list1` has all items and `list2`
+				is empty list
+			- if `i` > length of list, list1 is empty and `list2`
+				has all items
 
-// 	// implement function here
+			- always return a list that looks like this:
+				[list1, list2]
 
-// 	// TEST
-// 	describe('11. splitListAt', () => {
-// 		it('should break list into two at index', () => {
-// 			const [list1, list2] = splitListAt(1, [{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]);
+	*/
 
-// 			chai.assert.equal(list1[0].item, 'test')
-// 			chai.assert.equal(list1[0].price, 1)
-// 			chai.assert.equal(list1[1].item, 'test2')
-// 			chai.assert.equal(list1[1].price, 2)
-// 			chai.assert.equal(list2.length, 0)
+	// implement function here
+	const splitListAt = (i, list) => {
 
-// 		});
+		
+	}
 
-// 		it('should put all items into list1 if i < 0', () => {
-// 			const [list1, list2] = splitListAt(-1, [{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]);
+	// TEST
+	describe('11. splitListAt', () => {
+		it('should break list into two at index', () => {
+			const [list1, list2] = splitListAt(1, [{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}]);
 
-// 			chai.assert.equal(list1[0].item, 'test')
-// 			chai.assert.equal(list1[0].price, 1)
-// 			chai.assert.equal(list1[1].item, 'test2')
-// 			chai.assert.equal(list1[1].price, 2)
-// 			chai.assert.equal(list2.length, 0)
+			chai.assert.equal(list1[0].item, 'test')
+			chai.assert.equal(list1[0].price, 1)
+			chai.assert.equal(list1[1].item, 'test2')
+			chai.assert.equal(list1[1].price, 2)
+			chai.assert.equal(list2.length, 0)
 
-// 		});
+		});
 
-// 		it('should put all items into list2 if i > length of list', () => {
-// 			const [list1, list2] = splitListAt(100, [{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]);
+		it('should put all items into list1 if i < 0', () => {
+			const [list1, list2] = splitListAt(-1, [{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}]);
 
-// 			chai.assert.equal(list1.length, 0)
-// 			chai.assert.equal(list2[0].item, 'test')
-// 			chai.assert.equal(list2[0].price, 1)
-// 			chai.assert.equal(list2[1].item, 'test2')
-// 			chai.assert.equal(list2[1].price, 2)
+			chai.assert.equal(list1[0].item, 'test')
+			chai.assert.equal(list1[0].price, 1)
+			chai.assert.equal(list1[1].item, 'test2')
+			chai.assert.equal(list1[1].price, 2)
+			chai.assert.equal(list2.length, 0)
+
+		});
+
+		it('should put all items into list2 if i > length of list', () => {
+			const [list1, list2] = splitListAt(100, [{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}]);
+
+			chai.assert.equal(list1.length, 0)
+			chai.assert.equal(list2[0].item, 'test')
+			chai.assert.equal(list2[0].price, 1)
+			chai.assert.equal(list2[1].item, 'test2')
+			chai.assert.equal(list2[1].price, 2)
 
 
-// 		});
+		});
 
-// 		it('should return two lists', () => {
-// 			const [list1, list2] = splitListAt(1, [{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]);
+		it('should return two lists', () => {
+			const [list1, list2] = splitListAt(1, [{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}]);
 
-// 			chai.assert.isArray(list1)
-// 			chai.assert.isArray(list2)
-// 		})
+			chai.assert.isArray(list1)
+			chai.assert.isArray(list2)
+		})
 
 // 	});
 
