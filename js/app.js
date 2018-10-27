@@ -137,6 +137,13 @@ const removeFromShoppingList = (arr)=>{
 	*/
 
 	// implement function here
+	const removeFirstItem =(arr)=>{
+		if(arr.length === 0){
+			return arr;
+		}
+		arr.shift()
+		return arr;
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
