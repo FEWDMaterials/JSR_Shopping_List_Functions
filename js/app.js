@@ -26,12 +26,7 @@
  
 
 	// implement function here
-	const newShoppingListItem =(item, price) => {
-		return {
-			'item': item,
-			'price': price
-		}
-	}
+
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
