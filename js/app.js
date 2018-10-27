@@ -106,7 +106,7 @@
 			return list;
 		}
 		list.pop();
-		return list;
+		return list;  
 	}
 	// console.log(removeFromShoppingList())
 
