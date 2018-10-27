@@ -108,7 +108,7 @@
 
 		return list 
 		
-	}
+	} /*********** */
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
