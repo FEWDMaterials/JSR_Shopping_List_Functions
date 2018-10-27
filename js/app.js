@@ -183,7 +183,16 @@
 	*/
 
 	// implement function here
-
+	const removeNthItem = (i, list) => {
+  if (i > list.length ||
+  i < 0 ||
+  typeof i !== 'number' ) {
+    throw new Error ('Input valid i value')
+  }
+let newList = [];
+newList = newList.concat(list.slice(0,i), (list.slice(i + 1)));
+return newList;
+}
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
