@@ -361,7 +361,7 @@ const smartRemoveItems = (i,list) => {
 	}
 	let newList = []
 	if (i < 0) {
-		newList = list.slice(0,list.length + i);
+		newList = list.slice(0,i);
 	} else {
 		newList = list.slice(i)
 	}
@@ -444,7 +444,7 @@ const smartRemoveItems = (i,list) => {
 	*/
 
 	// implement function here
-
+		const spliceItem = 
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
