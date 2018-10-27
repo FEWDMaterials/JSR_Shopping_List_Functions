@@ -355,7 +355,18 @@ return newList;
 	*/
 
 	// implement function here
-
+const smartRemoveItems = (i,list) => {
+	if (i > list.length) {
+		return list;
+	}
+	let newList = []
+	if (i < 0) {
+		newList = list.slice(0,list.length + i);
+	} else {
+		newList = list.slice(i)
+	}
+	return newList
+}
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
