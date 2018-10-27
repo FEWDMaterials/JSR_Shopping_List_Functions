@@ -188,6 +188,16 @@ const removeFirstItem = (list = []) =>{
 	*/
 
 	// implement function here
+const removeNthItem = (i, list = []) => {
+
+	if ((i > list.length) || (i < 0) || (typeof i !== 'number')){
+	throw new Error('error message');
+}
+	
+	list.splice(i,1);
+	return list
+}
+
 
 	// TEST
 	describe('5. removeNthItem', () => {
