@@ -23,7 +23,19 @@
 	*/
 
 	// implement function here
+const newShoppingListItem = (item, price)=>{
 
+const shoppingListItem = {
+
+"item" : item,
+"price": price,
+
+
+}
+
+return shoppingListItem
+}
+let sList = newShoppingListItem()
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +65,17 @@
 	*/
 
 	// implement function here
+
+const addToShoppingList =(item, list=[])=>{
+
+ list.push(item)
+ return list
+
+
+
+}
+
+console.log(addToShoppingList())
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,7 +109,21 @@
 	*/
 
 	// implement function here
+const removeFromShoppingList= (list)=>{
 
+if(list.legnth === 0){
+
+	return list
+}
+
+else{
+	list.pop() 
+	return list
+
+}
+
+
+}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +157,24 @@
 	*/
 
 	// implement function here
+
+const removeFirstItem = (list)=>{
+
+	if(list.legnth === 0){
+
+		return list
+	}
+
+	else{
+		list.shift() 
+		return list
+	
+	}
+
+}
+
+
+
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,7 +213,16 @@
 	*/
 
 	// implement function here
-
+	const removeNthItem = (i, list)=>{
+		if(typeof i !== "number" || i < 0 || i > list.length){
+	
+			throw new Error("Input a number")
+		}
+		 list.splice(list.indexOf(list[i]),1)
+	
+		return list
+	
+	 }
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -228,7 +292,19 @@
 	*/
 
 	// implement function here
+const removeNItems = (i,num,list)=>{
+if(i<0 || typeof i !== "number" || typeof num !=="number" || i+num > list.length|| num>list.length){
 
+
+	throw new Error("Input Appropriate Number")
+}
+
+list.splice(list.indexOf(list[i]),list.indexOf(list[i+num]))
+
+
+return list
+
+}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
@@ -307,6 +383,26 @@
 	*/
 
 	// implement function here
+const smartRemoveItems =(i,list)=>{
+
+if(i <0){
+	list.pop(i)
+	return list
+	}
+	else if(i>list.length){
+	return list
+
+
+	}
+	else if(i >0){
+	list.shift(i)
+	return list
+	}
+
+}
+
+
+
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -385,7 +481,23 @@
 	*/
 
 	// implement function here
+	const spliceItem = (item,i,list)=>{
+		if(typeof item !== "object"){
+			throw new Error("Fix Object")
+		}
 
+		if(i > list.length){
+		list.push(Object.values(item).join())
+
+		}
+		if(i < 0){
+
+		list.unshift(Object.values(item).join())
+		}
+		list.splice(i,0, Object.values(item).join())
+
+	return list
+	}
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
