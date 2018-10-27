@@ -357,7 +357,7 @@ const newShoppingListItem = (item, price) => {
 
 	const smartRemoveItems = (i, list) => {
 		 if(i < 0){
-			return list.slice(0, i)
+			return list.slice(0, i);
 		 }	if(i > list.length){
 			 return list;
 		 }	if(i > 0){
@@ -522,14 +522,30 @@ const newShoppingListItem = (item, price) => {
 			- if `items` is empty, return list
 	*/
 
-	const spliceItems = (items, i, list) => {
-		if(!(typeof item === 'object')){
-			throw new Error('Invalid data type')
+	const spliceItems = (items, i, list=[]) => {
+
+		items.forEach((currentElement) => {
+			if(typeof currentElement !== 'object'){
+				throw new Error('Invalid input')
+			}
+		})
+
+		if(items.length === 0){
+			return list;
 		}
 
-		if(i > list.length){
-			list.push(items);
+		if(i >= list.length){
+			let newList = list.concat(items);
+			return newList;
 		}
+
+		if(i < 0){
+			let newList1 = items.concat(list);
+			return newList1;
+		}
+
+		let newList2 = list.slice(0, i).concat(items).concat(list.slice(i));
+		return newList2;
 
 	}
 
@@ -611,7 +627,33 @@ const newShoppingListItem = (item, price) => {
 			items1 THEN items in items2 as a single array
 	*/
 
-	// implement function here
+	const combineLists = (items1, items2) => {
+		
+		for(let key in items1){
+			if(typeof items1[key] !== 'object'){
+				throw new Error('Invalid input')
+			}
+		}
+
+		for(let key in items2){
+			if(typeof items2[key] !== 'object'){
+				throw new Error('Invalid input')
+			}
+		}
+
+		let list = [];
+
+		for(let key in items1){
+			list.push(items1[key]);
+		}
+
+		for(let key in items2){
+			list.push(items2[key]);
+		}
+	
+		return list;
+
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
