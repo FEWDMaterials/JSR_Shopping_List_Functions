@@ -29,7 +29,7 @@
 		shoppinglist['price'] = price
 		return shoppinglist;
 	}
-	console.log(newShoppingListItem('eggs' , 2));
+	
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -186,6 +186,13 @@
 			^^ return error
 	*/
 	// implement function here
+	const removeNthItem = (i, array = []) => { 
+		if (i < 0 || typeof(i) !== 'number' || i > array.length) { 
+			throw new Error('Invalid input');
+		}
+		return array.slice(0, i).concat(array.slice(i+1));
+	}
+	
 	
 
 	// TEST
@@ -255,8 +262,14 @@
 				- `num` > length of list
 			^^ return error
 	*/
-
 	// implement function here
+	const removeNItems = (i, num, list = []) => { 
+		if (i < 0 || typeof(i) !== 'number' || typeof(num) !== 'number' || i+num > list.length || num > list.length){
+			throw new Error('You suck lol');
+		}
+		list.splice(i,i+num);
+		return list;
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -691,9 +704,14 @@
 			if there are fewer than 10 items
 			in list, return true
 	*/
-
 	// implement function here
-
+	const canExpressCheckout = (arr = []) => {
+		if (arr.length < 10) {
+			return true;
+		}
+		return false;
+	}
+	
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -719,8 +737,14 @@
 			}
 			- sum all the price items and return value
 	*/
-
 	// implement function here
+	const computeSum = (array = []) => {  
+		let sum = 0;
+		for (let i = 0; i < arr.length ; i++) { 
+			sum += array[i].price;
+		}
+		return sum;
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
