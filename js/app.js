@@ -102,11 +102,13 @@
 	// implement function here
 
 	const removeFromShoppingList = (list=[]) => {
-		if (list === []) {
+		if (list.length === 0) {
 			return list;
 		}
-		else return list.pop(item);
+		list.pop();
+		return list;
 	}
+	// console.log(removeFromShoppingList())
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
