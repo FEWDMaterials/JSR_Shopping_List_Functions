@@ -23,6 +23,13 @@
 	*/
 
 	// implement function here
+	let shoppinglist = {};
+	const newShoppingListItem = (item = '' , price) => { 
+		shoppinglist['item'] = item;
+		shoppinglist['price'] = price
+		return shoppinglist;
+	}
+	console.log(newShoppingListItem('eggs' , 2));
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -53,7 +60,16 @@
 	*/
 
 	// implement function here
-
+		let myShoppingList = {'item': 'eggs',
+		'price': 20
+		};
+		const list = [];
+		const addToShoppingList = (obj , arr = []) => {
+        arr.push(obj);
+        return arr;
+		}
+   	 	addToShoppingList(myShoppingList,list);
+    	console.log(list);
 	// TEST
 	describe('2. addToShoppingList', () => {
 
@@ -84,8 +100,15 @@
 			if array has items, remove the LAST item
 				and then return the array
 	*/
-
 	// implement function here
+	const removeFromShoppingList = (arr = []) => { 
+		if (arr.length < 1) {
+			return arr;
+		}
+		arr.pop();
+		return arr;
+	}
+	removeFromShoppingList(list);
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -118,9 +141,15 @@
 			if array has items, remove the FIRST item
 				and then return the array
 	*/
-
 	// implement function here
-
+	const removeFirstItem = (arr = []) => {
+		if (arr.length < 1) {
+			return arr;
+		}
+		arr.shift();
+		return arr;
+	}
+	removeFirstItem(list);
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -156,8 +185,8 @@
 				- `i` is not number
 			^^ return error
 	*/
-
 	// implement function here
+	
 
 	// TEST
 	describe('5. removeNthItem', () => {
