@@ -56,7 +56,11 @@ const newShoppingListItem = (item, price) =>{
 	*/
 
 	// implement function here
-
+const addToShoppingList = (item, list) =>{
+	const arr = [];
+	arr.push(item);
+	return arr;
+}
 	// TEST
 	describe('2. addToShoppingList', () => {
 
