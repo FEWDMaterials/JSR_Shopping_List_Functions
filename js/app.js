@@ -269,6 +269,19 @@ const removeNthItem = (i, list = []) => {
 
 	// implement function here
 
+	const removeNItems = (i, num, list) =>{
+		if (i < 0 || typeof i !== 'number' || i > list.length || i + num >list.length){
+			throw new error('error')
+		}
+		for(let i = 0; i < list.length; i++){
+			list.pop(i)
+		}
+
+
+		return list
+
+	}
+
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
