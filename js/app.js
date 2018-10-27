@@ -108,7 +108,7 @@
 
 		return list 
 		
-	} /*********** */
+	} 
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -143,7 +143,14 @@
 	*/
 
 	// implement function here
+const removeFirstItem = (list = []) =>{
+	if (list.length === 0 ){
+		return list
+	} else 
 
+	list.shift()
+	return list
+}
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
