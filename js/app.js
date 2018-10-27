@@ -22,7 +22,14 @@
 					two decimal places
 	*/
 
-	// implement function here
+	const newShoppingListItem = (item, price) => {
+		return shoppingList = {
+			'items': 'eggs',
+			'price': 1.59
+		}
+	}
+	console.log('\n1');
+	console.log(newShoppingListItem());
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -51,8 +58,12 @@
 				- validate that the item is indeed a shoppingList item
 				- if shoppingList item is not passed in, throw error
 	*/
-
-	// implement function here
+	
+	const addToShoppingList = (item=newShoppingListItem(), list=[]) => {
+		return list.push(item)
+	}
+	console.log('\n2');
+	console.log(newShoppingListItem());
 
 	// TEST
 	describe('2. addToShoppingList', () => {
