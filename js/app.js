@@ -95,12 +95,11 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	const removeFromShoppingList = (list=[]) => {
-		if(list.length === 0){
+		if(list.length > 0){
+			list.pop();
 			return list;
 		}
-		else if(list.length >= 1){ 
-			return list.pop();
-		}
+		if(list.length === 0) return list;
 	}
 
 	// TEST
@@ -135,7 +134,14 @@ const newShoppingListItem = (item, price) => {
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFirstItem = (list) => {
+		if(list.length > 0){
+			list.shift();
+			return list;
+		} if(list === 0){
+			return list;
+		}
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -173,7 +179,20 @@ const newShoppingListItem = (item, price) => {
 			^^ return error
 	*/
 
-	// implement function here
+	 const removeNthItem = (i, list) => {
+		if(i > list.length){
+			throw new Error('Invalid input. Number of item can\'t be greater than list amount');
+		} else if(i < 0){
+			throw new Error('Invalid input. Number of item can\'t be lesser than 0.');
+		} else if(typeof i !== 'number'){
+			throw new Error('Invalid input. Number of item must be a number.')
+		}
+	
+		const firstHalfArr = list.slice(0, i);
+		const secondHalfArr = list.slice(i + 1);
+		
+		return firstHalfArr.concat(secondHalfArr);
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
