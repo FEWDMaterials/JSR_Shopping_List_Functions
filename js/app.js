@@ -60,13 +60,10 @@
 	*/
 
 	// implement function here
-	const addToShoppingList(obj)=>{
-		const obj ={
-			'item' : 'egg', 
-			'price': 1.59
-		}
-		return arr.push 
-	}
+const addToShoppingList = (object, array =[])=>{
+	array.push(object)
+	return array
+}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
