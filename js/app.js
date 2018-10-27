@@ -94,6 +94,13 @@ const newShoppingListItem =(item, price) => {
 	*/
 
 	// implement function here
+	const removeFromShoppingList = (list = []) =>{
+		if(list === 0){
+			return list
+		}
+		list.pop()
+		return list;
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
