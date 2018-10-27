@@ -94,7 +94,7 @@ const newShoppingListItem =(item, price) => {
 	*/
 
 	// implement function here
-	const removeFromShoppingList = (list = []) =>{
+	const removeFromShoppingList = (list= []) =>{
 		if(list === 0){
 			return list
 		}
@@ -135,6 +135,16 @@ const newShoppingListItem =(item, price) => {
 	*/
 
 	// implement function here
+let removeFirstItem = (list=[]) => {
+	if(list === 0){
+		return list
+	}
+	list.shift()
+		return list;
+
+
+}
+
 
 	// TEST
 	describe('4. removeFirstItem', () => {
