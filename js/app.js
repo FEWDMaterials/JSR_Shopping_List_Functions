@@ -439,8 +439,8 @@ const smartRemoveItems = (i,list) => {
 				'price': 1.59
 			} (else throw error)
 			- insert item into the ith index of the list
-			- if i > length of list, just append // push
-			- if i < 0, just prepend // unshift
+			- if i > length of list, just append // push (end)
+			- if i < 0, just prepend // unshift (beginning)
 	*/
 
 	// implement function here
@@ -521,6 +521,22 @@ const smartRemoveItems = (i,list) => {
 	*/
 
 	// implement function here
+	const spliceItems = (items,i,list) => {
+		let newList = []
+		items.forEach(element => {
+		if (typeof element !== 'object') throw new Error ('wrong');
+		});
+		if (items.length === 0) return list;
+		if (i > list.length) { 
+			newList = list.concat(items);
+		} else if (i < 0) { 
+			newList = items.concat(list);
+	} else {
+		newList = list.slice(0,i).concat(items).concat(i + 1);
+	}
+	return newList;
+}
+
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -601,7 +617,18 @@ const smartRemoveItems = (i,list) => {
 	*/
 
 	// implement function here
-
+		const combineLists = (items1, items2) => {
+			items1.forEach(element => {
+				if (typeof element !== 'object') throw new Error ('items are not all objects');
+			});
+			items2.forEach(element => {
+				if (typeof element !== 'object') throw new Error ('items are not all objects');
+			});
+			let newList = [];
+			newList = newList.concat(items1).concat(items2);
+			return newList;
+		}
+		
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
