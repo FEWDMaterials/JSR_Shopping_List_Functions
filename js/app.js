@@ -23,8 +23,8 @@
 	*/
 
 	const newShoppingListItem = (item, price) => {
-		return shoppingList = {
-			'items': item,
+		return {
+			'item': item,
 			'price': price
 		}
 	}
@@ -57,8 +57,9 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 	
-	const addToShoppingList = (item=newShoppingListItem(), list=[]) => {
-		return list.push(item)
+	const addToShoppingList = (item, list=[]) => {
+		list.push(item);
+		return list;
 	}
 
 	// TEST
