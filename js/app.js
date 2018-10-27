@@ -97,7 +97,13 @@ const addToShoppingList = (object, array =[])=>{
 	*/
 
 	// implement function here
-
+const removeFromShoppingList = (arr)=>{
+	if (arr.length === 0){
+		return arr;
+	}
+	arr.pop()
+	return arr;
+}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
