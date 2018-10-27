@@ -439,12 +439,22 @@ const smartRemoveItems = (i,list) => {
 				'price': 1.59
 			} (else throw error)
 			- insert item into the ith index of the list
-			- if i > length of list, just append
-			- if i < 0, just prepend
+			- if i > length of list, just append // push
+			- if i < 0, just prepend // unshift
 	*/
 
 	// implement function here
-		const spliceItem = 
+		const spliceItem = (item, i, list) => {
+		if (typeof item !== 'object') throw new Error ('item is not an object!');
+		if (i > list.length) {
+			list.push(item);
+		} else if (i < 0) {
+		list.unshift(item) }
+		else { list.splice(i,0,item);
+		} 
+		return list 
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
