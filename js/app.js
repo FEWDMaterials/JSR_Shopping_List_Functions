@@ -138,7 +138,14 @@
 			if array has items, remove the FIRST item
 				and then return the array
 	*/
-
+	const removeFirstItem= (list=[])=>{
+		if (list.length===0){
+			return list
+		}
+		else { list.shift ()
+		}
+		return list;
+    }
 
 
 	// TEST
