@@ -347,8 +347,19 @@
 			- if `i` > 0 remove i number of items
 				from START of list
 	*/
-
 	// implement function here
+	const smartRemoveItems = (i, list ) => { 
+		if (i < 0) {
+			list.splice(i);
+		}
+		else if (i > list.length) { 
+			return list;
+		}
+		else if (i > 0) { 
+		 list.splice(0,i);
+		}
+		return list;
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -427,6 +438,21 @@
 	*/
 
 	// implement function here
+		const spliceItem = (item, i, array ) => {
+			if (typeof item !== 'object') { 
+				throw new Error ('Invalid input');
+			}
+			if (i > array.length) {
+				array.push(item);
+			}
+			else if (i < 0) { 
+				array.unshift(item);
+			}
+			else {
+				array.splice(i,0,item);
+			}
+			return array;
+		}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -494,6 +520,30 @@
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list = []) => {
+		
+		 items.forEach((element) => { 
+			if ((typeof element) !== "object") {
+				throw new Error('lol no');
+			}
+		}) 
+	if (i > items.length) {
+		for (let k = 0 ;k < items.length ; k++) { 
+			list.push(items[k]);
+		}
+	}
+	else if (i < 0 ) {
+		for (let k = 0 ;k < items.length ; k++) { 
+			list.unshift(items[k]);
+		}
+	}
+	else if( items.length < 0) { 
+		return list;
+	}
+	list.splice(i,0,...items);
+	return list;
+	}
+			
 
 	// TEST
 	describe('9. spliceItems', () => {
