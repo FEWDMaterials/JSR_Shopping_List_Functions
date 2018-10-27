@@ -258,7 +258,14 @@ const addToShoppingList = (itemAndprice, list = []) => {
 	*/
 
 	// implement function here
-
+	const removeNItems = (i, num, list = []) => { 
+		if (i < 0 || i > list.length-1 || typeof i !== "number" || 
+		typeof num !== "number" || num > list.length || i+num > list.length) {
+			throw new Error('Error - please enter an item from the list.')
+		}
+		return list.slice(0,i).concat(list.slice(i+num+1));
+	
+	}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
