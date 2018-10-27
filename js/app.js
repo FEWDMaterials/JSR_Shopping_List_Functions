@@ -23,7 +23,14 @@
 	*/
 
 	// implement function here
-
+	const newShoppingListItem =(str, num)=>{
+		const object ={
+			'item' : str,
+			'price': num
+		}
+		return object
+	}
+	newShoppingListItem();
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +60,13 @@
 	*/
 
 	// implement function here
+	const addToShoppingList(obj)=>{
+		const obj ={
+			'item' : 'egg', 
+			'price': 1.59
+		}
+		return arr.push 
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
