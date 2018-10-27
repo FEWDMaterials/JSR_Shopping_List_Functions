@@ -190,6 +190,14 @@
 
 	// implement function here
 
+	const removeNthItem = (i, list=[]) => {
+		if ((i > list.length) || (i < 0) || (typeof i !== 'number')) {
+			throw new Error("Error");
+		}
+		list.splice(i, i);
+		return list;
+	}
+
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -259,6 +267,14 @@
 	*/
 
 	// implement function here
+
+	const removeNItems = (i, num, list=[]) => {
+		if ((i + num > list.length) || (i < 0) || (typeof num !== 'number') || (typeof i !== 'number')) {
+			throw new Error("Error");
+		}
+		list.splice(i, i + num);
+		return list;
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
