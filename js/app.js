@@ -23,6 +23,17 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem =  (string,number) =>{
+		let shoppingListItem = {
+			'item' : string , 
+			'price' : number,
+              
+		}
+		return shoppingListItem;
+	};
+
+	
+
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -53,6 +64,14 @@
 	*/
 
 	// implement function here
+
+	const addToShoppingList =()=>{
+		const newList = [{
+			'item' : string , 
+			'price' : number,	
+		}]
+		return newList
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
