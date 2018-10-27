@@ -156,26 +156,26 @@ GO into function.js folder
 	// console.log(removeFromShoppingList(['apple','orange','banana','mango'])) 
 
 	// TEST
-	describe('3. removeFromShoppingList', () => {
-		it('should remove from the end of the list', () => {
-			let list = addToShoppingList({
-				'item': 'test',
-				'price': 1
-			});
-			list = addToShoppingList({
-				'item': 'test2',
-				'price': 2
-			}, list);
+	// describe('3. removeFromShoppingList', () => {
+	// 	it('should remove from the end of the list', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
 
-			// actually test function now
-			list = removeFromShoppingList(list);
+	// 		// actually test function now
+	// 		list = removeFromShoppingList(list);
 
-			chai.assert.equal(list.length, 1)
-			// asert only item in list is 'test' with price 1
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)
-		})
-	});
+	// 		chai.assert.equal(list.length, 1)
+	// 		// asert only item in list is 'test' with price 1
+	// 		chai.assert.equal(list[0].item, 'test')
+	// 		chai.assert.equal(list[0].price, 1)
+	// 	})
+	// });
 
 	/* 4
 		@function removeFirstItem
@@ -431,63 +431,63 @@ GO into function.js folder
 
 
 	// TEST
-	describe('7. smartRemoveItems', () => {
-		it('should return list if i > length of list', () => {
-			let list = [];
-			list = smartRemoveItems(1, list);
+	// describe('7. smartRemoveItems', () => {
+	// 	it('should return list if i > length of list', () => {
+	// 		let list = [];
+	// 		list = smartRemoveItems(1, list);
 
-			// [] is initial state of list
-			// we expect `list` to also be length 0
-			// ...or, empty essentially
-			chai.assert.equal(list.length, 0);
-		});
+	// 		// [] is initial state of list
+	// 		// we expect `list` to also be length 0
+	// 		// ...or, empty essentially
+	// 		chai.assert.equal(list.length, 0);
+	// 	});
 
-		it('should remove i number from end of list if i < 0', () => {
-			let list = addToShoppingList({
-				'item': 'test',
-				'price': 1
-			});
-			list = addToShoppingList({
-				'item': 'test2',
-				'price': 2
-			}, list);
-			list = addToShoppingList({
-				'item': 'test3',
-				'price': 3
-			}, list);
+	// 	it('should remove i number from end of list if i < 0', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
+	// 		list = addToShoppingList({
+	// 			'item': 'test3',
+	// 			'price': 3
+	// 		}, list);
 
-			list = smartRemoveItems(-1, list);
+	// 		list = smartRemoveItems(-1, list);
 
-			chai.assert.equal(list.length, 2)
-			chai.assert.equal(list[0].item, 'test')
-			chai.assert.equal(list[0].price, 1)
-			chai.assert.equal(list[1].item, 'test2')
-			chai.assert.equal(list[1].price, 2)
-		});
+	// 		chai.assert.equal(list.length, 2)
+	// 		chai.assert.equal(list[0].item, 'test')
+	// 		chai.assert.equal(list[0].price, 1)
+	// 		chai.assert.equal(list[1].item, 'test2')
+	// 		chai.assert.equal(list[1].price, 2)
+	// 	});
 
-		it('should remove i number from START if list if i > 0', () => {
-			let list = addToShoppingList({
-				'item': 'test',
-				'price': 1
-			});
-			list = addToShoppingList({
-				'item': 'test2',
-				'price': 2
-			}, list);
-			list = addToShoppingList({
-				'item': 'test3',
-				'price': 3
-			}, list);
+	// 	it('should remove i number from START if list if i > 0', () => {
+	// 		let list = addToShoppingList({
+	// 			'item': 'test',
+	// 			'price': 1
+	// 		});
+	// 		list = addToShoppingList({
+	// 			'item': 'test2',
+	// 			'price': 2
+	// 		}, list);
+	// 		list = addToShoppingList({
+	// 			'item': 'test3',
+	// 			'price': 3
+	// 		}, list);
 
-			list = smartRemoveItems(1, list);
+	// 		list = smartRemoveItems(1, list);
 
-			chai.assert.equal(list.length, 2)
-			chai.assert.equal(list[0].item, 'test2')
-			chai.assert.equal(list[0].price, 2)
-			chai.assert.equal(list[1].item, 'test3')
-			chai.assert.equal(list[1].price, 3)
-		});
-	});
+	// 		chai.assert.equal(list.length, 2)
+	// 		chai.assert.equal(list[0].item, 'test2')
+	// 		chai.assert.equal(list[0].price, 2)
+	// 		chai.assert.equal(list[1].item, 'test3')
+	// 		chai.assert.equal(list[1].price, 3)
+	// 	});
+	// });
 
 	/* 8
 		@function spliceItem
@@ -508,26 +508,44 @@ GO into function.js folder
 
 	// implement function here
 	const spliceItem = (item , i, list) => {
+
 			if (typeof item != 'object'){
 				throw new Error ('Invalid Input')
-			} 
-
-			let newObject = {item, price}
+			}
+			
+			if(item['item'] == null) {
+				throw new Error ('Invalid Input')
+			} else if(item['price'] == null) {
+				throw new Error ('Invalid Input')
+			}
 
 			if(i > list.length){
 				// return list.push(item)
-				return list.splice(arr.length - 1,0, newObject)
+				// return list.splice(list.length - 1,0, item)
+				return list.concat(item)
 			} 
 			else if(i < 0){
+				let emptyArray = []
+				let insertItem = emptyArray.concat(item)
+				return insertItem.concat(list)
+				// return list.splice(0,0,item)
 				// return list.unshift(item)
-				return list.splice(0,0,newObject)
+	
 			}
 
-			// let newObject = {item, price}
+			//What's a shorter way to write this
+			let insertAtIthIndex = list.slice(0,i)
+			let newArray= insertAtIthIndex.concat(item)
+      		let secondHalfArray = list.slice(i, list.length)
 
-			return list.splice(i,0,newObject)
+			return newArray.concat(secondHalfArray);
+
+			// return list.splice(i,0,item)
+			
 
 		}
+
+
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -542,6 +560,8 @@ GO into function.js folder
 				'item': 'test',
 				'price': 1,
 			}, 0, [])
+
+			
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
@@ -575,87 +595,123 @@ GO into function.js folder
 
 	});
 
-// 	/* 9
-// 		@function spliceItems
-// 		@param items {list}
-// 		@param i {number}
-// 		@param list {array, []}
-// 		@returns list
-// 		@description
-// 			- *EACH* item in `items` must be an object
-// 			that looks like this:
-// 			{
-// 				'item': 'eggs',
-// 				'price': 1.59
-// 			} (else throw error)
-// 			- insert items into the ith index of the list
-// 			- if i > length of list, just append
-// 			- if i < 0, just prepend
-// 			- if `items` is empty, return list
-// 	*/
+	/* 9
+		@function spliceItems
+		@param items {list}
+		@param i {number}
+		@param list {array, []}
+		@returns list
+		@description
+			- *EACH* item in `items` must be an object
+			that looks like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			} (else throw error)
+			- insert items into the ith index of the list
+			- if i > length of list, just append
+			- if i < 0, just prepend
+			- if `items` is empty, return list
+	*/
 
-// 	// implement function here
+	// implement function here
+		let spliceItems = (items, i, list) => {
+			if (typeof item != 'object'){
+				throw new Error ('Invalid Input')
+			}
+			
+			if (item['item'] == null) {
+				throw new Error ('Invalid Input')
+			} else if(item['price'] == null) {
+				throw new Error ('Invalid Input')
+			}
 
-// 	// TEST
-// 	describe('9. spliceItems', () => {
-// 		it('should throw an error if item is not valid', () => {
-// 			chai.assert.throws(() => {
-// 				spliceItems([{
-// 					'item': 'test',
-// 					'price': 1,
-// 				},'invalidItem'], 0, [])
-// 			}, Error);
-// 		});
 
-// 		it('should insert items to the ith index of the list', () => {
-// 			const list = spliceItems([{
-// 				'item': 'test',
-// 				'price': 1,
-// 			}, {
-// 				'item': 'test2',
-// 				'price': 2,
-// 			}], 0, [{
-// 				'item': 'test3',
-// 				'price': 3,
-// 			}])
+			if(i > list.length){
+				// return list.push(item)
+				// return list.splice(list.length - 1,0, item)
+				return list.concat(item)
+			} 
+			else if(i < 0){
+				let emptyArray = []
+				let insertItem = emptyArray.concat(item)
+				return insertItem.concat(list)
+				// return list.splice(0,0,item)
+				// return list.unshift(item)
+			}
+			
 
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 			chai.assert.equal(list[1].item, 'test2')
-// 			chai.assert.equal(list[1].price, 2)
-// 		});
+			//What's a shorter way to write this
+			// let insertAtIthIndex = list.slice(0,i)
+			// let newArray= insertAtIthIndex.concat(item)
+      		// let secondHalfArray = list.slice(i, list.length)
 
-// 		it('should append to the end if i > length of list', () => {
-// 			const list = spliceItems([{
-// 				'item': 'test',
-// 				'price': 1,
-// 			}], 9, [{
-// 				'item': 'test0',
-// 				'price': 0,
-// 			}])
+			// return newArray.concat(secondHalfArray);
 
-// 			chai.assert.equal(list[1].item, 'test')
-// 			chai.assert.equal(list[1].price, 1)
-// 		});
 
-// 		it('should prepend if i < 0', () => {
-// 			const list = spliceItems([{
-// 				'item': 'test',
-// 				'price': 1,
-// 			}], -1, [{
-// 				'item': 'test0',
-// 				'price': 0,
-// 			}])
+		}
 
-// 			chai.assert.equal(list[0].item, 'test')
-// 			chai.assert.equal(list[0].price, 1)
-// 		});
 
-// 		it('should return list if items is empty', () => {
-// 			const list = spliceItems([], 0, []);
-// 			chai.assert.equal(list.length, 0)
-// 		})
-// 	});
+	// TEST
+	describe('9. spliceItems', () => {
+		it('should throw an error if item is not valid', () => {
+			chai.assert.throws(() => {
+				spliceItems([{
+					'item': 'test',
+					'price': 1,
+				},'invalidItem'], 0, [])
+			}, Error);
+		});
+
+		it('should insert items to the ith index of the list', () => {
+			const list = spliceItems([{
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}], 0, [{
+				'item': 'test3',
+				'price': 3,
+			}])
+
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+			chai.assert.equal(list[1].item, 'test2')
+			chai.assert.equal(list[1].price, 2)
+		});
+
+		it('should append to the end if i > length of list', () => {
+			const list = spliceItems([{
+				'item': 'test',
+				'price': 1,
+			}], 9, [{
+				'item': 'test0',
+				'price': 0,
+			}])
+
+			chai.assert.equal(list[1].item, 'test')
+			chai.assert.equal(list[1].price, 1)
+		});
+
+		it('should prepend if i < 0', () => {
+			const list = spliceItems([{
+				'item': 'test',
+				'price': 1,
+			}], -1, [{
+				'item': 'test0',
+				'price': 0,
+			}])
+
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+		});
+
+		it('should return list if items is empty', () => {
+			const list = spliceItems([], 0, []);
+			chai.assert.equal(list.length, 0)
+		})
+	});
 
 // 	/* 10
 // 		@function combineLists
