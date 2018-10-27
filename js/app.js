@@ -64,14 +64,10 @@
 	*/
 
 	// implement function here
-
-	const addToShoppingList =()=>{
-		const newList = [{
-			'item' : string , 
-			'price' : number,	
-		}]
-		return newList
-	}
+const addToShoppingList = (obj, list=[])=>{
+list.push(obj)
+return list
+}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -105,6 +101,13 @@
 	*/
 
 	// implement function here
+
+	const removeFromShoppingList= (list)=>{
+		if (list.length > 0){
+		 list.pop()
+		}
+		return list 
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
