@@ -24,6 +24,13 @@
 
 	// implement function here
 
+	 const newShoppingListItem = (item, price) =>{
+		let newItem = {}
+		 newItem['item'] = item;
+		 newItem['price'] = price;
+		 return newItem;
+	 }
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -54,6 +61,10 @@
 
 	// implement function here
 
+	const addToShoppingList = (item, list=[]) => {
+		list.push(item);
+		return list;
+	}
 	// TEST
 	describe('2. addToShoppingList', () => {
 
@@ -86,7 +97,10 @@
 	*/
 
 	// implement function here
-
+	const removeFromShoppingList = (list=[]) => {
+		list.pop();
+		return list;
+	}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +134,11 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = (list=[]) => {
+		list.shift();
+		return list;
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
