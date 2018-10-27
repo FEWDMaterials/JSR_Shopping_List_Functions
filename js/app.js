@@ -145,7 +145,11 @@
 	// implement function here
 
 	const removeFirstItem = (list=[]) => {
-		return list.shift();
+		if (list.length === 0) {
+			return list;
+		}
+		list.shift();
+		return list;
 	}
 
 	// TEST
