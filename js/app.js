@@ -262,7 +262,21 @@ const newShoppingListItem = (item, price) => {
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNItems = (i, num, list) => {
+		if(i > list.length || i + num > list.length){
+			throw new Error(`Invalid input. Number of item can't be greater than list amount`);
+		} else if(i < 0){
+			throw new Error(`Invalid input. Number of item can't be lesser than 0.`);
+		} else if(typeof i !== 'number'){
+			throw new Error(`Invalid input. Number of item must be a number.`);
+		}
+
+		const firstHalfArr = list.slice(0, i);
+		const secondHalfArr = list.slice(i + num + 1);
+
+		return firstHalfArr.concat(secondHalfArr);
+
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -341,7 +355,9 @@ const newShoppingListItem = (item, price) => {
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems = (i, list) => {
+		
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
