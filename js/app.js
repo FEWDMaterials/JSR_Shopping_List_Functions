@@ -21,14 +21,14 @@
 				- validate that price is less than 100 and has only
 					two decimal places
 	*/
-const newShoppingListItem = (item, price) => {
-	return {
-	item: item,
-	price: price
-	}
-} 
 
 	// implement function here
+	const newShoppingListItem = (item, price) => {
+		return {
+			item: item,
+			price: price
+		}
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -38,7 +38,6 @@ const newShoppingListItem = (item, price) => {
 			chai.assert.equal(shoppingListItem.price, 1);
 		});
 	});
-
 
 	/* 2
 		@function addToShoppingList
@@ -59,6 +58,10 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
+const addToShoppingList = (itemAndprice, list = []) => { 
+	const newItem = list.concat(itemAndprice); // item & price are one item in []
+	return newItem;
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -92,7 +95,14 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
-
+	const removeFromShoppingList = (list) => {
+		if (list === "[]") {
+			return list
+		}
+		else if (list.pop()) {
+			return list
+		} 
+	}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -126,7 +136,14 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
-
+	const removeFirstItem = (list) => {
+		if (list === "[]") {
+			return list
+		}
+		else if (list.shift()) {
+			return list
+		} 
+	}
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -164,6 +181,13 @@ const newShoppingListItem = (item, price) => {
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list = []) => { 
+		if (i < 0 || i > list.length-1 || typeof i !== "number") {
+			throw new Error('Error - please enter an item from the list.')
+		}
+		list.splice(i,1);
+		return list
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
