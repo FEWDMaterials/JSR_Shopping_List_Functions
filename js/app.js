@@ -24,12 +24,10 @@
 
 	const newShoppingListItem = (item, price) => {
 		return shoppingList = {
-			'items': 'eggs',
-			'price': 1.59
+			'items': item,
+			'price': price
 		}
 	}
-	console.log('\n1');
-	console.log(newShoppingListItem());
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -62,8 +60,6 @@
 	const addToShoppingList = (item=newShoppingListItem(), list=[]) => {
 		return list.push(item)
 	}
-	console.log('\n2');
-	console.log(newShoppingListItem());
 
 	// TEST
 	describe('2. addToShoppingList', () => {
