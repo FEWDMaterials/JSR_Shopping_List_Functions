@@ -172,7 +172,14 @@ const removeFirstItem = (list = []) =>{
 	*/
 
 	// implement function here
-
+const removeNthItem = (i, list) =>{
+	if (typeof i !== 'number' || i < 0 || i > list.length) throw new Error('Need reasonable #s here!');
+	const newList = [];
+	for(let n = 0; n < list.length; n++){
+		if(n !== i) newList.push(list[n]);
+	}
+	return newList;
+}
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
