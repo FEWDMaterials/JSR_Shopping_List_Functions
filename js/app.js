@@ -188,6 +188,15 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const removeNthItem =(i, list)=>{
+		 if ( (i < 0)|| (typeof i !== 'number')||(i>list.length)){
+			throw  Error('Whoops!');
+		}else if (i< list.length){
+			 list.splice(i,1)
+		}
+		return list
+	}
+
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
