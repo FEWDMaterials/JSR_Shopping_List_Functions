@@ -353,14 +353,15 @@
 	*/
 
 	const smartRemoveItems = (i, list =[])=>{
-		if (i<0) { list.slice(arr,-i)
-			//remove i number of items from end of list
+		if (i<0) { return list.slice(0,i) 
+				//remove i number of items from end of list
 		}
-		if (i>list.length){return list}
-		if (i>0) { list.slice()
+		else if (i>list.length){return list}
+		else if (i>0) { return list.slice(i)
 			//remove i number of items from start of list
 		}
 	}
+
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -373,6 +374,8 @@
 			// ...or, empty essentially
 			chai.assert.equal(list.length, 0);
 		});
+
+		
 
 		it('should remove i number from end of list if i < 0', () => {
 			let list = addToShoppingList({
