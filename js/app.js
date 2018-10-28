@@ -266,14 +266,13 @@
 
 	const removeNItems= ( i,num,list= [ ] )=>{
 
-		if ( num> list.length || i < 0 || (typeof i) !== "number"||i+num>list.length){ 
+		if ( num> list.length || i < 0 || typeof i !== "number"||i+num>list.length|| typeof num !=="number" ){ 
 			throw new Error('error');
 		}
 			let nth1= list.slice (0,i)
-			let nth2=list.slice(i+num) 
+			let nth2=list.slice(i+num+1) 
 			return nth1.concat(nth2);
-		}
-
+	
 	}
 
 	// TEST
@@ -353,7 +352,15 @@
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems = (i, list =[])=>{
+		if (i<0) { list.slice(arr,-i)
+			//remove i number of items from end of list
+		}
+		if (i>list.length){return list}
+		if (i>0) { list.slice()
+			//remove i number of items from start of list
+		}
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
