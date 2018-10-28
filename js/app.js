@@ -849,7 +849,7 @@ const canExpressCheckout = list => {
 			list.forEach(obj => {
 				sum = sum + obj.price;
 			}) 
-			sum = sum / taxRate + sum;
+			sum = sum * (taxRate/100) + sum;
 			return sum
 		}
 	// TEST
