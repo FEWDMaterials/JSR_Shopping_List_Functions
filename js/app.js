@@ -358,16 +358,18 @@ const removeFirstItem = (list)=>{
 	*/
 
 	// implement function here
-	const smartRemoveItems = (i,list)=>{
-		if (i<0){
-			list.pop()
-		}else if (i> list.length){
-			return list
-		}else (i>0);{
-			list.shift(i)
-		}
 
-	}
+	//make a function 
+	const smartRemoveItems = (i,list)=>{
+		if  (i> list.length){
+			return list
+		}else if (i<0){
+			return list.slice(0,i)
+		 
+		} else if (i>0)
+		   return list.slice(i)
+			
+		}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -725,6 +727,12 @@ const removeFirstItem = (list)=>{
 	*/
 
 	// implement function here
+
+	const canExpressCheckout = (list)=>{
+		if(list.length <10){
+			return true
+		}else return false
+	}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
