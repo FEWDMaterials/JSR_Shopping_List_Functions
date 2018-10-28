@@ -249,7 +249,19 @@ const removeNthItem = (i, list) =>{
 	*/
 
 	// implement function here
-
+const removeNItems = (i,num,list) =>{
+	if (typeof i !== 'number'    ||
+		typeof num !== 'number'  ||
+		i < 0					 ||
+		num > list.length		 ||
+		i + num > list.length
+		){
+			throw new Error("Unreasonable numbers!");
+		}
+	const half1 = list.slice(0,i); 
+	const half2 = list.slice(i+num+1);
+	return half1.concat(half2);
+}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
