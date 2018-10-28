@@ -486,18 +486,20 @@ if(i <0){
 			throw new Error("Fix Object")
 		}
 
-		if(i > list.length){
-		list.push(Object.values(item).join())
-
+		else if(i > list.length){
+		 list.push(item)
+        return list
 		}
-		if(i < 0){
+		else if(i < 0){
 
-		list.unshift(Object.values(item).join())
-		}
-		list.splice(i,0, Object.values(item).join())
-
-	return list
-	}
+         list.unshift(item)
+         return list
+        }
+       
+		// list.splice(i,0, Object.values(item).join())
+		 return list.slice(0,i).concat(item).concat(list.slice(i))
+        }
+    
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -564,6 +566,34 @@ if(i <0){
 	*/
 
 	// implement function here
+
+
+	const spliceItems=(items,i,list)=>{
+		items.forEach((e)=>{
+
+            if( typeof e !== "object"){
+				throw new Error("Fix Object")
+			}
+        }
+        )
+
+    	if(i > list.length){
+			return list.concat(items)
+			 
+			}
+			else if(i < 0){
+		
+			return items.concat(list)
+			  
+			}
+			else if(items.length === 0){ return list}
+			// list.splice(i,0, Object.values(item).join())
+			 return list.slice(0,i).concat(items).concat(list.slice(i))
+			}
+	
+
+
+
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -644,6 +674,32 @@ if(i <0){
 	*/
 
 	// implement function here
+const combineLists = (items1,items2)=>{
+
+	items1.forEach((e)=>{
+
+		if( typeof e !== "object"){
+			throw new Error("Fix Object")
+		}
+	}
+	)
+	items2.forEach((e)=>{
+
+		if( typeof e !== "object"){
+			throw new Error("Fix Object")
+		}
+	}
+	)
+
+const list = items1.concat(items2)
+
+
+return list
+
+}
+
+
+
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -696,7 +752,28 @@ if(i <0){
 	*/
 
 	// implement function here
+	const splitListAt =(i,list)=>{
+		let list1 = []
+        let list2 =[]
+        
+    if(i <= 0){
+    list1 = [...list]
 
+    }
+    
+    
+    else if(i>list.length){
+    list2 = [...list]
+    
+    
+    }
+    else{
+        list1 = list.slice(0,i+1)
+        list2 = list.slice(i+1)
+    }
+     return [list1 ,list2]
+    }
+    
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -776,7 +853,14 @@ if(i <0){
 	*/
 
 	// implement function here
+const canExpressCheckout = (list)=>{
 
+if(list.length< 10){
+	return true
+}
+
+
+}
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -804,7 +888,14 @@ if(i <0){
 	*/
 
 	// implement function here
-
+	const computeSum = (list)=>{
+		let sum = 0
+	for(let i = 0; i<list.length; i++){
+	sum = sum + list[i]["price"]
+	}
+	return sum
+	
+	}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -836,7 +927,16 @@ if(i <0){
 			- note that tax is passed in as percent not decimal
 
 	*/
+const computeSumWithTax =(list, taxRate)=>{
 
+	let sum = 0
+	for(let i = 0; i<list.length; i++){
+	sum = sum + list[i]["price"]
+	}
+	return sum * ( taxRate / 100) + sum
+
+
+}
 	// implement function here
 
 	// TEST
@@ -874,7 +974,25 @@ if(i <0){
 	*/
 
 	// implement function here
+const computeSumInRange=(i,j,list)=>{
+	let list2 = list.slice(i,j+1)
 
+
+	if(i> j){
+
+	throw new Error("Input Better Values")
+}
+if(i<0 || j<0 || i > list.length || j>list.length){
+	throw new Error("Input Better Values")
+
+}
+let sum = 0
+	for(let i = 0; i<list2.length; i++){
+	sum = sum + list2[i]["price"]
+	}
+	return sum 
+
+}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
