@@ -26,10 +26,9 @@
 
 	const newShoppingListItem = (item, price) => {
 		if (typeof item !== 'string' || typeof price !== 'number') {
-			throw error('Values not set properly!');
-		} else {
-			return {item: item, price: price};
-		}
+			throw new Error('Values not set properly!');
+		} else 
+			return {'item': item, 'price': price};
 	}
 
 	// TEST
@@ -63,13 +62,17 @@
 	// implement function here
 
 	const addToShoppingList = (item, list=[]) => {
-		if (typeof item === 'object' && typeof item.item === 'string' && typeof item.price === 'number') {
-			list.push(item);
-			return list;
-		} else {
-			throw error('Not a valid shoppingList item!');
-		}
+		let newList = [...list];
+		newList.push(item);
+		return newList;
 	}
+
+	// 	if (typeof item === 'object' && typeof item[item] === 'string' && typeof item[price] === 'number') {
+			
+	// 	} else {
+	// 		throw new Error('Not a valid shoppingList item!');
+	// 	}
+	// }
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -104,9 +107,11 @@
 
 	// implement function here
 
-	const removeFromShoppingList = (list) => {
-		if (list.length > 0) {
-			list.pop()
+	const removeFromShoppingList = (list=[]) => {
+		if (list !== []) {
+			list.pop();
+			return list;
+		} else {
 			return list;
 		}
 	}
@@ -145,6 +150,16 @@
 
 	// implement function here
 
+	const removeFirstItem = (list=[]) => {
+		if (list.length > 0) {
+			let newList = [...list];
+			newList.shift();
+			return newList;
+		} else {
+			return list;
+		}
+	}
+
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -182,6 +197,16 @@
 	*/
 
 	// implement function here
+
+	const removeNthItem = (i, list=[]) => {
+		if (i < 0  || typeof i !== 'number' || i > list.length) {
+			throw new Error('FUGAZI');
+		} else {
+			let newList = [];
+			newList = newList.concat(list.slice(0, i), (list.slice(i + 1)));
+			return newList;
+		}
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -252,6 +277,15 @@
 	*/
 
 	// implement function here
+
+	const removeNItems = (i, num, list=[]) => {
+		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || (i+num) > list.length) {
+			throw new Error('FUGAZI');
+		}
+			let newList = [];
+			newList = newList.concat(list.slice(0, i), list.slice(num+i+1));
+			return newList;
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -332,6 +366,18 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list=[]) => {
+		let newList = [];
+		if (i > list.length) {
+			return list;
+		} else if (i < 0) {
+			newList = list.slice(0, i);
+		} else if (i > 0) {
+			newList = list.slice(i);
+		}
+		return newList;
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -410,6 +456,20 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list=[]) => {
+		let newList = [...list];
+		if (typeof item !== 'object') {
+			throw new Error ('FUGAZI');
+		} else if (i > list.length) {
+			newList.push(item);
+		} else if (i < 0) {
+			newList.unshift(item);
+		} else {
+			newList.splice(i,0,item);
+		}
+		return newList;
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -476,6 +536,31 @@
 	*/
 
 	// implement function here
+	
+	const spliceItems = (items, i, list=[]) => {
+		let newList = [...list];
+		items.forEach(element => { if (typeof element !== 'object') {
+			throw new Error('FUGAZI');
+		}
+	});
+		if (items.length === 0) {
+			return list;
+		} else if (i > list.length) {
+			newList = newList.concat(items);
+		} else if (i < 0) {
+			newList = items.concat(newList);
+		} else {
+			newList = list.slice(0,i).concat(items, list.slice(i));
+		}
+		// newList.splice(i,0,items);
+
+		// newList2 = list.slice(0,i).concat(items).concat(list.slice(i))
+		// } else {
+		// 	newList = newList.concat(list.slice(0,i), items, list.slice(i));
+			// newList.splice(i,0,items);
+	
+		return newList;
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
