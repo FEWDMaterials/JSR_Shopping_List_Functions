@@ -459,6 +459,26 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list = []) => {
+		let keys = Object.keys(item);
+		if(typeof item[keys[0]] != 'string' || typeof item[keys[1]] != 'number'){
+			throw  new Error ('calling out mayday!');
+		} 
+		if (i > list.length){
+			list.push(item);
+			return list;
+		} else if ( i < 0 ){
+			list.unshift(item)
+			return list;
+		} else {
+			let temp = list.slice(0, i);
+			temp.push(item);
+			return temp.concat(list.slice(i));
+		}
+
+		
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
