@@ -705,7 +705,30 @@ const newShoppingListItem = (item, price) => {
 
 	*/
 
-	// implement function here
+	const splitListAt = (i, list) => {
+		if(i < 0){
+			let newList = [];
+			let list1 = list;
+			let list2 = [];
+			newList.push(list1);
+			newList.push(list2);
+			return newList;
+		} else if(i > list.length){
+			let newList = [];
+			let list1 = [];
+			let list2 = list;
+			newList.push(list1);
+			newList.push(list2);
+			return newList;
+		} 
+		let list1 = list.slice(0, i + 1);
+		let list2 = list.slice(i + 1);
+		let newList = [];
+		newList.push(list1);
+		newList.push(list2);
+		return newList;
+
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -813,7 +836,12 @@ const newShoppingListItem = (item, price) => {
 			- sum all the price items and return value
 	*/
 
-	// implement function here
+		const computeSum = (list) => {
+			return list.reduce((acc, currentElement) => {
+				acc += currentElement.price;
+				return acc;
+			}, 0);
+		}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -847,7 +875,20 @@ const newShoppingListItem = (item, price) => {
 
 	*/
 
-	// implement function here
+	const computeSumWithTax = (list, taxRate=8.125) => {
+		
+		let taxRate = taxRate / 100;
+
+		const sum = list.redue((acc, currentElement) => {
+			acc += currentElement.price;
+			return acc;
+		}, 0);
+
+		let taxSum = sum * taxRate;
+
+		return sum + taxSum;
+
+	}	
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -883,7 +924,13 @@ const newShoppingListItem = (item, price) => {
 			- if i or j not in range, throw error
 	*/
 
-	// implement function here
+	const computeSumInRange = (i, j, list) => {
+		if(i > j){
+			throw new Error('Invalid input.');
+		} else if(i > list.length || j > list.length){
+			throw new Error('Invalid input.')
+		}
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
