@@ -24,8 +24,8 @@
 
 	// implement function here
 const newShoppingListItem = (item, price) =>{
-	return {'item': item,
-			'price': price };
+	return { item,
+			 price };
 }
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -56,10 +56,9 @@ const newShoppingListItem = (item, price) =>{
 	*/
 
 	// implement function here
-const addToShoppingList = (item, list) =>{
-	const arr = [];
-	arr.push(item);
-	return arr;
+const addToShoppingList = (item, list = []) =>{
+	list.push(item);
+	return list;
 }
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -93,7 +92,11 @@ const addToShoppingList = (item, list) =>{
 	*/
 
 	// implement function here
-
+const removeFromShoppingList = (list) =>{
+	if (typeof list === 'array' && list.length === 0) return list;
+	list.pop();
+	return list;
+}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
