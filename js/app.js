@@ -350,7 +350,7 @@
 	// implement function here
 	const smartRemoveItems = (i, list ) => { 
 		if (i < 0) {
-			list.splice(i);
+			list.splice(i); 
 		}
 		else if (i > list.length) { 
 			return list;
@@ -624,6 +624,22 @@
 	*/
 
 	// implement function here
+	const combineLists = (items1 , items2 ) => { 
+		items2.forEach((element) => { 
+			if ((typeof element) !== "object") {
+				throw new Error('lol no');
+			}
+		}) 
+
+		items1.forEach((element) => { 
+			if ((typeof element) !== "object") {
+				throw new Error('lol no');
+			}
+		});
+
+		let combinedList = items1.concat(items2);
+		return combinedList;
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -676,6 +692,30 @@
 	*/
 
 	// implement function here
+	const splitListAt = (i, list = []) => { 
+		let list1 = [];
+		let list2 = [];
+		if (i < 0) { 
+			list1 = list;
+			list.push(list1,list2);
+			return list;
+		}
+		if (i > list.length ) { 
+			list2 = list;
+			 list.push(list1,list2);
+			 return list;
+		}
+		// for (let j = 0 ; j < list.length -1 ; j++) {
+		// 	if (list[j] <= i) {
+		// 		list1.push(list[j]);
+		// 	}
+		// 	else if (list[j] > i) {
+		// 		list2.push(list[j]);
+		// 	}
+		
+		 list.push(list1,list2);
+		 return list;
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -788,12 +828,12 @@
 			- sum all the price items and return value
 	*/
 	// implement function here
-	const computeSum = (array = []) => {  
-		let sum = 0;
-		for (let i = 0; i < arr.length ; i++) { 
-			sum += array[i].price;
+	const computeSum = (list) => { 
+		let total = 0;
+		for (let i = 0; i < list.length; i++) {
+			total += list[i].price
 		}
-		return sum;
+		return total;
 	}
 
 	// TEST
@@ -829,6 +869,17 @@
 	*/
 
 	// implement function here
+	const computeSumWithTax = (list,taxRate = 8.125) => { 
+		taxRate = taxRate/100;
+		let sum = 0;
+		for (let i = 0; i < list.length; i++) {
+			sum += list[i].price
+		}
+		let taxCalculation = sum * taxRate;
+		sum += taxCalculation;
+		
+		return sum;
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
