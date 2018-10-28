@@ -23,10 +23,10 @@
 	*/
 
 	// implement function here
-	const newShoppingListItem =  (string,number) =>{
+	const newShoppingListItem =  (item,price) =>{
 		let shoppingListItem = {
-			'item' : string , 
-			'price' : number,
+			'item' : item , 
+			'price' : price,
               
 		}
 		return shoppingListItem;
@@ -64,8 +64,8 @@
 	*/
 
 	// implement function here
-const addToShoppingList = (obj, list=[])=>{
-list.push(obj)
+const addToShoppingList = (item, list=[])=>{
+list.push(item)
 return list
 }
 
@@ -267,6 +267,19 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const removeNItems =(i,num,list)=>{
+		if (i<0 || typeof i !== 'number' || typeof num !== 'number' ||
+		i+num > list.length || num> list.length){
+			throw new Error ('this is an error');
+		}else  {
+		
+		list.splice(i,(i+num))
+		return list
+		//list.slice(0,i).concat(list.slice(i+num+1));
+	
+		}
+	};
+
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
@@ -345,6 +358,16 @@ const removeFirstItem = (list)=>{
 	*/
 
 	// implement function here
+	const smartRemoveItems = (i,list)=>{
+		if (i<0){
+			list.pop()
+		}else if (i> list.length){
+			return list
+		}else (i>0);{
+			list.shift(i)
+		}
+
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
