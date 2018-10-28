@@ -422,7 +422,17 @@ const smartRemoveItems = (i, list =[]) =>{
 	*/
 
 	// implement function here
-
+const spliceItem = (item, i, list =[]) =>{
+	if (typeof item !== 'object' || Array.isArray(item)) throw new Error('Need object item!');
+	if (i >= list.length) list.push(item);
+	if (i <= 0) list.unshift(item);
+	if (i > 0 && i < list.length) {
+		const half1 = list.slice(0,i);
+		const half2 = list.slice(i);
+		list = half1.concat(item).concat(half2);
+	}
+	return list;
+}
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
