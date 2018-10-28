@@ -588,7 +588,13 @@ const spliceItems = (items,i,list=[]) =>{
 	*/
 
 	// implement function here
-
+const combineLists = (items1, items2) =>{
+	if (!Array.isArray(items1)) throw new Error('Items must be a list[array]!');
+	if (!Array.isArray(items2)) throw new Error('Items must be a list[array]!');
+	items1.forEach( cI => {if(typeof cI !== 'object') throw new Error('Each item must be an object!');});
+	items2.forEach( cI => {if(typeof cI !== 'object') throw new Error('Each item must be an object!');});
+	return items1.concat(items2);
+}
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
