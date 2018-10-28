@@ -844,7 +844,14 @@ const canExpressCheckout = list => {
 	*/
 
 	// implement function here
-
+		const computeSumWithTax = (list,taxRate) => {
+			let sum = 0;
+			list.forEach(obj => {
+				sum = sum + obj.price;
+			}) 
+			sum = sum / taxRate + sum;
+			return sum
+		}
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
