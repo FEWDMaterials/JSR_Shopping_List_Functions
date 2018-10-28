@@ -499,7 +499,16 @@ const spliceItem = (item, i, list =[]) =>{
 	*/
 
 	// implement function here
-
+const spliceItems = (items,i,list=[]) =>{
+	if (!Array.isArray(items)) throw new Error('Items must be a list[array]!');
+	if (items.length === 0) return list;
+	items.forEach( cI => {if(typeof cI !== 'object') throw new Error('Each item must be an object!');});
+	if (i >= list.length) return list.concat(items);
+	if (i <= 0) return items.concat(list);
+	const half1 = list.slice(0,i);
+	const half2 = list.slice(i);
+	return half1.concat(items).concat(half2);
+}
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
