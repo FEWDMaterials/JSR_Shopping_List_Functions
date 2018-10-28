@@ -104,8 +104,8 @@ const addToShoppingList = (item, list = [])=> {
 		if (!Array.isArray(list)){
 			  return NaN; 
 		}         
-			  list.pop()
-			  return list;
+			   return list.slice(0,list.length -1);
+			  
    }
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -188,7 +188,14 @@ const removeFirstItem = (list = []) => {
 	*/
 
 	// implement function here
-
+const removeNthItem = (i, list = []) => {
+	if(typeof i !== "number" || i > list.length || i < 0){
+		  throw new Error ("Error, please check the item!");
+	}
+	 return list.slice(0,i).concat(list.slice(i+1));
+	 
+	
+}
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -258,7 +265,14 @@ const removeFirstItem = (list = []) => {
 	*/
 
 	// implement function here
-
+	const removeNItems = (i, num, list = []) => {
+		if(typeof i !== "number" || i+num > list.length || i < 0){
+			throw new Error ("Error, please check the item!");
+	  } if(typeof num !== "number" || num > list.length || num < 0){
+			throw new Error ("Error");
+	  }
+	  return list.slice(0,i).concat(list.slice(i,num));
+	}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
