@@ -340,7 +340,11 @@ const removeNItems = (i,num,list) =>{
 	*/
 
 	// implement function here
-
+const smartRemoveItems = (i, list =[]) =>{
+	if (i < 0) return list.slice(0,list.length+i);
+	if (i > list.length) return list;
+	return list.slice(i);
+}
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
