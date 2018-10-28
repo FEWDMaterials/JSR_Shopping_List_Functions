@@ -887,6 +887,14 @@ const canExpressCheckout = list => {
 	*/
 
 	// implement function here
+	const computeSumInRange = (i,j,list) => {
+		let sum = 0
+		if (i > j) throw new Error ('i > j !!');
+		if (i > list.length || j > list.length) throw new Error ('i and/or j are not in range');
+		for (let index = i; index <= j; index++) {
+			sum += list[index].price;
+		} return sum;
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
