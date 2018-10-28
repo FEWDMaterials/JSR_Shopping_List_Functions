@@ -155,7 +155,7 @@
 				'item': 'test',
 				'price': 1
 			});
-			list = addToShoppingList({
+			list = addToShoppingList({ 
 				'item': 'test2',
 				'price': 2
 			}, list);
@@ -184,8 +184,18 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNthItem= (i ,list = [])=>{
 
+		if ( i> list.length || i < 0 || typeof i !== "number"){ 
+		throw new Error('error');
+	}
+
+		let nTH= list.slice(0,i);
+		let ntH2= list.slice(i+1); 
+		return nTH.concat(ntH2);
+
+	}	
+	
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -254,7 +264,17 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNItems= ( i,num,list= [ ] )=>{
+
+		if ( num> list.length || i < 0 || (typeof i) !== "number"||i+num>list.length){ 
+			throw new Error('error');
+		}
+			let nth1= list.slice (0,i)
+			let nth2=list.slice(i+num) 
+			return nth1.concat(nth2);
+		}
+
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
