@@ -628,7 +628,7 @@ const smartRemoveItems = (i,list) => {
 			newList = newList.concat(items1).concat(items2);
 			return newList;
 		}
-		
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -680,7 +680,19 @@ const smartRemoveItems = (i,list) => {
 	*/
 
 	// implement function here
-
+	const splitListAt = (i,list) => {
+		let list1 = [];
+		let list2 = [];
+		if (i < 0) {
+			list1 = [...list];
+		} else if (i > list.length) { 
+			list2 = [...list]; 
+		} else {
+			list1 = list.slice(0, 1 +1);
+			list2 = list.slice(i + 1);
+	}
+	return [list1, list2];
+}
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -760,7 +772,11 @@ const smartRemoveItems = (i,list) => {
 	*/
 
 	// implement function here
-
+const canExpressCheckout = list => {
+	if (list.length < 10) {
+		return true;
+	}
+}
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -788,7 +804,7 @@ const smartRemoveItems = (i,list) => {
 	*/
 
 	// implement function here
-
+			const computeSum = list => {}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
