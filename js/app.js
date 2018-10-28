@@ -270,11 +270,11 @@ const removeNthItem = (i, list = []) => {
 	// implement function here
 
 	const removeNItems = (i, num, list) =>{
-		if (i < 0 || typeof i !== 'number' || i > list.length || i + num >list.length){
+		if (i < 0 || typeof i !== 'number' || i > list.length || i + num >list.length || num > list.length || typeof num !== 'number'){
 			throw new error('error')
 		}
 		for(let i = 0; i < list.length; i++){
-			list.pop(i)
+			list.pop()
 		}
 
 
@@ -361,6 +361,18 @@ const removeNthItem = (i, list = []) => {
 
 	// implement function here
 
+	const smartRemoveItems = (i, list = []) =>{
+		if (i < 0){
+			list.pop(i)
+			return list
+		} else if (i > 0){
+			list.shift(i)
+			return list
+		} else (i > list.length);{
+		 return list
+		}
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -438,6 +450,33 @@ const removeNthItem = (i, list = []) => {
 	*/
 
 	// implement function here
+			const spliceItem = (item = {}, i, list =[]) =>{
+	
+				
+
+				if ( typeof i !== 'number' || typeof item !== 'object'){
+					throw new error ('error');
+
+				} else if (i > list.length){
+					//list.push(item)
+					return list.concat(item)
+					;
+
+				} else if (i < list[0]) {
+					//list.splice(i, 1, item)
+					//list.unshift(item)
+					return item.concat(list)
+					;
+
+				} else {
+				return list.slice(0, i).concat(item).concat(list.slice(i + 1));
+
+
+				}
+				
+			}
+
+
 
 	// TEST
 	describe('8. spliceItem', () => {
