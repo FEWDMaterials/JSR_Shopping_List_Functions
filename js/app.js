@@ -760,7 +760,11 @@ const canExpressCheckout = (list =[]) => (list.length < 10) ? true : false;
 	*/
 
 	// implement function here
-
+const computeSum = (list =[]) =>{
+	return list.reduce( (acc, cI) =>{
+		return acc + cI.price;
+	}, 0);
+}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
