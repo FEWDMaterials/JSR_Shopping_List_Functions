@@ -798,7 +798,7 @@ const computeSum = (list =[]) =>{
 	*/
 
 	// implement function here
-
+const computeSumWithTax = (list=[], taxRate=8.125) => computeSum(list) * (1 + taxRate/100);
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
