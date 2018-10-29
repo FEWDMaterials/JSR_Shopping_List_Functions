@@ -859,6 +859,19 @@ const canExpressCheckout = (list) => {
 
 	// implement function here
 
+const computeSum = (list) => {
+	let total = 0;
+	for (let i = 0; i < list.length; i++){
+		for(let x in list[i]){
+			if(typeof list[i][x] === 'number'){
+				total += list[i][x];
+			}
+		}
+	}
+	return total;
+	
+}
+
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
