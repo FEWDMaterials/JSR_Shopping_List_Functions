@@ -441,7 +441,20 @@
 			- if i < 0, just prepend
 	*/
 
-	// implement function here
+	const spliceItem=(item, i,list=[])=>{
+		let newList = [];
+		if (typeof(item) !== ("object")){
+			throw new Error("Invalid input")
+		} if (i > list.length) {
+			newList = list.concat(item); //check order vs line 451 's order //append 
+		} else if (i < 0) {
+			newList = newList.concat(item).concat(list); //prepend
+		} else {
+			newList = list.slice(0, i).concat(item).concat(list.slice(i));
+		}
+		   return newList;
+	}
+	
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -508,7 +521,7 @@
 			- if `items` is empty, return list
 	*/
 
-	// implement function here
+	const spliceItems = ( items, i, list= [] )
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -720,7 +733,11 @@
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout= (list =[])=>{
+	if (items<10) {
+		 return true}
+	}
+	return false;
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
