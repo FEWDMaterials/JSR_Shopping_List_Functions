@@ -351,7 +351,21 @@ const removeNthItem = (i, list = []) => {
 	*/
 
 	// implement function here
-
+	const smartRemoveItems = (i, list = []) => {		   
+		if (i < 0) {
+			for(let x = i; x < 0; x++){
+				list.pop()
+			}
+			return list;
+		} else if (i > 0) {
+			for(let x = i; x > 0; x--){
+				list.shift()
+			}
+			return list;
+		} else {
+			return list;
+		}
+	}
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
