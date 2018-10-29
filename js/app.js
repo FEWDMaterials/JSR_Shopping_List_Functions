@@ -954,6 +954,21 @@ const computeSum = (list) => {
 
 	// implement function here
 
+	const computeSumInRange = (i, j, list) => {
+		let total = 0;
+		if( i > j || i > list.length || j > list.length){
+			throw  new Error ('calling out mayday!'); // checks if these items in Obj are not violating the rules
+		}
+		for (let q = i; q <= j; q++){
+		for(let x in list[q]){
+			if(typeof list[q][x] === 'number'){
+				total += list[q][x];
+				}
+			}
+		}
+		return total;
+	}
+
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
