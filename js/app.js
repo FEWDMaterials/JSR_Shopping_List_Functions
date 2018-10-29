@@ -23,7 +23,10 @@
 	*/
 
 	// implement function here
-
+const newShoppingListItem = (item, price) =>{
+	return { item,
+			 price };
+}
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,7 +56,10 @@
 	*/
 
 	// implement function here
-
+const addToShoppingList = (item, list = []) =>{
+	list.push(item);
+	return list;
+}
 	// TEST
 	describe('2. addToShoppingList', () => {
 
@@ -86,7 +92,11 @@
 	*/
 
 	// implement function here
-
+const removeFromShoppingList = (list) =>{
+	if (typeof list === 'array' && list.length === 0) return list;
+	list.pop();
+	return list;
+}
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,7 +130,11 @@
 	*/
 
 	// implement function here
-
+const removeFirstItem = (list = []) =>{
+	if (list.length === 0) return list;
+	list.shift();
+	return list;
+}
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -158,7 +172,14 @@
 	*/
 
 	// implement function here
-
+const removeNthItem = (i, list) =>{
+	if (typeof i !== 'number' || i < 0 || i > list.length) throw new Error('Need reasonable #s here!');
+	const newList = [];
+	for(let n = 0; n < list.length; n++){
+		if(n !== i) newList.push(list[n]);
+	}
+	return newList;
+}
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -228,7 +249,19 @@
 	*/
 
 	// implement function here
-
+const removeNItems = (i,num,list) =>{
+	if (typeof i !== 'number'    ||
+		typeof num !== 'number'  ||
+		i < 0					 ||
+		num > list.length		 ||
+		i + num > list.length
+		){
+			throw new Error("Unreasonable numbers!");
+		}
+	const half1 = list.slice(0,i); 
+	const half2 = list.slice(i+num+1);
+	return half1.concat(half2);
+}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
@@ -307,7 +340,11 @@
 	*/
 
 	// implement function here
-
+const smartRemoveItems = (i, list =[]) =>{
+	if (i < 0) return list.slice(0,list.length+i);
+	if (i > list.length) return list;
+	return list.slice(i);
+}
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -385,7 +422,17 @@
 	*/
 
 	// implement function here
-
+const spliceItem = (item, i, list =[]) =>{
+	if (typeof item !== 'object' || Array.isArray(item)) throw new Error('Need object item!');
+	if (i >= list.length) list.push(item);
+	if (i <= 0) list.unshift(item);
+	if (i > 0 && i < list.length) {
+		const half1 = list.slice(0,i);
+		const half2 = list.slice(i);
+		list = half1.concat(item).concat(half2);
+	}
+	return list;
+}
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -452,7 +499,16 @@
 	*/
 
 	// implement function here
-
+const spliceItems = (items,i,list=[]) =>{
+	if (!Array.isArray(items)) throw new Error('Items must be a list[array]!');
+	if (items.length === 0) return list;
+	items.forEach( cI => {if(typeof cI !== 'object') throw new Error('Each item must be an object!');});
+	if (i >= list.length) return list.concat(items);
+	if (i <= 0) return items.concat(list);
+	const half1 = list.slice(0,i);
+	const half2 = list.slice(i);
+	return half1.concat(items).concat(half2);
+}
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -532,7 +588,13 @@
 	*/
 
 	// implement function here
-
+const combineLists = (items1, items2) =>{
+	if (!Array.isArray(items1)) throw new Error('Items must be a list[array]!');
+	if (!Array.isArray(items2)) throw new Error('Items must be a list[array]!');
+	items1.forEach( cI => {if(typeof cI !== 'object') throw new Error('Each item must be an object!');});
+	items2.forEach( cI => {if(typeof cI !== 'object') throw new Error('Each item must be an object!');});
+	return items1.concat(items2);
+}
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -584,7 +646,13 @@
 	*/
 
 	// implement function here
-
+const splitListAt = (i, list =[]) =>{
+	if (i < 0) {return [list,[]];}
+	if (i > list.length) {return [[],list];}
+	const list1 = list.slice(0,i+1);
+	const list2 = list.slice(i+1);
+	return [list1, list2];
+}
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -664,7 +732,7 @@
 	*/
 
 	// implement function here
-
+const canExpressCheckout = (list =[]) => (list.length < 10) ? true : false;
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -692,7 +760,11 @@
 	*/
 
 	// implement function here
-
+const computeSum = (list =[]) =>{
+	return list.reduce( (acc, cI) =>{
+		return acc + cI.price;
+	}, 0);
+}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -726,7 +798,7 @@
 	*/
 
 	// implement function here
-
+const computeSumWithTax = (list=[], taxRate=8.125) => computeSum(list) * (1 + taxRate/100);
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
@@ -762,7 +834,15 @@
 	*/
 
 	// implement function here
-
+const computeSumInRange = (i,j,list=[]) =>{
+	if( i > j 			||
+		i < 0 			||
+		i > list.length ||
+		j < 0 			||
+		j > list.length) throw new Error('Need sensible numbers within range!');
+	const newList = list.slice(i,j+1);
+	return computeSum(newList);
+}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
