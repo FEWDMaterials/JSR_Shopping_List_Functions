@@ -443,7 +443,25 @@ const removeNthItem = (i, list = []) => {
 	*/
 
 	// implement function here
+const spliceItem = (item, i, list = []) => {
+   if(typeof item !== "object") {
+	   throw new Error ("Invalid items, Please try again!");
+   } 
+   if(i > list.length){
+		list.push(item);
+		return list;
+   }
+   else if(i < 0){
+	   list.unshift(item);
+	   return list;
 
+   }
+   else {
+	   list.splice(0,i,item);
+	   return list;
+   }
+   
+}
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
