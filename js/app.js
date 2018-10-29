@@ -352,6 +352,20 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i,list=[]) => {
+		if(i < 0 ) {
+			// for(i; i < 0; i++){	
+			return list.slice(0, i);
+		// }
+	 } else if (i > list.length){
+			return list;
+		}
+		else if (i > 0){	
+			return list.slice(i);
+		}
+	}
+
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -430,6 +444,25 @@
 
 	// implement function here
 
+	const spliceItem = (item = {}, i, list =[]) => {
+		if (typeof i !== 'number' || typeof item !== 'object'){
+		throw new Error('Invalid input.');
+		}
+		else if (i > list.length) {
+			return list.concat(item);
+		}
+		else if (i < list[0]) {
+			return item.concat(list);
+		}
+		else {
+			return list.slice(0,i).concat(item).concat(list.slice(i+1));
+		}
+	}
+	
+
+
+
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -496,6 +529,25 @@
 	*/
 
 	// implement function here
+
+	const spliceItems = (items, i, list = []) => {
+		if (item === 0) {
+			return list;
+		}
+		for (i = 0; i < items.length; i++){
+			if (typeof items[i] !== 'object'){
+				throw new Error ('invalid input')
+			}
+			else if (i > list.length) {
+				return list.concat(item);
+			}
+			else if (i < list[0]) {
+				return item.concat(list);
+			}
+			else {
+				return list.slice(0,i).concat(item).concat(list.slice(i+1));
+			}
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
