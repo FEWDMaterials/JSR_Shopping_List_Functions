@@ -22,7 +22,12 @@
 					two decimal places
 	*/
 
-	// implement function here
+	const newShoppingListItem = (item, price) => {
+		return {
+			'item': item,
+			'price': price
+		}
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -51,8 +56,11 @@
 				- validate that the item is indeed a shoppingList item
 				- if shoppingList item is not passed in, throw error
 	*/
-
-	// implement function here
+	
+	const addToShoppingList = (item, list=[]) => {
+		list.push(item);
+		return list;
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -85,7 +93,15 @@
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFromShoppingList = (list) => {
+		if (list === []){
+			return list;
+		} else if (list !== []){
+			let newList = [...list];
+			newList.pop();
+			return newList;
+		}
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -119,7 +135,15 @@
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFirstItem = list => {
+		if (list === []){
+			return list;
+		} else if (list !== []){
+			let newList = [...list];
+			newList.shift();
+			return newList;
+		}
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -157,7 +181,14 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNthItem = (i, list= []) => {
+		if (i > list.length || i < 0 || typeof i !== 'number'){
+			throw new Error('Why isn\'t this working!!!!')
+		}
+		let newList = []
+		newList = newList.concat((list.slice(0,i)),(list.slice(i+1)))
+      	return newList
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -227,7 +258,14 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNItems = (i, num, list= []) => {
+		if (i < 0 || typeof (i + num) !== 'number' || (i+num) > list.length){	
+			throw new Error('Why isn\'t this working!!!!')
+		}
+		let newList = []
+		newList = newList.concat((list.slice(0,i)),(list.slice(i+num+1)))
+      	return newList
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -306,7 +344,17 @@
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems = (i, list) => {
+		let newList = []
+		if (i > list.length){
+			return list;
+		}	else if (i < 0) {
+			newList = list.slice(0, i);
+			return newList;
+		} 
+		newList = list.slice(i);
+		return newList;
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -384,7 +432,20 @@
 			- if i < 0, just prepend
 	*/
 
-	// implement function here
+	const spliceItem = (item, i, list=[]) => {
+		let newList = [...list]
+		if (typeof item !== 'object'){
+			throw new Error ('not an object')
+		} else if (i > list.length) {
+			newList.push(item)
+			return newList
+		} else if (i < 0) {
+			newList.unshift(item)
+			return newList
+		}
+		newList = newList.concat(list.slice(0,i+1),item,list.slice(i+1))
+		return newList
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -450,8 +511,25 @@
 			- if i < 0, just prepend
 			- if `items` is empty, return list
 	*/
-
-	// implement function here
+	
+	const spliceItems = (items, i, list=[]) => {
+		let newList = [...list];
+		items.forEach(element => { if (typeof element !== 'object') {
+			throw new Error('Not an object');
+		}
+	});
+		if (items === {}) {
+			return list;
+		} else if (i > list.length) {
+			newList = newList.concat(items);
+		} else if (i < 0) {
+			newList = items.concat(newList);
+		} else {
+			newList = list.slice(0,i).concat(items, list.slice(i));
+		}
+		
+		return newList;
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -531,7 +609,21 @@
 			items1 THEN items in items2 as a single array
 	*/
 
-	// implement function here
+	const combineLists = (items1 = [], items2 = []) =>{
+		let newList = []
+		items1.forEach(element => {
+			if (typeof element !== 'object'){
+				throw new Error ('Not an object')
+			}
+		});
+		items2.forEach(element => {
+			if (typeof element !== 'object'){
+				throw new Error ('Not an object')
+			}
+		});
+		newList = items1.concat(items2)
+		return newList
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -583,7 +675,20 @@
 
 	*/
 
-	// implement function here
+	const splitListAt = (i , list = []) => {
+		let list1 = []
+		let list2 = []
+		if (i >= 0 && i <= list.length - 1){
+			list1 = list.slice(0, i+1)
+			list2 = list.slice(i+1)
+			return [list1, list2]
+		} else if (i < 0){
+			list1 = list
+			return [list1, list2]
+		} 
+		list2 = list
+		return [list1, list2]
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -663,7 +768,7 @@
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout = list => list.length < 10
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -691,7 +796,20 @@
 			- sum all the price items and return value
 	*/
 
-	// implement function here
+	// const computeSum = list => {
+	// 	let sum = 0
+	// 	list.forEach(currentItem => {
+	// 		sum += currentItem.price
+	// 	})
+	// 	return sum
+	// }
+
+	const computeSum = (list = []) => {
+		 return list.reduce((acc, currentItem) => {
+			acc += currentItem.price
+			return acc
+		}, 0)
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -725,7 +843,14 @@
 
 	*/
 
-	// implement function here
+	const computeSumWithTax = (list = [], taxRate ) => {
+		let sum = list.reduce((acc, currentItem) => {
+		   acc += currentItem.price
+		   return acc
+	   }, 0)
+	   let tax = 1+(taxRate/100)
+	   return sum * tax
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -761,7 +886,38 @@
 			- if i or j not in range, throw error
 	*/
 
-	// implement function here
+	const computeSumInRange = (i, j, list) => {
+		if(i > j){
+			throw new Error ('i > j')
+		}
+		if (i < 0 || i > list.length){
+			throw new Error ('i not in range')
+		}
+		if (j < 0 || j > list.length){
+			throw new Error ('j not in range')
+		}
+		let sum = list.slice(i,j+1).reduce((acc, currentItem) => {
+			acc += currentItem.price
+			return acc
+		}, 0)
+		return sum
+	}
+
+	// const computeSumInRange = (i, j, list) => {
+	// 	if (i > j){
+	// 		throw new Error ('i > j')
+	// 	} else if (i < 0 || i > list.length || j < 0 || j > list.length){
+	// 		throw new Error ('Not in range')
+	// 	}
+	// 	let range = [];
+	// 	range = list.slice(i,j+1)
+	// 	let sum = range.reduce((acc, currentItem) => {
+	// 		acc += currentItem.price
+	// 		return acc
+	// 	}, 0)
+	// 	let tax = 1+(8.125/100)
+	// 	return sum * tax
+	// }
 
 	// TEST
 	describe('15. computeSumInRange', () => {
