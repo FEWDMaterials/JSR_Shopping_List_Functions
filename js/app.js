@@ -785,6 +785,14 @@
 
 	// implement function here
 
+	
+	const canExpressCheckout = (list) => {
+		let numItem = [];
+		if(numItem < 10) {
+			return true;
+		}
+	}
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -812,6 +820,14 @@
 	*/
 
 	// implement function here
+
+	const computeSum = (list) =>{
+		let sumPrices = []
+		for(i = 0; i < list; i++){
+			sumPrices ===+ list;
+		}
+		return sumPrices;
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
