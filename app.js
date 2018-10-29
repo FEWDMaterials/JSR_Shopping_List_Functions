@@ -528,7 +528,33 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
-
+	const spliceItems = (items, i, list) => {
+	// 	if (typeof items !== "object"){
+	// 	   throw new Error ("Invalid items,Please try again!")
+	//    } 
+	    
+		items.forEach((currentItem)=>  {
+			 if(typeof currentItem !=="object"){
+				throw new Error ("Invalid items, Please try again")
+			 }
+		});
+	   if(items.length === 0 ){
+		   return list; 
+	   }
+	   if (i > list.length){
+			list = list.concat(items);
+			
+	   }
+	   else if(i < 0 ) {
+		   list = items.concat(list); 
+		   
+	   }
+	   else {
+		list = list.slice(0,i).concat(items).concat(list.slice(i));
+		
+	   }
+	   return list; 
+	}
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -608,7 +634,20 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
+const combineLists = (items1, items2) => {
+	// if(typeof items1 !== "object" || typeof items2 !== "object") {
+	// 	throw new Error ("Invalid items, Please try again!");
+	// } 
 
+	items1.forEach((currentItem) => {
+         if(typeof currentItem !== "object"){throw new Error ("Invalid items, Please try again!")}
+	});
+    items2.forEach((currentItem) => {
+		if(typeof currentItem !== "object"){throw new Error ("Invalid items, Please try again!")}
+   });
+    
+	return items1.concat(items2); 
+}
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
