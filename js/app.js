@@ -93,8 +93,6 @@
 				and then return the array
 	*/
 
-	// implement function here
-
 
 	const removeFromShoppingList = (list = []) =>{
           if (list.length===0){
@@ -521,7 +519,24 @@
 			- if `items` is empty, return list
 	*/
 
-	const spliceItems = ( items, i, list= [] )
+	const spliceItems=(items, i,list=[])=>{
+		items.forEach((element) => {
+			  if(typeof(element) !== ("object")){
+				throw new Error("error")
+			  }
+			})
+			if(i > list.length){
+				return list.concat(items); //append
+			  }
+			 if(items.length === 0){
+			  return list;   
+			}
+			 if(i < 0){
+			  return items.concat(list); //prepend
+			}
+			 let concatedList = list.slice(0, i).concat(items).concat(list.slice(i)); //similar to 8 index to exclude i. the objects and then the after i stuff
+			return concatedList;
+		   }
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -601,7 +616,14 @@
 			items1 THEN items in items2 as a single array
 	*/
 
-	// implement function here
+	const combineLists = ( items1, items2) => {
+		items.forEach((element) => {
+			if(typeof(element) !== ("object")){
+			  throw new Error("error")
+			}
+
+		  
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
