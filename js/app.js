@@ -905,7 +905,19 @@ const computeSum = (list) => {
 	*/
 
 	// implement function here
-
+	const computeSumWithTax = (list, taxRate) => {
+	let total = 0;
+	for (let i = 0; i < list.length; i++){
+		for(let x in list[i]){
+			if(typeof list[i][x] === 'number'){
+				total += list[i][x];
+			}
+		}
+	}
+	return total += (total * (taxRate/100));
+	
+}
+		
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
