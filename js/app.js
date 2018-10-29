@@ -834,7 +834,15 @@ const computeSumWithTax = (list=[], taxRate=8.125) => computeSum(list) * (1 + ta
 	*/
 
 	// implement function here
-
+const computeSumInRange = (i,j,list=[]) =>{
+	if( i > j 			||
+		i < 0 			||
+		i > list.length ||
+		j < 0 			||
+		j > list.length) throw new Error('Need sensible numbers within range!');
+	const newList = list.slice(i,j+1);
+	return computeSum(newList);
+}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
