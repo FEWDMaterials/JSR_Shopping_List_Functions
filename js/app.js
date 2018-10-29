@@ -62,8 +62,7 @@
 	// implement function here
 
 	const addToShoppingList = (item, list=[]) => {
-		let newList = [...list];
-		newList.push(item);
+		let newList = list.concat(item);
 		return newList;
 	}
 
@@ -109,8 +108,9 @@
 
 	const removeFromShoppingList = (list=[]) => {
 		if (list !== []) {
-			list.pop();
-			return list;
+			// list.pop();
+			let newList = list.slice(0, -1);
+			return newList;
 		} else {
 			return list;
 		}
@@ -152,8 +152,9 @@
 
 	const removeFirstItem = (list=[]) => {
 		if (list.length > 0) {
-			let newList = [...list];
-			newList.shift();
+			let newList = list.slice(1);
+			// let newList = [...list];
+			// newList.shift();
 			return newList;
 		} else {
 			return list;
@@ -202,8 +203,7 @@
 		if (i < 0  || typeof i !== 'number' || i > list.length) {
 			throw new Error('FUGAZI');
 		} else {
-			let newList = [];
-			newList = newList.concat(list.slice(0, i), (list.slice(i + 1)));
+			let newList = list.slice(0, i).concat(list.slice(i + 1));
 			return newList;
 		}
 	}
@@ -282,8 +282,7 @@
 		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || (i+num) > list.length) {
 			throw new Error('FUGAZI');
 		}
-			let newList = [];
-			newList = newList.concat(list.slice(0, i), list.slice(num+i+1));
+			let newList = list.slice(0, i).concat(list.slice(num+i+1));
 			return newList;
 	}
 
@@ -456,18 +455,32 @@
 
 	// implement function here
 
-	const spliceItem = (item, i, list=[]) => {
-		let newList = [...list];
-		if (typeof item !== 'object') {
-			throw new Error ('FUGAZI');
-		} else if (i > list.length) {
-			newList.push(item);
+	// const spliceItem = (item, i, list=[]) => {
+	// 	let newList = [...list];
+	// 	if (typeof item !== 'object') {
+	// 		throw new Error ('FUGAZI');
+	// 	} else if (i > list.length) {
+	// 		newList.push(item);
+	// 	} else if (i < 0) {
+	// 		newList.unshift(item);
+	// 	} else {
+	// 		newList.splice(i,0,item);
+	// 	}
+	// 	return newList;
+	// }
+
+	const spliceItem=(item, i,list=[])=>{
+		let newList = [];
+		if (typeof(item) !== ("object")){
+			throw new Error("Invalid input")
+		} if (i > list.length) {
+			newList = list.concat(item);
 		} else if (i < 0) {
-			newList.unshift(item);
+			newList = newList.concat(item).concat(list);
 		} else {
-			newList.splice(i,0,item);
+			newList = list.slice(0, i).concat(item).concat(list.slice(i));
 		}
-		return newList;
+		   return newList;
 	}
 
 	// TEST
@@ -538,7 +551,7 @@
 	// implement function here
 	
 	const spliceItems = (items, i, list=[]) => {
-		let newList = [...list];
+		let newList = [];
 		items.forEach(element => { if (typeof element !== 'object') {
 			throw new Error('FUGAZI');
 		}
@@ -546,19 +559,12 @@
 		if (items.length === 0) {
 			return list;
 		} else if (i > list.length) {
-			newList = newList.concat(items);
+			newList = list.concat(items);
 		} else if (i < 0) {
-			newList = items.concat(newList);
+			newList = items.concat(list);
 		} else {
 			newList = list.slice(0,i).concat(items, list.slice(i));
 		}
-		// newList.splice(i,0,items);
-
-		// newList2 = list.slice(0,i).concat(items).concat(list.slice(i))
-		// } else {
-		// 	newList = newList.concat(list.slice(0,i), items, list.slice(i));
-			// newList.splice(i,0,items);
-	
 		return newList;
 	}
 
@@ -642,6 +648,21 @@
 
 	// implement function here
 
+	const combineLists = (items1,items2) =>{
+		for (let i = 0; i < items1.length; i++){
+			if (typeof items1[i] !== 'object'){
+				throw new Error ('invalid input');
+			}
+		}
+		for (let i = 0; i < items2.length; i++){
+			if (typeof items2[i] !== 'object'){
+				throw new Error ('invalid input');
+			}
+		}
+		let newList = items1.concat(items2);
+		return newList;
+	}
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -693,6 +714,26 @@
 	*/
 
 	// implement function here
+
+	const splitListAt = (i, list=[]) => {
+		let list1 = [];
+		let list2 = [];
+		if (i < 0) {
+			list1 = [...list];
+		} else if (i > list.length) {
+			list2 = [...list];
+		} else {
+			list.forEach((currentObj, index) => {
+				if (index <= i) {
+					list1.push(currentObj);
+				} else {
+					list2.push(currentObj);
+				}
+			});
+		}
+
+		return [list1, list2];
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -774,6 +815,12 @@
 
 	// implement function here
 
+	const canExpressCheckout = (list) => {
+		if (list.length < 10) {
+			return true;
+		}
+	}
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -801,6 +848,14 @@
 	*/
 
 	// implement function here
+
+	const computeSum = (list) => {
+		let sum = list.reduce((total, obj) => {
+			return obj['price'] + total;
+		}, 0)
+
+		return sum;
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -835,6 +890,14 @@
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (list, taxRate) => {
+		let sum = list.reduce((total, obj) => {
+			return obj['price'] + total;
+		}, 0)
+
+		return sum + ((sum * taxRate) / 100);
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -871,6 +934,21 @@
 	*/
 
 	// implement function here
+
+	const computeSumInRange = (i, j, list=[]) => {
+		if (i > j || i < 0 || i > list.length || j < 0 || j > list.length) {
+			throw new Error('FUGAZI');
+		}
+		let sum = 0;
+		for (i; i <= j; i++) {
+			sum += list[i]['price'];
+			// let currentObj = list[i]
+			// let objPrice = currentObj['price'];
+			// sum = objPrice + sum;
+		}
+
+		return sum;
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
