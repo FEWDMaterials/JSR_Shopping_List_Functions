@@ -646,7 +646,13 @@ const combineLists = (items1, items2) =>{
 	*/
 
 	// implement function here
-
+const splitListAt = (i, list =[]) =>{
+	if (i < 0) {return [list,[]];}
+	if (i > list.length) {return [[],list];}
+	const list1 = list.slice(0,i+1);
+	const list2 = list.slice(i+1);
+	return [list1, list2];
+}
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
