@@ -732,7 +732,7 @@ const splitListAt = (i, list =[]) =>{
 	*/
 
 	// implement function here
-
+const canExpressCheckout = (list =[]) => (list.length < 10) ? true : false;
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
