@@ -668,10 +668,20 @@
 
 	// implement function here
 
-	// const combineLists = (items1, items2) => {
-	// 	let nuList = [];
+	const combineLists = (items1, items2) => {
+		if (chkItem(items1) && chkItem(items2)){
+			let nuList = [];
+			for(let x = 0; x < items1.length; x++){ 
+				nuList.push(items1[x]);
+			}
+			for(let x = 0; x < items2.length; x++){ 
+				nuList.push(items2[x]);
+			}
+			return nuList;
+		}
+	throw  new Error ('calling out mayday!'); // checks if these items in Obj are not violating the rules
 
-	// }
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
