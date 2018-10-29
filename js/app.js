@@ -542,8 +542,36 @@ const removeNthItem = (i, list = []) => {
 			- if i < 0, just prepend
 			- if `items` is empty, return list
 	*/
+			
+
 
 	// implement function here
+
+	const spliceItems = (items, i, list) =>{ // item is an array filled with objects
+
+		if (items.length === 0){
+			return list;
+		}
+
+		for(let i = 0; i < items.length; i++){
+			if(typeof items[i] !== 'object'){
+				throw new Error('error');
+			}
+		}
+
+			if (i > list.length){
+				return list.concat(items)
+			} else if (i < 0){
+				return items.concat(list)
+			} else{
+				return list.slice(0,i).concat(items).concat(list.slice(i));
+
+			}
+return list;
+			// return items.slice(0,i).concat(list).concat(items.slice(i,1));
+			
+	}
+
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -624,7 +652,15 @@ const removeNthItem = (i, list = []) => {
 	*/
 
 	// implement function here
-
+const combineLists = (items1 , items2) =>{
+	if (typeof items1 !== 'object' || typeof items2 !== 'number'){
+		throw new error ('Error'); 
+	} else
+		const newItem = items1.concat(items2);
+	return newItem
+		
+		
+}
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -676,6 +712,17 @@ const removeNthItem = (i, list = []) => {
 	*/
 
 	// implement function here
+	const splitListAt = (i,list = []) =>{
+		const list1 = list.slice(0,i)
+		const list2 = list.slice(i+1)
+		if (i < 0) {
+		return list1
+		}else if (i > list.length){
+			return list2.slice()
+		} else
+		return [list1,list2]
+	}
+
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -756,6 +803,10 @@ const removeNthItem = (i, list = []) => {
 	*/
 
 	// implement function here
+
+	const canExpressCheckout = (list) =>{
+		return list.length < 10
+	}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
