@@ -449,6 +449,22 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const spliceItem = (item,i,list)=>{
+        //let newList = list.splice(i-1,0,item)
+        let itemkeys = Object.keys(item)
+        if (itemkeys.includes('item','price')){
+            let newList = list.splice(i-1,0,item)
+        }else{
+            throw new Error ('this is not the right object');
+        }
+        if (i>list.length){
+            list.push(i)
+        }if (i<0){
+            list.push(i)
+        }
+        return list
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
