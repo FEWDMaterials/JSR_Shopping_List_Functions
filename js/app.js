@@ -525,6 +525,19 @@
 
 	});
 
+	// GO FOR A LOOP
+	// CHECKS EACH OBJ FOR ITEM & PRICE
+	const chkItem = (item) => {
+		for(let x = 0; x < item.length; x++){ // runs through obj array length
+			let keys = Object.keys(item[x]);  // sets keys to current obj at x index of array
+				let tempObj = item[x];
+			if(typeof tempObj[keys[0]] !== 'string' || typeof tempObj[keys[1]] !== 'number'){ 
+				return false;
+			} 
+		}
+		return true;
+	}
+
 	/* 9
 		@function spliceItems
 		@param items {list}
@@ -546,6 +559,35 @@
 
 	// implement function here
 
+	const spliceItems = (item, i, list = []) => {
+
+		if (chkItem(item)){
+
+		// if obj passes test, add to shopping list 
+			if (i > list.length){
+			for(let x = 0; x < item.length; x++){ 
+				list.push(item[x]);
+			}
+			return list;
+		
+		} else if (i < 0) {
+			for(let x = 0; x < item.length; x++){ 
+				list.unshift(item[x]);
+			}
+			return list;
+		} else  {
+			let temp = list.slice(0, i);
+			for(let x = 0; x < item.length; x++){ 
+				temp.push(item[x]);
+			}
+			return temp.concat(list.slice(i));
+			}
+		}
+		throw  new Error ('calling out mayday!'); // checks if these items in Obj are not violating the rules
+
+	}
+		
+	
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -625,6 +667,11 @@
 	*/
 
 	// implement function here
+
+	// const combineLists = (items1, items2) => {
+	// 	let nuList = [];
+
+	// }
 
 	// TEST
 	describe('10. combineLists', () => {
