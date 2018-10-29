@@ -877,9 +877,9 @@ const newShoppingListItem = (item, price) => {
 
 	const computeSumWithTax = (list, taxRate=8.125) => {
 		
-		let taxRate = taxRate / 100;
+		taxRate = taxRate / 100;
 
-		const sum = list.redue((acc, currentElement) => {
+		const sum = list.reduce((acc, currentElement) => {
 			acc += currentElement.price;
 			return acc;
 		}, 0);
@@ -924,12 +924,19 @@ const newShoppingListItem = (item, price) => {
 			- if i or j not in range, throw error
 	*/
 
-	const computeSumInRange = (i, j, list) => {
+    const computeSumInRange = (i, j, list) => {
 		if(i > j){
 			throw new Error('Invalid input.');
 		} else if(i > list.length || j > list.length){
 			throw new Error('Invalid input.')
-		}
+		} 
+
+		return list.reduce((acc, currentElement) => {
+			if(currentElement.indexOf() >= i && currentElement.indexOf <= j){
+				acc += currentElement.price;
+				return acc;
+			}
+		}, 0)
 	}
 
 	// TEST
