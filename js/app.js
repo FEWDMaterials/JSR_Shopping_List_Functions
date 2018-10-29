@@ -735,6 +735,15 @@
 
 	// implement function here
 
+	const splitListAt = (i, list) => {
+		let nuList = [];
+		if (i < 0) {
+			nuList.push(list)
+			nuList.push({});
+			return nuList;
+		}
+	}	
+
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -814,6 +823,13 @@
 	*/
 
 	// implement function here
+
+const canExpressCheckout = (list) => {
+	if ((list.length-1) < 10 ){
+		return true;
+	}
+	return false;
+}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
