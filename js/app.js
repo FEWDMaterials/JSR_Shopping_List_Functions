@@ -689,22 +689,27 @@
 			- always return a list that looks like this:
 				[list1, list2]
 
-	*/
-
-	// implement function here
+	*/// implement function here
 	const splitListAt = (i, list = []) => { 
+		let newArr = list.slice();
 		let list1 = [];
 		let list2 = [];
+
+		
 		if (i < 0) { 
-			list1 = list;
-			list.push(list1,list2);
-			return list;
+			list1 = newArr.slice();
+		} else if (i > list.length){			
+			list2 = newArr.slice();
+		} else {
+			list1 = newArr.slice(0, i + 1)	;
+			list2 = newArr.slice(i + 1, newArr.length -1);
 		}
-		if (i > list.length ) { 
-			list2 = list;
-			 list.push(list1,list2);
-			 return list;
-		}
+		
+		newArr[0] = list1;
+		newArr[1] = list2;	
+		return newArr;
+	}
+	
 		// for (let j = 0 ; j < list.length -1 ; j++) {
 		// 	if (list[j] <= i) {
 		// 		list1.push(list[j]);
@@ -712,11 +717,6 @@
 		// 	else if (list[j] > i) {
 		// 		list2.push(list[j]);
 		// 	}
-		
-		 list.push(list1,list2);
-		 return list;
-	}
-
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
