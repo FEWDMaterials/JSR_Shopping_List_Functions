@@ -530,22 +530,23 @@
 
 	// implement function here
 
-	const spliceItems = (items, i, list = []) => {
-		if (item === 0) {
+	const spliceItems = (items, i, list) => {
+		if (items.length === 0) {
 			return list;
 		}
-		for (i = 0; i < items.length; i++){
+		for (let i = 0; i < items.length; i++){
 			if (typeof items[i] !== 'object'){
-				throw new Error ('invalid input')
+				throw new Error ('invalid input');
 			}
-			else if (i > list.length) {
-				return list.concat(item);
+		}
+		 if (i > list.length) {
+				return list.concat(items)
 			}
-			else if (i < list[0]) {
-				return item.concat(list);
+			else if (i < 0) {
+				return items.concat(list)
 			}
 			else {
-				return list.slice(0,i).concat(item).concat(list.slice(i+1));
+				return list.slice(0,i).concat(items).concat(list.slice(i));
 			}
 	}
 
@@ -628,6 +629,29 @@
 	*/
 
 	// implement function here
+
+	const combineLists = (items1,items2) =>{
+		let newList = [];
+		for (let i = 0; i < items1.length; i++){
+			if (typeof items1[i] !== 'object'){
+				throw new Error ('invalid input');
+			}
+		}
+		for (let i = 0; i < items2.length; i++){
+			if (typeof items2[i] !== 'object'){
+				throw new Error ('invalid input');
+			}
+		}
+		newList = items1.concat(items2);
+		return newList;
+	}
+		// for (let i = 0; i < items1.lenght; i++ ){
+		// 	return items1;
+		// }	
+		// for (let i = 0; i < items2.length; i++){
+		// 	return items2;
+		// }
+
 
 	// TEST
 	describe('10. combineLists', () => {
