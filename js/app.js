@@ -60,9 +60,9 @@
 	*/
 
 	// implement function here
-const addToShoppingList = (object, array =[])=>{
-	array.push(object)
-	return array
+const addToShoppingList = (obj, arr=[])=>{
+	arr.push(obj)
+	return arr
 }
 
 	// TEST
@@ -137,12 +137,12 @@ const removeFromShoppingList = (arr)=>{
 	*/
 
 	// implement function here
-	const removeFirstItem =(arr)=>{
-		if(arr.length === 0){
-			return arr;
+	const removeFirstItem =(list)=>{
+		if(list.length === 0){
+			return list;
 		}
-		arr.shift()
-		return arr;
+		list.shift()
+		return list;
 	}
 
 	// TEST
@@ -182,7 +182,13 @@ const removeFromShoppingList = (arr)=>{
 	*/
 
 	// implement function here
-
+	const removeNthItem = (i, list)=>{
+		if (typeof i !== 'number' || i > list.length || i < 0){
+		return error;
+	}
+	 list.splice(i,1);
+	 return list;
+}
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
