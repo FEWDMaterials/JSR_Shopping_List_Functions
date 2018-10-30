@@ -355,6 +355,18 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list=[]) => {
+		if (i < 0) {
+			list.splice(i, list.length);
+			return list;
+		}
+		if (i > list.length) {
+			return list;
+		}
+		else list.splice(0, i);
+		return list;
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -433,6 +445,24 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list=[]) => {
+		if (item !== {item, price}) {
+			throw new Error("Error");
+		}
+		if (i > list.length) {
+			// list.push(i);
+			list.append(i);
+			return list;
+		}
+		if (i < 0) {
+			// list.splice(1, 0, item);
+			list.prepend(i)
+			return list;
+		}
+		else list.push(i);
+		return list;
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -499,6 +529,13 @@
 	*/
 
 	// implement function here
+
+	const spliceItems = (items, i, list=[]) => {
+		if (item !== {item, price}) {
+			throw new Error("Error");
+		}
+
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -579,6 +616,11 @@
 	*/
 
 	// implement function here
+
+	const combineLists = (items1, items2) => {
+		Object.assign(items1, items2);
+		return list;
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -712,6 +754,13 @@
 
 	// implement function here
 
+	const canExpressCheckout = (list=[]) => {
+		if (list.length <= 10) {
+			return true;
+		}
+		else return false;
+	}
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -739,6 +788,17 @@
 	*/
 
 	// implement function here
+
+	const computeSum = (list=[]) => {
+		const keys = Object.keys(list);
+		const currentKey = keys[i];
+		currentVal = list[currentKey];
+		for (let i = 0; i < keys.length; i++) {
+			let sum = 0;
+			sum += currentVal;
+			return sum
+		}
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
