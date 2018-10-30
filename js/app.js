@@ -258,7 +258,12 @@ const removeFromShoppingList = (arr)=>{
 	*/
 
 	// implement function here
-
+	const removeNItems = (i, num, list)=>{
+		if (i < 0 || typeof i !== 'number' || typeof num !== 'number'|| i+num > list.length || num > list.length){
+			return error;
+		}	
+		return list.slice(0, i).concat(list.slice(i, num))
+	}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
@@ -337,7 +342,22 @@ const removeFromShoppingList = (arr)=>{
 	*/
 
 	// implement function here
-
+	const smartRemoveItems = (i, list = []) => {		   
+		if (i < 0) {
+			for(let x = i; x < 0; x++){
+				list.pop()
+			}
+			return list;
+		} else if (i > 0) {
+			for(let x = i; x > 0; x--){
+				list.shift()
+			}
+			return list;
+		} else {
+			return list;
+		}
+	}
+	
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
