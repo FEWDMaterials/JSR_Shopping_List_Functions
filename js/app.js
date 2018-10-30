@@ -532,6 +532,30 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const spliceItems = (items, i, list)=>{
+		let emptyItems = items.length === 0
+		let itemskeys = items.filter(item => typeof items[0]=== 'object' )
+		//let itemskeys = Object.keys(items);
+		let itemkeyss= Object.keys(item);
+		//let emptyItems = items.length === 0
+		if (itemkeyss.includes('item','price')){
+			let newList = list.splice(i-1,0,items)
+		}else{
+			throw new Error ('this is not the right object');
+		}
+		if (i>list.length){
+			list.push(i)
+		}if (i<0){
+			list.push(i)
+		}if (emptyItems){
+			return list
+		}
+		
+	
+		return list
+	}
+	
+
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -664,6 +688,29 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const splitListAt = (i,list)=>{
+		const newList = [];
+		let list1 = [];
+		let list2 = [];
+
+		if(i<list.length && i>0){
+			let list1 = list.slice(0,i+1);
+			let list2 = list.slice(i+1);
+			//console.log(list1)
+			//console.log(list)
+			newList.push(list1,list2);
+			//return newList
+		}else if (i<0){
+			 list1= [...list];
+			newList.push(list1,list2);
+			//return newList
+		}else if (i>list.length){
+			list2=[...list];
+			newList.push(list1,list2)
+		}
+		return newList
+	}
+
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -778,6 +825,11 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const computeSum = (list)=>{
+		list.forEach(element => {
+			Object.keys(element)
+		});
+	}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
