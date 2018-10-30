@@ -24,6 +24,21 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item, price) => {
+		if (typeof item === 'string' && item.length < 10 && typeof price === 'number' && price < 100) {
+			const shoppingListItem = { // creates object with item and price properties
+				item, // short way of creating new property when key/value pair is same as param name
+				price, // long way of creating property would be "price: 'price',"
+			}
+			return shoppingListItem; // returns the object when function is invoked if conditions are met
+		}
+		else {
+			throw new Error ('Invalid input'); // returns error if conditions for creating obj are not met
+		}
+	}
+
+	console.log('newShoppingListItem: returns Object?', typeof newShoppingListItem('test', 1) === 'object');
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
