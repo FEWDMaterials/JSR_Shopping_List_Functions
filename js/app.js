@@ -924,19 +924,28 @@ const newShoppingListItem = (item, price) => {
 			- if i or j not in range, throw error
 	*/
 
-    const computeSumInRange = (i, j, list) => {
-		if(i > j){
+    const computeSumInRange = (startIdx, endIdx, list) => {
+		if(startIdx > endIdx){
 			throw new Error('Invalid input.');
-		} else if(i > list.length || j > list.length){
+		} else if(startIdx > list.length || endIdx > list.length){
 			throw new Error('Invalid input.')
 		} 
 
-		return list.reduce((acc, currentElement) => {
-			if(currentElement.indexOf() >= i && currentElement.indexOf <= j){
-				acc += currentElement.price;
-				return acc;
+		let sum = 0;
+
+		for(let i = startIdx; i <= endIdx; i++){
+			const currentObj = list[i];
+			const currentKeys = Object.keys(currentObj);
+
+			for(let j = startIdx; j <= endIdx; j++){
+				if(typeof currentObj[currentKeys[j]] === 'number'){
+					sum += currentObj[currentKeys[j]];
+				}
 			}
-		}, 0)
+		}
+
+		return sum;
+
 	}
 
 	// TEST
