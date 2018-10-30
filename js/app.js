@@ -615,15 +615,39 @@
 			- return ONE list that contains items in
 			items1 THEN items in items2 as a single array
 	*/
-
+		
 	const combineLists = ( items1, items2) => {
-		items.forEach((element) => {
-			if(typeof(element) !== ("object")){
-			  throw new Error("error")
-			}
-
-		  
+	  const list = []
+	  items1.forEach((element) => {
+		   if(typeof element !== "object"){
+		   throw new Error("error")
+		}
 	}
+)
+		items2.forEach((element) => {
+			if(typeof element !== "object"){
+			throw new Error("error")
+		  }
+		}
+	)
+
+	//    for(let i=0 ; i < items1.length ; i++){
+	// 	   arr.concat(items1)
+	//    }
+
+	//    for(let i=0 ; i < items2.length ; i++){
+	// 	arr.concat(items2)
+	//    }
+	
+	// items1.concat (item2)	
+	const newVar = list.concat(items1, items2)
+	// list.concat(items2))
+return newVar
+//list.concat(items2)
+	// arr.concat(items2)
+	//return list
+	} 
+	
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -675,7 +699,10 @@
 
 	*/
 
-	// implement function here
+	const splitListAt= (i, list=[])=>{
+		if (i<0){ //list1 has all the items and list 2 is empty}
+		if (i>list.length) //list1 is empty and list 2 has all the items 
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -757,9 +784,11 @@
 
 	const canExpressCheckout= (list =[])=>{
 	if (items<10) {
-		 return true}
+		 return true;
 	}
+	
 	return false;
+    }
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -786,8 +815,11 @@
 			}
 			- sum all the price items and return value
 	*/
-
-	// implement function here
+		
+	//ANSWER 
+	// const computeSum = (list=[])=>{
+		//access element 2?
+	//}
 
 	// TEST
 	describe('13. computeSum', () => {
