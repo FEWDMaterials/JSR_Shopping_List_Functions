@@ -1,17 +1,3 @@
-    /* NOTES:
-Needs to run in browser
-Using real TDD
-Don't do any of the optionals
-Solve at least 13 out of 15
-
-Fork repo
-GO into index.html in local broswer
-open index.htl
-GO into function.js folder
-
-
-*/
-
 (function() { // protect the lemmings!
 
 	/* 1
@@ -60,13 +46,13 @@ GO into function.js folder
 
 
 	// TEST
-	// describe('1. newShoppingListItem', () => {
-	// 	it('should return an object with item and price attributes', () => {
-	// 		const shoppingListItem = newShoppingListItem('test', 1)
-	// 		chai.assert.equal(shoppingListItem.item, 'test');
-	// 		chai.assert.equal(shoppingListItem.price, 1);
-	// 	});
-	// });
+	describe('1. newShoppingListItem', () => {
+		it('should return an object with item and price attributes', () => {
+			const shoppingListItem = newShoppingListItem('test', 1)
+			chai.assert.equal(shoppingListItem.item, 'test');
+			chai.assert.equal(shoppingListItem.price, 1);
+		});
+	});
 
 
 	/* 2
@@ -101,25 +87,25 @@ GO into function.js folder
 	// console.log(addToShoppingList(newShoppingListItem('eggs',1.59)))
 
 	// TEST
-	// describe('2. addToShoppingList', () => {
+	describe('2. addToShoppingList', () => {
 
-	// 	it('should return a list', () => {
-	// 		const newList = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		chai.assert.equal(newList.length, 1)
-	// 	});
+		it('should return a list', () => {
+			const newList = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			chai.assert.equal(newList.length, 1)
+		});
 
-	// 	it('should have one item that is a shopping list object', () => {
-	// 		const newList = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		chai.assert.equal(newList[0].item, 'test');
-	// 		chai.assert.equal(newList[0].price, 1);
-	// 	})
-	// });
+		it('should have one item that is a shopping list object', () => {
+			const newList = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			chai.assert.equal(newList[0].item, 'test');
+			chai.assert.equal(newList[0].price, 1);
+		})
+	});
 
 	/* 3
 		@function removeFromShoppingList
@@ -156,26 +142,26 @@ GO into function.js folder
 	// console.log(removeFromShoppingList(['apple','orange','banana','mango'])) 
 
 	// TEST
-	// describe('3. removeFromShoppingList', () => {
-	// 	it('should remove from the end of the list', () => {
-	// 		let list = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		list = addToShoppingList({
-	// 			'item': 'test2',
-	// 			'price': 2
-	// 		}, list);
+	describe('3. removeFromShoppingList', () => {
+		it('should remove from the end of the list', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
 
-	// 		// actually test function now
-	// 		list = removeFromShoppingList(list);
+			// actually test function now
+			list = removeFromShoppingList(list);
 
-	// 		chai.assert.equal(list.length, 1)
-	// 		// asert only item in list is 'test' with price 1
-	// 		chai.assert.equal(list[0].item, 'test')
-	// 		chai.assert.equal(list[0].price, 1)
-	// 	})
-	// });
+			chai.assert.equal(list.length, 1)
+			// asert only item in list is 'test' with price 1
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+		})
+	});
 
 	/* 4
 		@function removeFirstItem
@@ -201,24 +187,24 @@ GO into function.js folder
 	// console.log(removeFirstItem(['peach','strawberry','lychee']))
 
  	// TEST
-	// describe('4. removeFirstItem', () => {
-	// 	it('should remove from the end of the list', () => {
-	// 		let list = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		list = addToShoppingList({
-	// 			'item': 'test2',
-	// 			'price': 2
-	// 		}, list);
-	// 		list = removeFirstItem(list);
+	describe('4. removeFirstItem', () => {
+		it('should remove from the end of the list', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
+			list = removeFirstItem(list);
 
-	// 		chai.assert.equal(list.length, 1)
-	// 		// asert only item in list is 'test2' with price 2
-	// 		chai.assert.equal(list[0].item, 'test2')
-	// 		chai.assert.equal(list[0].price, 2)
-	// 	})
-	// });
+			chai.assert.equal(list.length, 1)
+			// asert only item in list is 'test2' with price 2
+			chai.assert.equal(list[0].item, 'test2')
+			chai.assert.equal(list[0].price, 2)
+		})
+	});
 
 	/* 5
 		@function removeNthItem
@@ -257,55 +243,55 @@ GO into function.js folder
 	// console.log(removeNthItem('lol',[45, 56, 33, 43, 76])) //returns error
 
 	// TEST 
-	// describe('5. removeNthItem', () => {
-	// 	it('should remove i-th item from list', () => {
-	// 		let list = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		list = addToShoppingList({
-	// 			'item': 'test2',
-	// 			'price': 2
-	// 		}, list);
-	// 		list = addToShoppingList({
-	// 			'item': 'test3',
-	// 			'price': 3
-	// 		}, list);
+	describe('5. removeNthItem', () => {
+		it('should remove i-th item from list', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
+			list = addToShoppingList({
+				'item': 'test3',
+				'price': 3
+			}, list);
 
 
-	// 		list = removeNthItem(1, list);
+			list = removeNthItem(1, list);
 
-	// 		chai.assert.equal(list.length, 2)
+			chai.assert.equal(list.length, 2)
 
-	// 		chai.assert.equal(list[0].item, 'test')
-	// 		chai.assert.equal(list[0].price, 1)
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
 
-	// 		chai.assert.equal(list[1].item, 'test3')
-	// 		chai.assert.equal(list[1].price, 3)
-	// 	});
+			chai.assert.equal(list[1].item, 'test3')
+			chai.assert.equal(list[1].price, 3)
+		});
 
-	// 	it('should throw error if i < 0', () => {
-	// 		// if i < 0
-	// 		chai.assert.throws(() => {
-	// 			removeNthItem(-1, [])
-	// 		}, Error);
-	// 	});
+		it('should throw error if i < 0', () => {
+			// if i < 0
+			chai.assert.throws(() => {
+				removeNthItem(-1, [])
+			}, Error);
+		});
 
-	// 	it('should throw error if i > length of list', () => {
-	// 		// if i > length of array
-	// 		chai.assert.throws(() => {
-	// 			removeNthItem(1, [])
-	// 		}, Error);
-	// 	});
+		it('should throw error if i > length of list', () => {
+			// if i > length of array
+			chai.assert.throws(() => {
+				removeNthItem(1, [])
+			}, Error);
+		});
 
-	// 	it('should throw error if i is not a number', () => {
+		it('should throw error if i is not a number', () => {
 
-	// 		// if i is not a number
-	// 		chai.assert.throws(() => {
-	// 			removeNthItem('adfas', [])
-	// 		}, Error);
-	// 	})
-	// });
+			// if i is not a number
+			chai.assert.throws(() => {
+				removeNthItem('adfas', [])
+			}, Error);
+		})
+	});
 
 	/* 6
 		@function removeNItems
@@ -340,68 +326,68 @@ GO into function.js folder
 	
 
 	// TEST
-	// describe('6. removeNItems', () => {
-	// 	it('should remove i-th item from list', () => {
-	// 		let list = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		list = addToShoppingList({
-	// 			'item': 'test2',
-	// 			'price': 2
-	// 		}, list);
-	// 		list = addToShoppingList({
-	// 			'item': 'test3',
-	// 			'price': 3
-	// 		}, list);
+	describe('6. removeNItems', () => {
+		it('should remove i-th item from list', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
+			list = addToShoppingList({
+				'item': 'test3',
+				'price': 3
+			}, list);
 
 
-	// 		list = removeNItems(1, 1, list);
+			list = removeNItems(1, 1, list);
 
-	// 		chai.assert.equal(list.length, 1)
+			chai.assert.equal(list.length, 1)
 
-	// 		chai.assert.equal(list[0].item, 'test')
-	// 		chai.assert.equal(list[0].price, 1)
-	// 	});
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+		});
 
-	// 	it('should throw error if i + num < 0', () => {
-	// 		// if i < 0
-	// 		chai.assert.throws(() => {
-	// 			removeNItems(-1, 0, [])
-	// 		}, Error);
-	// 	});
+		it('should throw error if i + num < 0', () => {
+			// if i < 0
+			chai.assert.throws(() => {
+				removeNItems(-1, 0, [])
+			}, Error);
+		});
 
-	// 	it('should throw error if i + num > length of list', () => {
-	// 		// if i > length of array
-	// 		chai.assert.throws(() => {
-	// 			removeNItems(1, 2, ['a', 'b'])
-	// 		}, Error);
-	// 	});
+		it('should throw error if i + num > length of list', () => {
+			// if i > length of array
+			chai.assert.throws(() => {
+				removeNItems(1, 2, ['a', 'b'])
+			}, Error);
+		});
 
-	// 	it('should throw error if i is not a number', () => {
+		it('should throw error if i is not a number', () => {
 
-	// 		// if i is not a number
-	// 		chai.assert.throws(() => {
-	// 			removeNItems('adfas', 1, [])
-	// 		}, Error);
-	// 	})
+			// if i is not a number
+			chai.assert.throws(() => {
+				removeNItems('adfas', 1, [])
+			}, Error);
+		})
 
-	// 	it('should throw error if num is not a number', () => {
+		it('should throw error if num is not a number', () => {
 
-	// 		// if i is not a number
-	// 		chai.assert.throws(() => {
-	// 			removeNItems(1, 'asasdfa', [])
-	// 		}, Error);
-	// 	})
+			// if i is not a number
+			chai.assert.throws(() => {
+				removeNItems(1, 'asasdfa', [])
+			}, Error);
+		})
 
-	// 	it('should throw error if num > length of list', () => {
+		it('should throw error if num > length of list', () => {
 
-	// 		// if i is not a number
-	// 		chai.assert.throws(() => {
-	// 			removeNItems(1, 8, [])
-	// 		}, Error);
-	// 	})
-	// });
+			// if i is not a number
+			chai.assert.throws(() => {
+				removeNItems(1, 8, [])
+			}, Error);
+		})
+	});
 
 	/* 7
 		@function smartRemoveItems
@@ -418,76 +404,77 @@ GO into function.js folder
 
 	// implement function here
 	let smartRemoveItems = (i, list) => {
-		if(i < 0){
-			list.pop()
-			return list;
-		} else if(i > list.arr){
-			return list;
-		} else if(i > 0){
-			list.shift()
-			return list;
-		}
+			if(i < 0){
+                console.log(i)
+                return list.slice(0 , i);
+            }
+         else if (i > list.length){
+            return list;
+        } else if(i > 0){
+            return list.slice(i)
+
+        }
 	}
 
 
 	// TEST
-	// describe('7. smartRemoveItems', () => {
-	// 	it('should return list if i > length of list', () => {
-	// 		let list = [];
-	// 		list = smartRemoveItems(1, list);
+	describe('7. smartRemoveItems', () => {
+		it('should return list if i > length of list', () => {
+			let list = [];
+			list = smartRemoveItems(1, list);
 
-	// 		// [] is initial state of list
-	// 		// we expect `list` to also be length 0
-	// 		// ...or, empty essentially
-	// 		chai.assert.equal(list.length, 0);
-	// 	});
+			// [] is initial state of list
+			// we expect `list` to also be length 0
+			// ...or, empty essentially
+			chai.assert.equal(list.length, 0);
+		});
 
-	// 	it('should remove i number from end of list if i < 0', () => {
-	// 		let list = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		list = addToShoppingList({
-	// 			'item': 'test2',
-	// 			'price': 2
-	// 		}, list);
-	// 		list = addToShoppingList({
-	// 			'item': 'test3',
-	// 			'price': 3
-	// 		}, list);
+		it('should remove i number from end of list if i < 0', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
+			list = addToShoppingList({
+				'item': 'test3',
+				'price': 3
+			}, list);
 
-	// 		list = smartRemoveItems(-1, list);
+			list = smartRemoveItems(-1, list);
 
-	// 		chai.assert.equal(list.length, 2)
-	// 		chai.assert.equal(list[0].item, 'test')
-	// 		chai.assert.equal(list[0].price, 1)
-	// 		chai.assert.equal(list[1].item, 'test2')
-	// 		chai.assert.equal(list[1].price, 2)
-	// 	});
+			chai.assert.equal(list.length, 2)
+			chai.assert.equal(list[0].item, 'test')
+			chai.assert.equal(list[0].price, 1)
+			chai.assert.equal(list[1].item, 'test2')
+			chai.assert.equal(list[1].price, 2)
+		});
 
-	// 	it('should remove i number from START if list if i > 0', () => {
-	// 		let list = addToShoppingList({
-	// 			'item': 'test',
-	// 			'price': 1
-	// 		});
-	// 		list = addToShoppingList({
-	// 			'item': 'test2',
-	// 			'price': 2
-	// 		}, list);
-	// 		list = addToShoppingList({
-	// 			'item': 'test3',
-	// 			'price': 3
-	// 		}, list);
+		it('should remove i number from START if list if i > 0', () => {
+			let list = addToShoppingList({
+				'item': 'test',
+				'price': 1
+			});
+			list = addToShoppingList({
+				'item': 'test2',
+				'price': 2
+			}, list);
+			list = addToShoppingList({
+				'item': 'test3',
+				'price': 3
+			}, list);
 
-	// 		list = smartRemoveItems(1, list);
+			list = smartRemoveItems(1, list);
 
-	// 		chai.assert.equal(list.length, 2)
-	// 		chai.assert.equal(list[0].item, 'test2')
-	// 		chai.assert.equal(list[0].price, 2)
-	// 		chai.assert.equal(list[1].item, 'test3')
-	// 		chai.assert.equal(list[1].price, 3)
-	// 	});
-	// });
+			chai.assert.equal(list.length, 2)
+			chai.assert.equal(list[0].item, 'test2')
+			chai.assert.equal(list[0].price, 2)
+			chai.assert.equal(list[1].item, 'test3')
+			chai.assert.equal(list[1].price, 3)
+		});
+	});
 
 	/* 8
 		@function spliceItem
@@ -506,7 +493,7 @@ GO into function.js folder
 			- if i < 0, just prepend //adds item to beginning of list 
 	*/
 
-	// implement function here
+// 	// implement function here
 	const spliceItem = (item , i, list) => {
 
 			if (typeof item !== 'object'){
@@ -520,10 +507,8 @@ GO into function.js folder
 			}
 
 			if(i > list.length){
-				// return list.push(item)
 				// return list.concat(item)
 
-			
 				//Greater than array,
 				list.splice(i,0, item)
 				return list;
@@ -544,9 +529,7 @@ GO into function.js folder
 			//What's a shorter way to write this
 			// let insertAtIthIndex = list.slice(0,i)
 			// let newArray= insertAtIthIndex.concat(item)
-      		// let secondHalfArray = list.slice(i, list.length)
-
-			  
+      		// let secondHalfArray = list.slice(i, list.length)  
 			// return newArray.concat(secondHalfArray);
 
 			
@@ -608,7 +591,7 @@ GO into function.js folder
 
 	/* 9
 		@function spliceItems
-		@param items {list}
+		@param items [{list}]
 		@param i {number}
 		@param list {array, []}
 		@returns list
@@ -645,10 +628,11 @@ GO into function.js folder
 
 			if(i >= list.length){
 				//  list.splice(i,0, items)
-				//  list.push(items)
+				//	return list;
+		
 
-				let newList =list.concat(items)
-				 return newList;
+				let newList = list.concat(items) //returns new array
+				return newList;
 				
 			} 
 			else if(i < 0){
@@ -815,8 +799,32 @@ GO into function.js folder
 
 	// implement function here
 	const splitListAt = (i, list) => {
+		if(i < 0){
+			let emptyArr = []
+			let list1 = list
+			let list2 = []
+			emptyArr.push(list1)
+			emptyArr.push(list2)
+	
+			return emptyArr;
+		}else if(i > list.length){
+			let emptyArr = []
+			let list1 = []
+			let list2 = list
+			emptyArr.push(list1)
+			emptyArr.push(list2)
+			return emptyArr;
+		}
 
-		
+		let emptyArr = []
+		let list1 = list.slice(0,i+1)
+		let list2 = list.slice(i + 1)
+	
+		emptyArr.push(list1)
+		emptyArr.push(list2)
+
+		return emptyArr;
+	
 	}
 
 	// TEST
@@ -886,7 +894,7 @@ GO into function.js folder
 			chai.assert.isArray(list2)
 		})
 
-// 	});
+	});
 
 	/* 12
 		@function canExpressCheckout
@@ -906,7 +914,7 @@ GO into function.js folder
 		
 	
 
-// 	// TEST
+	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
 			chai.assert.equal(canExpressCheckout([{
@@ -919,133 +927,169 @@ GO into function.js folder
 		})
 	});
 
-// 	/* 13
-// 		@function computeSum
-// 		@param list {array, []}
-// 		@returns {number}
-// 		@description
-// 			given a list of objects that look like this:
-// 			{
-// 				'item': 'eggs',
-// 				'price': 1.59
-// 			}
-// 			- sum all the price items and return value
-// 	*/
+	/* 13
+		@function computeSum
+		@param list {array, []}
+		@returns {number}
+		@description
+			given a list of objects that look like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			}
+			- sum all the price items and return value
+	*/
 
-// 	// implement function here
+	// implement function here
+	const computeSum = (list) => {
+		return  list.reduce((acc, currentElement) => {
+			acc += currentElement.price;
+			return acc;
+		},0)
 
-// 	// TEST
-// 	describe('13. computeSum', () => {
-// 		it('should return sum of all item prices in array', () => {
-// 			const sum = computeSum([{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}]);
+		//How do you add the sum if you didn't know the name of they key.
+	}
 
-// 			chai.assert.equal(sum, 3);
-// 		});
-// 	});
+	// TEST
+	describe('13. computeSum', () => {
+		it('should return sum of all item prices in array', () => {
+			const sum = computeSum([{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}]);
 
-// 	/* 14
-// 		@function computeSumWithTax
-// 		@param list {array, []}
-// 		@param taxRate {number, 8.125}
-// 		@returns {number}
-// 		@description
-// 			given a list of objects that look like this:
-// 			{
-// 				'item': 'eggs',
-// 				'price': 1.59
-// 			}
-// 			- sum all the price items and return value AND
-// 				apply tax value
-// 			- note that tax is passed in as percent not decimal
+			chai.assert.equal(sum, 3);
+		});
+	});
 
-// 	*/
+	/* 14
+		@function computeSumWithTax
+		@param list {array, []}
+		@param taxRate {number, 8.125}
+		@returns {number}
+		@description
+			given a list of objects that look like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			}
+			- sum all the price items and return value AND
+				apply tax value
+			- note that tax is passed in as percent not decimal
 
-// 	// implement function here
+	*/
 
-// 	// TEST
-// 	describe('14. computeSumWithTax', () => {
-// 		it('should return sum of all item prices in array + taxes', () => {
-// 			const sum = computeSumWithTax([{
-// 					'item': 'test',
-// 					'price': 1,
-// 				}, {
-// 					'item': 'test2',
-// 					'price': 2,
-// 				}], 10);
+	// implement function here
+	const computeSumWithTax = (array, taxRate = 8.125) => {
 
-// 			// stupid hack to prevent the 3.3000000000000003 error...
-// 			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
-// 		});
-// 	});
 
-// 	/* 15
-// 		@function computeSumInRange
-// 		@param i {number}
-// 		@param j {number}
-// 		@param list {array, []}
-// 		@returns {number}
-// 		@description
-// 			given a list of objects that look like this:
-// 			{
-// 				'item': 'eggs',
-// 				'price': 1.59
-// 			}
-// 			- sum all the price items FROM start index `i` and
-// 				end index `j` and return value
-// 			- if i > j, throw error
-// 			- if i or j not in range, throw error
-// 	*/
+		let taxxRate =  taxRate / 100;
+		
+		let sum = array.reduce((acc, currentElement) => {
+			acc += currentElement.price;
+			return acc;
+		},0)
 
-// 	// implement function here
+		let taxSum = sum * taxxRate;
 
-// 	// TEST
-// 	describe('15. computeSumInRange', () => {
-// 		it('should throw error if i > j', () => {
-// 			chai.assert.throws(() => {
-// 				computeSumInRange(100, 1, [])
-// 			}, Error)
-// 		})
+		return sum + taxSum;
+	}
 
-// 		it('should throw error if i < 0', () => {
-// 			chai.assert.throws(() => {
-// 				computeSumInRange(-1, 1, [])
-// 			}, Error)
-// 		})
+	// TEST
+	describe('14. computeSumWithTax', () => {
+		it('should return sum of all item prices in array + taxes', () => {
+			const sum = computeSumWithTax([{
+					'item': 'test',
+					'price': 1,
+				}, {
+					'item': 'test2',
+					'price': 2,
+				}], 10);
 
-// 		it('should throw error if i > length of list', () => {
-// 			chai.assert.throws(() => {
-// 				computeSumInRange(100, 101, [])
-// 			}, Error)
-// 		})
+			// stupid hack to prevent the 3.3000000000000003 error...
+			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
+		});
+	});
 
-// 		it('should throw error if j < 0', () => {
-// 			chai.assert.throws(() => {
-// 				computeSumInRange(0, -1, [])
-// 			}, Error)
-// 		})
+	/* 15
+		@function computeSumInRange
+		@param i {number}
+		@param j {number}
+		@param list {array, []}
+		@returns {number}
+		@description
+			given a list of objects that look like this:
+			{
+				'item': 'eggs',
+				'price': 1.59
+			}
+			- sum all the price items FROM start index `i` and
+				end index `j` and return value
+			- if i > j, throw error
+			- if i or j not in range, throw error
+	*/
 
-// 		it('should throw error if j > length of list', () => {
-// 			chai.assert.throws(() => {
-// 				computeSumInRange(0, 100, [])
-// 			}, Error)
-// 		})
+	// implement function here
+	const computeSumInRange = (i,j,list) => {
+		if(i > j || i < 0 || i > list.length || j < 0 || j > list.length){
+			throw new Error('Invalid af')
+		}
 
-// 		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
-// 			const sum =  computeSumInRange(1, 3, [
-// 				newShoppingListItem('test', 1),
-// 				newShoppingListItem('test2', 2),
-// 				newShoppingListItem('test3', 3),
-// 				newShoppingListItem('test4', 4)
-// 			]);
+		
+		let sum = 0;
+		for (i; i <= j; i++) {
+			sum += list[i]['price'];
+		}
 
-// 			chai.assert.equal(sum, 9)
-// 		})
-// 	});
+		return sum;
+	
+	}
+
+	// TEST
+	describe('15. computeSumInRange', () => {
+		it('should throw error if i > j', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(100, 1, [])
+			}, Error)
+		})
+
+		it('should throw error if i < 0', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(-1, 1, [])
+			}, Error)
+		})
+
+		it('should throw error if i > length of list', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(100, 101, [])
+			}, Error)
+		})
+
+		it('should throw error if j < 0', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(0, -1, [])
+			}, Error)
+		})
+
+		it('should throw error if j > length of list', () => {
+			chai.assert.throws(() => {
+				computeSumInRange(0, 100, [])
+			}, Error)
+		})
+
+		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
+			const sum =  computeSumInRange(1, 3, [
+				newShoppingListItem('test', 1),
+				newShoppingListItem('test2', 2),
+				newShoppingListItem('test3', 3),
+				newShoppingListItem('test4', 4)
+			]);
+
+			chai.assert.equal(sum, 9)
+		})
+	});
 
 })();
