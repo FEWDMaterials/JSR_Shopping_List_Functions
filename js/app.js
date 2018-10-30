@@ -112,6 +112,18 @@
 
 	// implement function here
 
+	const removeFromShoppingList = (list=[]) => {
+		if (list.length < 1) { // if array contains less than 0 items, returns the array
+			return list;
+		}
+		else {
+			return list.slice(0,list.length-1);; // if list has items then returns a shallow copy of list
+			// and leaves out the last element of the original list
+		}
+	}
+
+	console.log('removes last item of array?', removeFromShoppingList(['test', 'test']));
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
