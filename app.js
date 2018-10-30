@@ -635,6 +635,7 @@ const spliceItem = (item, i, list = []) => {
 
 	// implement function here
 const combineLists = (items1, items2) => {
+
 	// if(typeof items1 !== "object" || typeof items2 !== "object") {
 	// 	throw new Error ("Invalid items, Please try again!");
 	// } 
@@ -699,7 +700,22 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
-
+	const splitListAt = (i, list =[])=> {
+		if(i <0 || i < list.length){
+		  return [list, []]; // list 1 has all the item 
+	  } 
+	  else if (i > list.length){
+		return [[], list]; // empty list1 and second list will have all the items 
+	  }
+		let list1 = list.slice(0,i+1);
+		// console.log(list1)
+		let list2 = list.slice(i);
+		// console.log(list2)
+		return [list1,list2]
+	  }
+// console.log(splitListAt(0,["apple","orange","milk"]))
+// console.log(splitListAt(6,["banana","peanut butter","butter"]))
+// console.log(splitListAt(5,["grapes"]))
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -779,6 +795,7 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
+const canExpressCheckout =(list = []) => list.length < 10 ? true : false; 
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
