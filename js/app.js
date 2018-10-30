@@ -23,6 +23,27 @@
 	*/
 
 	// implement function here
+	const newShoppingListItem = (item, price) => { return {item : item, price : price }; }
+		
+		// if(typeof item != 'string' && typeof price != 'number'){
+		// 	return 'throw error'
+		// } 
+		// if(item.length > 10){
+		// 	return 'item needs less than 10 characters'
+		// }
+		// else if(price > 100 ){
+		// 	return 'number must be less than 100, and can only have two decimal places'
+		// }
+
+
+	
+
+	// console.log(newShoppingListItem('apples',5.99)) //item: apples, price: 5.99
+	// console.log(newShoppingListItem('applestewn1',5.99)) //item needs less than 10 characters
+	// console.log(newShoppingListItem('applesssswww',500.99)) //item needs less than 10 characters
+	// console.log(newShoppingListItem('apples',500.99)) //number must be less than 100, 
+	// console.log(newShoppingListItem('apples',5,888)) // number needs only two decimal places
+
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -53,6 +74,17 @@
 	*/
 
 	// implement function here
+	const addToShoppingList = (item = {}, list = []) => {
+		// if(typeof item != 'object' ){
+		// 	return "Not a shoppingList item"
+		// }
+		
+		//Which is more preferable?
+		return list.concat(item); //lol why is this working
+		// return list.push(item);
+	}
+
+	// console.log(addToShoppingList(newShoppingListItem('eggs',1.59)))
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -86,6 +118,28 @@
 	*/
 
 	// implement function here
+	const removeFromShoppingList = (list) => {
+		if (list.length === 0 ){
+			return list} 
+			
+			else if (list.length > 0){
+				list.pop()
+				return list;
+
+				//How to write it so it returns a new array, not mutated one
+				//Is map or reduce better?
+				//Should I write it this way or is the list.pop() , return list; more effcient?
+
+				// return list.map(currentElement => {
+				// 	list.pop()
+				// 	return list;
+				// })
+				
+			}
+
+	}
+	// console.log(removeFromShoppingList([])) 
+	// console.log(removeFromShoppingList(['apple','orange','banana','mango'])) 
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -120,8 +174,19 @@
 	*/
 
 	// implement function here
+	const removeFirstItem = list => {
+		if(list.length === 0){
+			return list
+		}
 
-	// TEST
+		list.shift()
+		return list;
+	}
+
+	// console.log(removeFirstItem([]))
+	// console.log(removeFirstItem(['peach','strawberry','lychee']))
+
+ 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
 			let list = addToShoppingList({
@@ -158,8 +223,26 @@
 	*/
 
 	// implement function here
+	const removeNthItem = (i, list) => {
+		// if(isNaN(i) || i > list.length || i < 0 ){
+		// 	return 'Error';}
 
-	// TEST
+			if(isNaN(i) || i > list.length || i < 0 ){
+				throw new Error ("Invalid input")
+			}
+
+			//Why isnt this working? throw new Error(['Invalid input'])
+		
+		return list.slice(0, i).concat(list.slice(i + 1));
+		//What if I'm removing the 0 index or the last index?
+	}
+	// console.log(removeNthItem(3,[45, 56, 33, 43, 76])) //returns [45, 56, 33, 76]
+	// console.log(removeNthItem(2,[45, 56, 33, 43, 76])) //returns [45, 56, 43, 76]
+	// console.log(removeNthItem(8,[45, 56, 33, 43, 76])) //returns error
+	// console.log(removeNthItem(-1,[45, 56, 33, 43, 76])) //returns error
+	// console.log(removeNthItem('lol',[45, 56, 33, 43, 76])) //returns error
+
+	// TEST 
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
 			let list = addToShoppingList({
@@ -228,6 +311,19 @@
 	*/
 
 	// implement function here
+	const removeNItems = (i, num, list) => {
+		
+		if(isNaN(i) || isNaN(num) ||i + num > list.length || num > list.length || i > list.length || i < 0 ){
+			throw new Error ("Invalid input")
+		}
+
+		//Why isnt this working? throw new Error(['Invalid input'])
+	
+	return list.slice(0, i).concat(list.slice( num + i + 1));
+
+	}
+	// console.log(removeNItems(1,3,[5,6,7,8,9,10,11,12])) 
+	
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -307,6 +403,19 @@
 	*/
 
 	// implement function here
+	let smartRemoveItems = (i, list) => {
+			if(i < 0){
+                console.log(i)
+                return list.slice(0 , i);
+            }
+         else if (i > list.length){
+            return list;
+        } else if(i > 0){
+            return list.slice(i)
+
+        }
+	}
+
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -380,11 +489,57 @@
 				'price': 1.59
 			} (else throw error)
 			- insert item into the ith index of the list
-			- if i > length of list, just append
-			- if i < 0, just prepend
+			- if i > length of list, just append //adding item to the end of list
+			- if i < 0, just prepend //adds item to beginning of list 
 	*/
 
-	// implement function here
+// 	// implement function here
+	const spliceItem = (item , i, list) => {
+
+			if (typeof item !== 'object'){
+				throw new Error ('Invalid Input')
+			}
+			
+			if(item['item'] == null) {
+				throw new Error ('Invalid Input')
+			} else if(item['price'] == null) {
+				throw new Error ('Invalid Input')
+			}
+
+			if(i > list.length){
+				// return list.concat(item)
+
+				//Greater than array,
+				list.splice(i,0, item)
+				return list;
+				
+				
+			} 
+			else if(i < 0){
+				// let emptyArray = []
+				// let insertItem = emptyArray.concat(item)
+				// return insertItem.concat(list)
+
+				list.splice(0,0,item)
+				return list;
+				// return list.unshift(item)
+	
+			}
+
+			//What's a shorter way to write this
+			// let insertAtIthIndex = list.slice(0,i)
+			// let newArray= insertAtIthIndex.concat(item)
+      		// let secondHalfArray = list.slice(i, list.length)  
+			// return newArray.concat(secondHalfArray);
+
+			
+			list.splice(i,0,item)
+			return list;
+			
+
+		}
+
+
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -399,6 +554,8 @@
 				'item': 'test',
 				'price': 1,
 			}, 0, [])
+
+			
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
@@ -434,7 +591,7 @@
 
 	/* 9
 		@function spliceItems
-		@param items {list}
+		@param items [{list}]
 		@param i {number}
 		@param list {array, []}
 		@returns list
@@ -452,6 +609,44 @@
 	*/
 
 	// implement function here
+		let spliceItems = (items, i, list) => {
+			if (typeof items !== 'object'){
+				throw new Error ('Invalid Input')
+			}
+
+			items.forEach((currentElement) => {
+				if(typeof currentElement !== 'object'){
+					throw new Error ('Invalid Input')
+				}
+
+			})
+
+			
+			if(items.length === 0){
+				return list;
+			}
+
+			if(i >= list.length){
+				//  list.splice(i,0, items)
+				//	return list;
+		
+
+				let newList = list.concat(items) //returns new array
+				return newList;
+				
+			} 
+			else if(i < 0){
+				// list.splice(0,0,items)
+
+				let newList2 = items.concat(list);
+				return newList2;
+			}
+
+			// list.splice(i,0,items)
+			  return list.slice(0,i).concat(items).concat(list.slice(i))
+
+		}
+
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -532,6 +727,25 @@
 	*/
 
 	// implement function here
+	const combineLists = (items1, items2) => {
+		if (typeof items1 !== 'object' || typeof items2 !== 'object'){
+			throw new Error ('Invalid Input')
+		}
+
+		items1.forEach((currentElement) => {
+			if(typeof currentElement !== 'object'){
+				throw new Error ('Invalid Input')
+			}
+		})
+		items2.forEach((currentElement) => {
+			if(typeof currentElement !== 'object'){
+				throw new Error ('Invalid Input')
+			}
+		})
+		
+		return items1.concat(items2)
+
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -584,6 +798,34 @@
 	*/
 
 	// implement function here
+	const splitListAt = (i, list) => {
+		if(i < 0){
+			let emptyArr = []
+			let list1 = list
+			let list2 = []
+			emptyArr.push(list1)
+			emptyArr.push(list2)
+	
+			return emptyArr;
+		}else if(i > list.length){
+			let emptyArr = []
+			let list1 = []
+			let list2 = list
+			emptyArr.push(list1)
+			emptyArr.push(list2)
+			return emptyArr;
+		}
+
+		let emptyArr = []
+		let list1 = list.slice(0,i+1)
+		let list2 = list.slice(i + 1)
+	
+		emptyArr.push(list1)
+		emptyArr.push(list2)
+
+		return emptyArr;
+	
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -664,6 +906,13 @@
 	*/
 
 	// implement function here
+	const canExpressCheckout = (list) => list.length < 10 ? true : false;
+		// if(list.length < 10){
+		// 	return true
+		// }
+		// return false
+		
+	
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -692,6 +941,14 @@
 	*/
 
 	// implement function here
+	const computeSum = (list) => {
+		return  list.reduce((acc, currentElement) => {
+			acc += currentElement.price;
+			return acc;
+		},0)
+
+		//How do you add the sum if you didn't know the name of they key.
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -726,6 +983,20 @@
 	*/
 
 	// implement function here
+	const computeSumWithTax = (array, taxRate = 8.125) => {
+
+
+		let taxxRate =  taxRate / 100;
+		
+		let sum = array.reduce((acc, currentElement) => {
+			acc += currentElement.price;
+			return acc;
+		},0)
+
+		let taxSum = sum * taxxRate;
+
+		return sum + taxSum;
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -762,6 +1033,20 @@
 	*/
 
 	// implement function here
+	const computeSumInRange = (i,j,list) => {
+		if(i > j || i < 0 || i > list.length || j < 0 || j > list.length){
+			throw new Error('Invalid af')
+		}
+
+		
+		let sum = 0;
+		for (i; i <= j; i++) {
+			sum += list[i]['price'];
+		}
+
+		return sum;
+	
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
