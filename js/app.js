@@ -654,12 +654,15 @@ const spliceItem = (item, i, list) => {
 	// implement function here
 
 const combineLists = (items1, items2) => {
-	if (typeof item1 !== "object" && typeof item2 !== "object") {
-		throw new Error("Error");
+	for (let i = 0; i < items1.length; i++) {
+		if ((typeof items1[i]) !== "object") {
+			throw new Error("Error!")
+		}
+		if ((typeof items2[i]) !== "object") {
+			throw new Error("Error!")
+		}
 	}
-
-	return items1.concat(items2);
-
+	return items1.concat(...items2);
 }
 
 	// TEST
