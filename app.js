@@ -795,7 +795,7 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
-const canExpressCheckout =(list = []) => list.length < 10 ? true : false; 
+	const canExpressCheckout =(list = []) => list.length < 10 ? true : false; 
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
