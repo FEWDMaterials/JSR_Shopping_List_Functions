@@ -824,7 +824,7 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
-const computeSum = (list =[]) => {
+let computeSum = (list =[]) => {
 	return list.reduce((acc,currentItem) =>{
 		return acc +=currentItem.price
 	}, 0);
@@ -914,7 +914,16 @@ const computeSumWithTax = (list, taxRate) => {
 	*/
 
 	// implement function here
-
+	const computeSumInRange = (i,j,list = [])=> {
+		if(typeof i !== "number" || i > list.length || i < 0 || i > j ){
+			 throw new Error ("Invalid input or range exceeded ");
+		}
+		if(typeof j !== "number" || j < 0 || j > list.length ){
+			throw new Error ("Invalid input or range exceeded ");
+		}
+		const sumlist = list.slice(i, j+1);
+		return computeSum(sumlist);
+	}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
