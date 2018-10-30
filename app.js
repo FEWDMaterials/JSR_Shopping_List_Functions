@@ -829,6 +829,7 @@ const computeSum = (list =[]) => {
 		return acc +=currentItem.price
 	}, 0);
 }
+
 // reference
 // const average1 = arr => {
 //     const sum =  arr.reduce((acc,currentItem)=> {
@@ -870,6 +871,13 @@ const computeSum = (list =[]) => {
 	*/
 
 	// implement function here
+const computeSumWithTax = (list, taxRate) => {
+	let sumTotal = 0; 
+	list.forEach((currentItem )=> {
+           sumTotal +=currentItem.price
+	});
+	   return sumTotal + (sumTotal * (taxRate/100));
+}	
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
