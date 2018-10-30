@@ -69,6 +69,16 @@
 
 	// implement function here
 
+	const addToShoppingList = (item, list=[]) => {
+		if (typeof item === 'object') { // if statement checks if item being passed is an object
+			return list.concat(item); // if condition is met, adds item object to an empty array if list is empty
+			// if list isn't empty, adds item to the end of the array
+		}
+		else {
+			throw new Error ('Invalid item input'); // if item isn't an object, throws new error
+		}
+	}
+
 	// TEST
 	describe('2. addToShoppingList', () => {
 
