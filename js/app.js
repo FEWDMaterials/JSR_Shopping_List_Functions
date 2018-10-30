@@ -23,8 +23,10 @@
 	*/
 
 	// implement function here
-	let shoppinglist = {};
+	
+	
 	const newShoppingListItem = (item = '' , price) => { 
+		let shoppinglist = {};
 		shoppinglist['item'] = item;
 		shoppinglist['price'] = price
 		return shoppinglist;
@@ -914,9 +916,19 @@
 			- if i > j, throw error
 			- if i or j not in range, throw error
 	*/
-
 	// implement function here
+	const computeSumInRange = (i, j, list) => {
+		if (i > j || i < 0 || i >= list.length || j < 0 || j >= list.length) {
+			throw new Error('Error');
+		}
+		let sum = 0;
+		for (i; i <= j; i++) {
+			sum += list[i].price;
+		}
 
+		return sum;
+	}
+	
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
@@ -956,6 +968,8 @@
 				newShoppingListItem('test3', 3),
 				newShoppingListItem('test4', 4)
 			]);
+
+			console.log(sum)
 
 			chai.assert.equal(sum, 9)
 		})
