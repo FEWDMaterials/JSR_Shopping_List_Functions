@@ -541,9 +541,36 @@ const objList = newShoppingListItem('egg', 1.59);
 			- if i < 0, just prepend
 			- if `items` is empty, return list
 	*/
-
 	// implement function here
+	
 
+
+const spliceItems = (items, i, list=[]) => {
+    
+	
+		for(let i = 0; i < items.length; i++){ 
+			if(typeof items[i] !== 'object'){ 
+				throw new Error('Error');
+			}
+		}
+
+	
+	 if (i > list.length) {
+			let newList = list.concat(items);
+			return newList;
+		}
+		else if (i < 0) {
+			let newList = items.concat(list);
+			return newList;
+		}
+		 else {
+			let newList = list.slice(0, i).concat(items).concat(list.slice(i, list.length));
+			return newList;
+		}
+	}
+
+	
+    
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -623,6 +650,16 @@ const objList = newShoppingListItem('egg', 1.59);
 	*/
 
 	// implement function here
+	const combineLists =(items1, items2) => {
+	for(let i = 0; i < items.length; i++){ 
+		if(typeof items[i] !== 'object'){ 
+			throw new Error('Error');
+		}
+	}
+		let newList = Object.assign({}, items1, items2);
+		return  newList;
+}
+
 
 	// TEST
 	describe('10. combineLists', () => {
