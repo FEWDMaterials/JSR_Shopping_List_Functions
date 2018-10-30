@@ -213,6 +213,7 @@ const removeNthItem = (i , list = []) => {
 	return list 
 }
 
+
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -282,6 +283,13 @@ const removeNthItem = (i , list = []) => {
 	*/
 
 	// implement function here
+const removeNItems = (i, num, list = []) => {
+	if ((num > list.length) || (i + num > list.length) || (i < 0) || (typeof i !== "number" || typeof num !== "number")) {
+		throw new Error("Error!")
+	}
+	list.splice(i, i+num);
+	return list
+}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -362,6 +370,22 @@ const removeNthItem = (i , list = []) => {
 
 	// implement function here
 
+const smartRemoveItems = (i , list) => {
+	if(i < 0){
+		list.splice(-1, (-i))
+		return list 
+	}
+	if (i > list.length){
+		return list
+	}
+	if (i > 0){
+		list.splice(0, i)
+		return list
+	}
+	return list
+}
+
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -433,12 +457,29 @@ const removeNthItem = (i , list = []) => {
 				'item': 'eggs',
 				'price': 1.59
 			} (else throw error)
-			- insert item into the ith index of the list
-			- if i > length of list, just append
-			- if i < 0, just prepend
+			- insert item into the ith index of the list splice
+			- if i > length of list, just append .push
+			- if i < 0, just prepend .unshift
 	*/
 
 	// implement function here
+
+const spliceItem = (item, i, list) => {
+	if(typeof item !== "object"){
+		throw new Error ("Error")
+	}
+	if (i > list.length){
+		list.push(item)
+		return list
+	}
+	if (i < 0){
+		list.unshift(item)
+		return list
+	}
+	
+	list.splice(i, 0, item);
+	return list
+}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -502,10 +543,35 @@ const removeNthItem = (i , list = []) => {
 			- insert items into the ith index of the list
 			- if i > length of list, just append
 			- if i < 0, just prepend
-			- if `items` is empty, return list
+			- if `items` is empty, return [list]
 	*/
 
 	// implement function here
+	const spliceItems = (items, i, list) => {
+		for(let j = 0; j < items.length; j++){
+		if ((typeof items[j]) !== "object") {
+			throw new Error("Error!")
+		}
+	}
+		
+		if (i > list.length) {
+
+			list.push(...items)
+			return list
+		}
+		if (i < 0) {
+			list.unshift(...items)
+			return list
+		}
+		if (items === []){
+			return list
+		}
+
+		list.splice(i, 0, ...items);
+
+		return list
+	
+}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -587,6 +653,15 @@ const removeNthItem = (i , list = []) => {
 
 	// implement function here
 
+const combineLists = (items1, items2) => {
+	if (typeof item1 !== "object" && typeof item2 !== "object") {
+		throw new Error("Error");
+	}
+
+	return items1.concat(items2);
+
+}
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -638,6 +713,8 @@ const removeNthItem = (i , list = []) => {
 	*/
 
 	// implement function here
+
+
 
 	// TEST
 	describe('11. splitListAt', () => {
