@@ -824,7 +824,19 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
-
+const computeSum = (list =[]) => {
+	return list.reduce((acc,currentItem) =>{
+		return acc +=currentItem.price
+	}, 0);
+}
+// reference
+// const average1 = arr => {
+//     const sum =  arr.reduce((acc,currentItem)=> {
+//           //console.log(acc);
+//           return acc +=currentItem;
+//     }, 0);
+//         return sum / arr.length;
+//   }
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
