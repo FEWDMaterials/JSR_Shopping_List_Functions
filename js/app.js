@@ -370,6 +370,19 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list =[]) =>{
+		if (i < 0) {
+		  list.splice(i);
+		}
+		else if (i > list.length) {
+		  return list;
+		}
+		  else if ( i > 0) {
+			list.splice(0,i);
+		  }
+		return list;
+	  }
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
