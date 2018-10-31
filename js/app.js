@@ -291,6 +291,25 @@
 
 	// implement function here
 
+	const removeNItems = (i, num, list) => {
+
+		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || i+num > list.length || num > list.length) {
+			throw new Error('Not a valid item number, please try again') 
+			// throws error if conditions are not true
+		}
+		else { // if all conditions are true then runs following code
+			// list.splice(i, i+num); works but fixed with proper answer below 
+
+			const list1 = list.slice(0,i); // creates array from 0 index to i, not including i
+			const list2 = list.slice(i+num+1); // creates second array after i+num
+			// we add +1 to i+num because first value is included when using .slice
+			// and we do NOT want to include i+num
+
+			return list1.concat(list2);; // returns new array with both sliced lists added together with concat
+			// thus removing all items from i to i+num
+		}
+	}
+
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
