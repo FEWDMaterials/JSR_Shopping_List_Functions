@@ -749,7 +749,9 @@ return list;
 	*/
 
 	// implement function here
-
+	function canExpressCheckout(list){
+		if(list.length < 10) return true
+	}
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
