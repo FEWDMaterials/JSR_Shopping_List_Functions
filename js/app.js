@@ -640,8 +640,8 @@ const removeFirstItem = (list)=>{
 		for ( let a=0; a <items1.length; a++){
 			for(let b=0; b <items1.length; b++){
 				if (items1[a].hasOwnProperty('item') && items1[a].hasOwnProperty('price') &&
-				items2[b].hasOwnProperty('item') && items2[b].hasOwnProperty('price') && (typeof items1[a]
-				=== 'object') && (typeof items2[b] === 'object') ){
+				items2[b].hasOwnProperty('item') && items2[b].hasOwnProperty('price') 
+				 ){
 					let newList = items1.concat(items2);
 					return newList
 				}else {//if //((typeof [a] !== 'object' )|| ( typeof [b] !== 'object')) {
@@ -842,10 +842,12 @@ const removeFirstItem = (list)=>{
 
 	const computeSum = (list)=>{
 		for (let i = 0; i< list.length;i++){
-			let sum = list[i].price + list[1].price
+			let sum = list[0].price + list[1].price
 			return sum
 		}
+		return sum
 	}
+
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -879,6 +881,14 @@ const removeFirstItem = (list)=>{
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (list,taxRate)=>{
+		let sum = 0;
+		for(let i=0; i < list.length;i++){
+			sum += list[i].price
+		}
+		return ((taxRate /100) * sum)+ sum
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
