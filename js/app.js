@@ -32,7 +32,6 @@
 }
 
 
-/*const objList = newShoppingListItem('egg', 1.59);*/
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -66,8 +65,7 @@
 		list.push(item);
 		return list;
 		}
-		/*addToShoppingList(objList);
-		const newList = (addToShoppingList(objList));*/
+		
 	// TEST
 	describe('2. addToShoppingList', () => {
 
@@ -107,7 +105,6 @@
 		list.pop();
 		return list;
 	  }
-	  /*removeFromShoppingList(newList);*/
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -148,7 +145,6 @@
 		list.shift();
 		return list;
 	  }
-	 /* removeFirstItem(newList);*/
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
