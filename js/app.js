@@ -859,7 +859,16 @@ return list;
 	*/
 
 	// implement function here
-
+	const computeSumInRange = (i, j, list) => {
+		if(i > j || i >= list.length || j > list.length || i < 0 || j < 0){
+		   throw new Error ("Can not compute, try again")
+	   }
+		let sum = 0
+		for (i; i <= j; i++){
+		   sum += list[i].price
+	   }
+		return sum
+	}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
