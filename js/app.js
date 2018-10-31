@@ -636,6 +636,21 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const combineLists= (items1,items2)=>{
+		for ( let a=0; a <items1.length; a++){
+			for(let b=0; b <items1.length; b++){
+				if (items1[a].hasOwnProperty('item') && items1[a].hasOwnProperty('price') &&
+				items2[b].hasOwnProperty('item') && items2[b].hasOwnProperty('price') && (typeof items1[a]
+				=== 'object') && (typeof items2[b] === 'object') ){
+					let newList = items1.concat(items2);
+					return newList
+				}else {//if //((typeof [a] !== 'object' )|| ( typeof [b] !== 'object')) {
+					throw new Error ('not the right object');
+				}
+			}
+		}
+	}
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -826,9 +841,10 @@ const removeFirstItem = (list)=>{
 	// implement function here
 
 	const computeSum = (list)=>{
-		list.forEach(element => {
-			Object.keys(element)
-		});
+		for (let i = 0; i< list.length;i++){
+			let sum = list[i].price + list[1].price
+			return sum
+		}
 	}
 	// TEST
 	describe('13. computeSum', () => {
