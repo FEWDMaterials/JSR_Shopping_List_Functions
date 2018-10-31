@@ -168,7 +168,7 @@
 	}
 
 	console.log('removes first item from array?', removeFirstItem(['item1', 'item2', 'item3']));
-	
+
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -206,6 +206,20 @@
 	*/
 
 	// implement function here
+
+	const removeNthItem = (i, list) => {
+
+		if (i > list.length || i < 0 || typeof i !== 'number') {
+			throw new Error('Not a valid item input, please try again')
+		}
+		else {
+			return list.slice(0,i).concat(list.slice(i+1, list.length+1)); // splits list at i index
+			// then concats what is before i and what is after i
+		}
+	}
+
+	// console.log('TEST: returns error when adding string to i', removeNthItem('error?', [1,2,3]));
+	// console.log('TEST: removes second item', removeNthItem(2, [1,2,3]));
 
 	// TEST
 	describe('5. removeNthItem', () => {
