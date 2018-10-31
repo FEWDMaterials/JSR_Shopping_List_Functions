@@ -775,6 +775,25 @@ let tea = newShoppingListItem('tea',6.0)
 
 	// implement function here
 
+	const splitListAt = (i, list) => {
+
+		let list1 = [];
+		let list2 = [];
+
+		if (i < 0) {
+			list1 = list.slice(0);
+		}
+		else if (i > list.length) {
+			list2 = list.slice(0);
+		}
+		else {
+			list1 = list.slice(0,i+1);
+			list2 = list.slice(i+1,-1);
+		}
+
+
+		return [list1, list2];
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -856,6 +875,8 @@ let tea = newShoppingListItem('tea',6.0)
 
 	// implement function here
 
+	const canExpressCheckout = list => list.length<10 ? true : false;
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -884,6 +905,14 @@ let tea = newShoppingListItem('tea',6.0)
 
 	// implement function here
 	
+	const computeSum = (list)=> {
+
+		return list.reduce((acc, currentEle) => {
+
+			return acc += currentEle.price;
+
+		},0)
+	}
 
 
 	// TEST
@@ -919,6 +948,14 @@ let tea = newShoppingListItem('tea',6.0)
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (list, taxRate) => {
+
+		let sum = computeSum(list);
+
+		return  sum + (sum * (taxRate/100));
+
+	}
 
 
 	// TEST
@@ -957,6 +994,21 @@ let tea = newShoppingListItem('tea',6.0)
 
 	// implement function here
 
+	const computeSumInRange = (i, j, list) => {
+
+		if (i<0 || i>list.length || j<0 || j>list.length || i>j) {
+			throw new Error('Invalid input. out of Range');
+		}
+
+		else  {
+			const newList = list.slice(i, j+1);
+			return newList.reduce((acc, currentEle) => {
+				acc+=currentEle.price
+				return acc;
+			}, 0)
+		}
+
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
