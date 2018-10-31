@@ -283,7 +283,13 @@
 
 	// implement function here
 
-
+	const removeNItems = (i, num, list =[]) => {
+        if ((i + num > list.length) || (i < 0) || (typeof i !== "number" ) || (typeof num !== "number")) {
+            throw new Error("Error");
+        }
+        list.splice(i, i + num);
+        return list;
+    }
 
 	// TEST
 	describe('6. removeNItems', () => {
