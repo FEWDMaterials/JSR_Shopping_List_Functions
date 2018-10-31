@@ -760,6 +760,28 @@
 
 	// implement function here
 
+	const splitListAt = (i, list) => {
+		if (i < 0) {
+			const list1 = list.slice(0, list.length);
+			const list2 = [];
+			return [list1, list2];
+		}
+		else if (i > list.length) {
+			const list1 = [];
+			const list2 = list.slice(0, list.length);;
+			return [list1, list2];
+		}
+		else {
+            let list1 = list.slice(0, i+1);
+			// splitting list into two where i+1 = all items <= i
+			// since slice includes beginning value but excludes last value given
+            let list2 = list.slice(i+1, list.length);
+			// splitting list into two where i+1 = index after i through to end of list
+			// so we can skip i and start the second list with index after i
+			return [list1, list2];
+		}
+    }
+
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
