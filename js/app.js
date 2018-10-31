@@ -461,6 +461,25 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list =[]) => {  
+		if ((typeof item) !== 'object')
+		throw new(Error);
+	  
+	if (i > list.length){
+		list.push(item);
+		return list;
+	}
+	if ( i < 0 ) {
+		list.splice(0,0,item);
+		return list;
+	}
+	else{ 
+		list.splice (i, 0, item)
+		return list;
+	}
+	}   
+
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
