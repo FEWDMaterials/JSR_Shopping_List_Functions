@@ -149,7 +149,18 @@
 
 	// implement function here
 
-
+	    const removeFirstItem = (list) => {
+		        if ( list.length === '[]' ) {
+				   return []
+		        } 
+		        else if (list.shift () ) { 
+		
+		             return list
+		         }
+		
+		        
+		    
+		    }
 
 	// TEST
 	describe('4. removeFirstItem', () => {
