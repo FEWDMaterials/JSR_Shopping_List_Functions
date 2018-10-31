@@ -733,16 +733,28 @@
 
 	*/
 
+
 	// implement function here
 
 	const splitListAt = (i, list) => {
-		let nuList = [];
-		if (i < 0) {
-			nuList.push(list)
-			nuList.push({});
-			return nuList;
+        let list1 = [];
+        let list2 = [];
+        
+
+        if (i < 0 ){ // add items in list to list one
+            for(let x = 0; x < list.length; x ++){
+                list1 = [...list];
+            }
+        } else if (i > list.length){
+			for(let x = 0; x < list.length; x ++){
+                list2 = [...list];
+            }
+		} else {
+			list1 = list.slice(0, i+1)
+			list2 = list.slice(i+1, 0)
 		}
-	}	
+        return [list1, list2];
+    }
 
 	// TEST
 	describe('11. splitListAt', () => {
