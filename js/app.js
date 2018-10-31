@@ -990,6 +990,21 @@
 
 	// implement function here
 
+	const computeSumInRange = (i, j, list) => {
+		if (i > j || list.length < j || list.length < i) {
+			throw new Error ('Invalid range input');
+		}
+		else {
+			let sumOfPrice = 0;
+			for (let x = i; x <= j; x++) { // we add +1 to j or use <= because we want to include j index
+			// we let x = i so that we start computing prices only at the given i index NOT at zero index
+				sumOfPrice += list[x].price;
+				// sumOfPrice will now calculate sum from list[i].price through to list[j].price
+			}
+			return sumOfPrice;
+		}
+	}
+
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
