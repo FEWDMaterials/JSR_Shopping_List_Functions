@@ -389,6 +389,25 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list) => {
+
+		if (i < 0) {
+			i = i * -1;
+			return list.slice(0, list.length-i);; // returns new array with given slice range of values
+			// in this case , i is the number of items we want removed from the end of the array
+		}
+		else if (i > list.length) {
+			return list; // if i is greater than the number of list items, then simply return the list
+			// since user may not want to delete all items in the list
+		}
+		else if (i > 0) {
+			return list.slice(0+i); // returns new array with given slice range of values
+			// 0 is our start index, so we add i so that we can create new array and remove i number
+			// of items from the beginning of the array
+		}
+			// removed else statement at the end as it is not necessary or requested
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
