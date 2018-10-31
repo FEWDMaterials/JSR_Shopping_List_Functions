@@ -933,7 +933,7 @@ const newShoppingListItem = (item, price) => {
 
 		let sum = 0;
 
-		for(let i = startIdx; i <= endIdx; i++){
+		for(let i = startIdx; i <= endIdx  ; i++){
 			const currentObj = list[i];
 			const currentKeys = Object.keys(currentObj);
 
