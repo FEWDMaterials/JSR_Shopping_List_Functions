@@ -717,7 +717,23 @@ const combineLists = (items1, items2) => {
 
 	// implement function here
 
+const splitListAt = (i , list) => {
+	let list1 = [];
+	let list2 = [];
+	if (i < 0){
+		list1 = list
+	}
+	else if (i > list.length){
+		list2 = list
+	}
 
+	else { 
+		list1 = list.slice(0 , i+1)
+		list2 = list.slice(i, list.length - 1 )
+	}
+	
+	return [list1, list2]
+}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -798,7 +814,12 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
-
+const canExpressCheckout = list => {
+	if (list > 10) {
+		return false
+	}
+	return true
+}
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -826,7 +847,14 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
-
+const computeSum = list => {
+	let newList = 0;
+	for(let i = 0; i < list.length; i++){
+		newList += list[i].price
+	}
+	return newList
+}
+	
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -860,6 +888,14 @@ const combineLists = (items1, items2) => {
 	*/
 
 	// implement function here
+const computeSumWithTax = (list, taxRate) => {
+	let newPrice = 0;
+	for (let i = 0; i < list.length; i++) {
+		newPrice += list[i].price
+	}
+	newPrice += (taxRate / 100) * newPrice
+	return newPrice
+} 
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
