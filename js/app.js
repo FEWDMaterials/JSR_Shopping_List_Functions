@@ -446,20 +446,18 @@
 	// implement function here
 
 	const spliceItem = (item, i, list=[]) => {
-		if (item !== {item, price}) {
-			throw new Error("Error");
-		}
 		if (i > list.length) {
-			// list.push(i);
-			list.append(i);
+			list.push(item);
 			return list;
 		}
 		if (i < 0) {
-			// list.splice(1, 0, item);
-			list.prepend(i)
+			list.unshift(item);
 			return list;
 		}
-		else list.push(i);
+		if (typeof item !== 'object') {
+			throw new Error("Error");
+		}
+		list.splice(i, 0, item);
 		return list;
 	}
 
@@ -531,9 +529,22 @@
 	// implement function here
 
 	const spliceItems = (items, i, list=[]) => {
-		if (item !== {item, price}) {
+		if (typeof items[i] !== 'object') {
 			throw new Error("Error");
 		}
+		if (i > list.length) {
+			list.push(items);
+			return list;
+		}
+		if (i < 0) {
+			list.unshift(items);
+			return list;
+		}
+		if (Object.keys(items).length <= 0) {
+			return list;
+		}
+		list.splice(i, 0, items)
+		return list;
 
 	}
 
@@ -618,8 +629,13 @@
 	// implement function here
 
 	const combineLists = (items1, items2) => {
-		Object.assign(items1, items2);
-		return list;
+		const newArray = items1.concat(items2);
+		for (let i = 0; i < newArray.length; i++) {
+			if ((typeof newArray[i]) !== 'object') {
+				throw new Error('Error');
+			}
+		}
+		return newArray;
 	}
 
 	// TEST
@@ -673,6 +689,27 @@
 	*/
 
 	// implement function here
+
+	const splitListAt = (i, list=[]) => {
+			if (i < 0) {
+				const list1 = list.slice(0);
+				const list2 = [];
+				return [list1, list2];
+			}
+			else if (i > list.length) {
+				const list2 = list.slice(0);
+				const list1 = [];
+				return [list1, list2];
+			}
+			else {
+			// const list1 = [];
+			const list1 = list.slice(0, i +1);
+			// const list2 = [];
+			const list2 = list.slice(i + 1, list.length);
+			return [list1, list2];
+			}
+		// return [list1, list2];
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -789,16 +826,17 @@
 
 	// implement function here
 
-	const computeSum = (list=[]) => {
-		const keys = Object.keys(list);
-		const currentKey = keys[i];
-		currentVal = list[currentKey];
-		for (let i = 0; i < keys.length; i++) {
-			let sum = 0;
-			sum += currentVal;
-			return sum
-		}
+	const computeSum = (list) => {
+	
+		let sum = 0;
+
+		list.forEach((currentEl) => {
+			sum += currentEl.price;
+		})
+		return sum;
 	}
+	
+	
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -833,6 +871,14 @@
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (list, taxRate) => {
+		let sum = 0;
+		list.forEach((currentEl) => {
+			sum += currentEl.price;
+		})
+		return sum * taxRate / 100;
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -869,6 +915,20 @@
 	*/
 
 	// implement function here
+
+	const computeSumInRange = (i, j, list=[]) => {
+		if (i > j) {
+			throw new Error('Error');
+		}
+		if ((i > list.length) || (j > list.length)) {
+			throw new Error('Error');
+		}
+		for (let i = 0; i < j; i++) {
+			sum = 0;
+			sum += i;
+		}
+		return sum;
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
