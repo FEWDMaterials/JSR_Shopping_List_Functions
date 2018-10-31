@@ -96,7 +96,7 @@ const newShoppingListItem =(item, price) => {
 	// implement function here
 	const removeFromShoppingList = (list= []) =>{
 		if(list === 0){
-			return list
+			return list;
 		}
 		list.pop()
 		return list;
@@ -137,7 +137,7 @@ const newShoppingListItem =(item, price) => {
 	// implement function here
 let removeFirstItem = (list=[]) => {
 	if(list === 0){
-		return list
+		return list;
 	}
 	list.shift()
 		return list;
@@ -183,7 +183,13 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const removeNthItem = (i, list) =>{
+		if(i > list.length || i < 0 || isNaN(i)){
+			throw new Error ('What went wrong!?');
+		}
+		list.splice(i, 1);
+return list;
+	}
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -253,7 +259,13 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const removeNItems = (i, num, list) => {
+		if (isNaN(i,num) || isNaN(num) || num > list.length || i < 0 || i+num > list.length){
+		   throw new Error ("Try again");
+	   }
+		list = list.slice(0, i).concat(list.slice(i+num+1));
+		return list;
+	}
 	// TEST
 	describe('6. removeNItems', () => {
 		it('should remove i-th item from list', () => {
@@ -332,7 +344,21 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const smartRemoveItems = (i, list) => {
+		if (i > list.length){
+		   return list;
+	   }
+		if (i < 0){
+		for (let index = 0; index < i * -1; index++){
+		   list.pop();
+	   }
+		return list;
+	   }
+		for (let index = 0; index < i; index++){
+		   list.shift();
+	   }
+		return list;
+	}
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -410,7 +436,22 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const spliceItem = (item, i, list) => {
+		if (typeof item !== "object") {
+		   throw new Error ("Invalid entry");
+	   }
+		if (i >= list.length){
+		   list = list.concat(item);
+	   }
+	   else if (i <= 0){
+		   item = [item]
+		   list = item.concat(list);
+	   }
+	   else{
+		   list = list.slice(0, i).concat(item).concat(list.slice(i));
+	   }
+		return list;
+	}
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -477,7 +518,26 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const spliceItems = (items, i, list) => {
+		if (typeof items !== "object"){
+		   throw new Error ("Invalid entry");
+	   }
+	   items.forEach((currentItem) => {
+		   if (typeof currentItem !== "object"){
+			   throw new Error ("Invalid entry");
+		   }
+	   })
+		if (i >= list.length){
+		   list = list.concat(items);
+	   }
+	   else if (i <= 0){
+		   list = items.concat(list);
+	   }
+	   else{
+		   list = list.slice(0, i).concat(items).concat(list.slice(i));
+	   }
+		return list;
+	}
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -717,7 +777,13 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const computeSum = list => {
+		let sum = 0;
+		list.forEach((currentItem) => {
+		   sum += currentItem.price;
+	   })
+		return sum;
+	}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -751,7 +817,13 @@ let removeFirstItem = (list=[]) => {
 	*/
 
 	// implement function here
-
+	const computeSumWithTax = (list, taxRate) => {
+		let sum = 0
+		list.forEach((currentItem) => {
+		   sum += currentItem.price
+	   })
+		return sum + (sum * (taxRate/100))
+   }
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
