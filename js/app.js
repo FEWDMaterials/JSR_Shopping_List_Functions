@@ -24,6 +24,21 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item, price) => {
+		if (typeof item === 'string' && item.length < 10 && typeof price === 'number' && price < 100) {
+			const shoppingListItem = { // creates object with item and price properties
+				item, // short way of creating new property when key/value pair is same as param name
+				price, // long way of creating property key/value would be "price: price,"
+			}
+			return shoppingListItem; // returns the object when function is invoked if conditions are met
+		}
+		else {
+			throw new Error ('Invalid input'); // returns error if conditions for creating obj are not met
+		}
+	}
+
+	// console.log('newShoppingListItem: returns Object?', typeof newShoppingListItem('test', 1) === 'object');
+
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -53,6 +68,17 @@
 	*/
 
 	// implement function here
+
+	const addToShoppingList = (item, list=[]) => {
+		if (typeof item === 'object') { // if statement checks if item being passed is an object
+			return list.concat(item); 
+			// if condition is met, adds item object to an empty array if list is empty
+			// if list isn't empty, adds item to the end of the array
+		}
+		else {
+			throw new Error ('Invalid item input'); // if item isn't an object, throws new error
+		}
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +113,18 @@
 
 	// implement function here
 
+	const removeFromShoppingList = (list=[]) => {
+		if (list.length < 1) { // if array contains fewer than one item, returns the array
+			return list;
+		}
+		else {
+			return list.slice(0,list.length-1);; // if list arr contains items, returns a shallow copy of list
+			// and leaves out the last element of the original list
+		}
+	}
+
+	// console.log('removes last item of array?', removeFromShoppingList(['test', 'test']));
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +158,18 @@
 	*/
 
 	// implement function here
+
+	const removeFirstItem = (list=[]) => {
+		if (list.length < 1) {
+			return list;
+		}
+		else {
+			return list.slice(1,list.length); // creates a copy of given list array being passed in
+			// but does not include the first index, as a result removes the first item of the list
+		}
+	}
+
+	// console.log('removes first item from array?', removeFirstItem(['item1', 'item2', 'item3']));
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -158,6 +208,20 @@
 	*/
 
 	// implement function here
+
+	const removeNthItem = (i, list) => {
+
+		if (i > list.length || i < 0 || typeof i !== 'number') {
+			throw new Error('Not a valid item input, please try again')
+		}
+		else {
+			return list.slice(0,i).concat(list.slice(i+1, list.length+1)); // splits list at i index
+			// then concats what is before i and what is after i
+		}
+	}
+
+	// console.log('TEST: returns error when adding string to i', removeNthItem('error?', [1,2,3]));
+	// console.log('TEST: removes second item', removeNthItem(2, [1,2,3]));
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +292,25 @@
 	*/
 
 	// implement function here
+
+	const removeNItems = (i, num, list) => {
+
+		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || i+num > list.length || num > list.length) {
+			throw new Error('Not a valid item number, please try again');
+			// throws error if conditions are not true
+		}
+		else { // if all conditions are true then runs following code
+			// list.splice(i, i+num); works but fixed with proper answer below 
+
+			const list1 = list.slice(0,i); // creates array from 0 index to i, not including i
+			const list2 = list.slice(i+num+1); // creates second array after i+num
+			// we add +1 to i+num because first value is included when using .slice
+			// and we do NOT want to include i+num
+
+			return list1.concat(list2); // returns new array with both sliced lists added together with concat
+			// thus removing all items from i to i+num
+		}
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -308,6 +391,25 @@
 
 	// implement function here
 
+	const smartRemoveItems = (i, list) => {
+
+		if (i < 0) {
+			i = i * -1;
+			return list.slice(0, list.length-i); // returns new array with given slice range of values
+			// in this case , i is the number of items we want removed from the end of the array
+		}
+		else if (i > list.length) {
+			return list; // if i is greater than the number of list items, then simply return the list
+			// since user may not want to delete all items in the list
+		}
+		else if (i > 0) {
+			return list.slice(0+i); // returns new array with given slice range of values
+			// 0 is our start index, so we add i so that we can create new array and remove i number
+			// of items from the beginning of the array
+		}
+			// removed else statement at the end as it is not necessary or requested
+	}
+
 	// TEST
 	describe('7. smartRemoveItems', () => {
 		it('should return list if i > length of list', () => {
@@ -386,6 +488,29 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list) => {
+		// uses .slice but also included comments using .push, .unshift, .splice methods 
+		if (typeof item.item !== 'string' || typeof item.price !== 'number' || typeof item !== 'object') { 
+			throw new Error ('Input Error: try again');
+		}
+		else if (i > list.length) {
+			// list.push(item);  // pushing item to end of the list
+			return list.slice(0).concat(item);
+		}
+		else if (i < 0) {
+			// list.unshift(item); // adds item to beginning of list
+			const list2 = list.slice(0);
+			list2.unshift(item);
+			return list2;
+		}
+		else {
+			// list.splice(i, 0, item); // inputting item at the i(nth) index of list
+			const list2 = list.slice(0);
+			list2.splice(i,0,item);
+			return list2;
+		}
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
@@ -452,6 +577,41 @@
 	*/
 
 	// implement function here
+
+	const spliceItems = (items, i, list) => {
+		// 1. First, we loop through an array of objects to verify each item in array is an object
+		for (let x=0; x < items.length; x++) {
+			if (typeof items[x] !== 'object') {
+				throw new Error ('Input Error: try again'); // if it's not an object, throw error
+				// if all items are objects, then code will continue to run
+			} 
+		}
+		// 2. We then use if statements and for loops to check the given number (i)
+		//	  and we use for loops to add each of the objects in the items array to the list
+		//	  depending on the conditionals: we will either append, prepend or insert the items
+		 if (i > list.length) {
+			const list2 = list.slice(0); // we create a shallow copy of original list that we can push to
+			 for (let x = 0; x < items.length; x++) {
+				list2.push(items[x]); // pushing items to the end of the list
+			 }
+			 return list2; // we return the shallow copy that has been mutated by the push method
+		}
+		else if (i < 0) {
+			const list2 = list.slice(0);
+			for (let x = 0; x < items.length; x++) {
+				list2.unshift(items[x]); // adding items to the beginning of the list
+			}
+			return list2;
+		}
+		else if (items.length === 0) { 	
+		// to check if items arr is empty we see if it's length is equal to zero
+			return list;  // returns list if items array is empty 
+		}
+		else {
+			// uses .concat method to insert the objects in items array to our list
+			return list.slice(0,i).concat(items).concat(list.slice(i));
+		}
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -533,6 +693,23 @@
 
 	// implement function here
 
+	const combineLists = (items1, items2) => {
+		// for Loop to check if each object in items1 array is an object, if not throw error
+		for (let x=0; x < items1.length; x++) {
+			if (typeof items1[x] !== 'object') {
+				throw new Error ('Input Error: try again');
+			}
+		}
+		// for Loop to check if each obj in items2 array is an object, if not throw error
+		for (let x=0; x < items2.length; x++) {
+			if (typeof items2[x] !== 'object') {
+				throw new Error ('Input Error: try again');
+			}
+		}
+		// if both for loops pass, then concat items1 to items2
+		return items1.concat(items2);
+	}
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -584,6 +761,28 @@
 	*/
 
 	// implement function here
+
+	const splitListAt = (i, list) => {
+		if (i < 0) {
+			const list1 = list.slice(0, list.length);
+			const list2 = [];
+			return [list1, list2];
+		}
+		else if (i > list.length) {
+			const list1 = [];
+			const list2 = list.slice(0, list.length);
+			return [list1, list2];
+		}
+		else {
+            const list1 = list.slice(0, i+1);
+			// splitting list into two where i+1 = all items <= i
+			// since slice includes beginning value but excludes last value given
+            const list2 = list.slice(i+1, list.length);
+			// splitting list into two where i+1 = index after i through to end of list
+			// so we can skip i and start the second list with index after i
+			return [list1, list2];
+		}
+    }
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -665,6 +864,15 @@
 
 	// implement function here
 
+	const canExpressCheckout = list => list.length < 10 ? true : false;
+		// alternative method using if statement shown below
+		// if (list.length < 10) {
+		// 	return true;
+		// }
+		// else {
+		// 	return false;
+		// }
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -692,6 +900,15 @@
 	*/
 
 	// implement function here
+
+	const computeSum = (list) => {
+		let sumOfPrice = 0; // creates variable that will store item prices
+		for (let i = 0; i < list.length; i++) {
+			sumOfPrice += list[i].price; // loops through price property of each item object in arr
+			// then adds the property values together and stores final total in the sum variable
+		}
+		return sumOfPrice;
+	}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -726,6 +943,18 @@
 	*/
 
 	// implement function here
+
+	const computeSumWithTax = (list, taxRate) => {
+		let sumOfPrice = 0;
+		for (let i = 0; i < list.length; i++) {
+			sumOfPrice += list[i].price;
+		}
+		const taxOfSum = (taxRate/100) * sumOfPrice;
+		// turns tax percentage to decimal then gets tax of the total sum
+		const finalCost = taxOfSum + sumOfPrice;
+		// adds total sum to the tax amount of that sum to return final cost
+		return finalCost;
+	}
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -762,6 +991,21 @@
 	*/
 
 	// implement function here
+
+	const computeSumInRange = (i, j, list) => {
+		if (i > j || list.length < j || list.length < i) {
+			throw new Error ('Invalid range input');
+		}
+		else {
+			let sumOfPrice = 0;
+			for (let x = i; x <= j; x++) { // we add +1 to j or use <= because we want to include j index
+			// we let x = i so that we start computing prices only at the given i index NOT at zero index
+				sumOfPrice += list[x].price;
+				// sumOfPrice will now calculate sum from list[i].price through to list[j].price
+			}
+			return sumOfPrice;
+		}
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
