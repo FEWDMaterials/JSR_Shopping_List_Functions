@@ -24,7 +24,13 @@
 
 	// implement function here
 
+	const newShoppingListItem = (item,price) => {
+		return {item,price}
+	};
+
+
 	// TEST
+
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
 			const shoppingListItem = newShoppingListItem('test', 1)
@@ -53,6 +59,8 @@
 	*/
 
 	// implement function here
+	
+
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -87,6 +95,8 @@
 
 	// implement function here
 
+
+
 	// TEST
 	describe('3. removeFromShoppingList', () => {
 		it('should remove from the end of the list', () => {
@@ -120,6 +130,8 @@
 	*/
 
 	// implement function here
+
+
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -157,7 +169,11 @@
 			^^ return error
 	*/
 
+	
+
+
 	// implement function here
+
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -228,6 +244,8 @@
 	*/
 
 	// implement function here
+
+
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -560,7 +578,7 @@
 			chai.assert.equal(list[0].price, 1)
 			chai.assert.equal(list[1].item, 'test2')
 			chai.assert.equal(list[1].price, 2)
-		});
+		}); 
 	});
 
 	/* 11
