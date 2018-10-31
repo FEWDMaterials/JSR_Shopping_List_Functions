@@ -59,7 +59,9 @@
 	*/
 
 	// implement function here
-	    const addToShoppingList = (item, list = []) => {
+	    
+	
+	const addToShoppingList = (item, list = []) => {
 		        list.push(item);
 		        return list;
 		    };
@@ -99,7 +101,19 @@
 
 	// implement function here
 
-
+	    const removeFromShoppingList = (list) => {
+		        if ( list.length === '[]' ) {
+				   return []
+		        } 
+		        else if (list.pop () ) { 
+		
+		             return list
+		         }
+		
+		        
+		    
+		    }
+		
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
