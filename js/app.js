@@ -576,6 +576,41 @@
 
 	// implement function here
 
+	const spliceItems = (items, i, list) => {
+		// 1. First, we loop through an array of objects to verify each item in array is an object
+		for (let x=0; x < items.length; x++) {
+			if (typeof items[x] !== 'object') {
+				throw new Error ('Input Error: try again') // if it's not an object, throw error
+				// if all items are objects, then code will continue to run
+			} 
+		}
+		// 2. We then use if statements and for loops to check the given number (i)
+		//	  and we use for loops to add each of the objects in the items array to the list
+		//	  depending on the conditionals: we will either append, prepend or insert the items
+		 if (i > list.length) {
+			const list2 = list.slice(0); // we create a shallow copy of original list that we can push to
+			 for (let x = 0; x < items.length; x++) {
+				list2.push(items[x]); // pushing items to the end of the list
+			 }
+			 return list2; // we return the shallow copy that has been mutated by the push method
+		}
+		else if (i < 0) {
+			const list2 = list.slice(0);
+			for (let x = 0; x < items.length; x++) {
+				list2.unshift(items[x]); // adding items to the beginning of the list
+			}
+			return list2;
+		}
+		else if (items.length === 0) { 	
+		// to check if items arr is empty we see if it's length is equal to zero
+			return list;  // returns list if items array is empty 
+		}
+		else {
+			// uses .concat method to insert the objects in items array to our list
+			return list.slice(0,i).concat(items).concat(list.slice(i));
+		}
+	}
+
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
