@@ -634,11 +634,9 @@
 	//    for(let i=0 ; i < items1.length ; i++){
 	// 	   arr.concat(items1)
 	//    }
-
 	//    for(let i=0 ; i < items2.length ; i++){
 	// 	arr.concat(items2)
 	//    }
-	
 	// items1.concat (item2)	
 	const newVar = list.concat(items1, items2)
 	// list.concat(items2))
@@ -700,8 +698,24 @@ return newVar
 	*/
 
 	const splitListAt= (i, list=[])=>{
-		if (i<0){ //list1 has all the items and list 2 is empty}
-		if (i>list.length) //list1 is empty and list 2 has all the items 
+		const newList = [];
+		let list1 = [];
+		let list2 = [];
+		
+		if(i<list.length && i>0){
+			let list1 = list.slice(0,i+1);
+			let list2 = list.slice(i+1);
+			newList.push(list1,list2);
+			
+		} else if (i<0){    //list1 has all the items and list 2 is empty}
+			 list1= [...list];
+			newList.push(list1,list2);
+			
+		}else if (i>list.length){  //list1 is empty and list 2 has all the items 
+			list2=[...list];
+			newList.push(list1,list2)
+		}
+		return newList
 	}
 
 	// TEST
@@ -783,7 +797,7 @@ return newVar
 	*/
 
 	const canExpressCheckout= (list =[])=>{
-	if (items<10) {
+	if (list.length<10) {
 		 return true;
 	}
 	
@@ -816,10 +830,15 @@ return newVar
 			- sum all the price items and return value
 	*/
 		
-	//ANSWER 
-	// const computeSum = (list=[])=>{
-		//access element 2?
-	//}
+	const computeSum = (list)=>{
+		for (let i = 0; i< list.length;i++){
+			let sumation = list[0].price + list[1].price
+			return sumation
+		}
+		return sumation
+	}
+
+
 
 	// TEST
 	describe('13. computeSum', () => {
