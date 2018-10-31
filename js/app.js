@@ -158,6 +158,17 @@
 
 	// implement function here
 
+	const removeFirstItem = (list=[]) => {
+		if (list.length < 1) {
+			return list;
+		}
+		else {
+			return list.slice(1,list.length);
+		}
+	}
+
+	console.log('removes first item from array?', removeFirstItem(['item1', 'item2', 'item3']));
+	
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
