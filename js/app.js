@@ -874,10 +874,11 @@
 
 	const computeSumWithTax = (list, taxRate) => {
 		let sum = 0;
+		const tax = taxRate / 100
 		list.forEach((currentEl) => {
 			sum += currentEl.price;
 		})
-		return sum * taxRate / 100;
+		return (sum * tax + sum);
 	}
 
 	// TEST
