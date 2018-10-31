@@ -28,7 +28,7 @@
 		if (typeof item === 'string' && item.length < 10 && typeof price === 'number' && price < 100) {
 			const shoppingListItem = { // creates object with item and price properties
 				item, // short way of creating new property when key/value pair is same as param name
-				price, // long way of creating property would be "price: 'price',"
+				price, // long way of creating property key/value would be "price: price,"
 			}
 			return shoppingListItem; // returns the object when function is invoked if conditions are met
 		}
@@ -37,7 +37,7 @@
 		}
 	}
 
-	console.log('newShoppingListItem: returns Object?', typeof newShoppingListItem('test', 1) === 'object');
+	// console.log('newShoppingListItem: returns Object?', typeof newShoppingListItem('test', 1) === 'object');
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -71,7 +71,8 @@
 
 	const addToShoppingList = (item, list=[]) => {
 		if (typeof item === 'object') { // if statement checks if item being passed is an object
-			return list.concat(item); // if condition is met, adds item object to an empty array if list is empty
+			return list.concat(item); 
+			// if condition is met, adds item object to an empty array if list is empty
 			// if list isn't empty, adds item to the end of the array
 		}
 		else {
@@ -113,16 +114,16 @@
 	// implement function here
 
 	const removeFromShoppingList = (list=[]) => {
-		if (list.length < 1) { // if array contains less than 0 items, returns the array
+		if (list.length < 1) { // if array contains fewer than one item, returns the array
 			return list;
 		}
 		else {
-			return list.slice(0,list.length-1);; // if list has items then returns a shallow copy of list
+			return list.slice(0,list.length-1);; // if list arr contains items, returns a shallow copy of list
 			// and leaves out the last element of the original list
 		}
 	}
 
-	console.log('removes last item of array?', removeFromShoppingList(['test', 'test']));
+	// console.log('removes last item of array?', removeFromShoppingList(['test', 'test']));
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -163,11 +164,12 @@
 			return list;
 		}
 		else {
-			return list.slice(1,list.length);
+			return list.slice(1,list.length); // creates a copy of given list array being passed in
+			// but does not include the first index, as a result removes the first item of the list
 		}
 	}
 
-	console.log('removes first item from array?', removeFirstItem(['item1', 'item2', 'item3']));
+	// console.log('removes first item from array?', removeFirstItem(['item1', 'item2', 'item3']));
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -294,7 +296,7 @@
 	const removeNItems = (i, num, list) => {
 
 		if (i < 0 || typeof i !== 'number' || typeof num !== 'number' || i+num > list.length || num > list.length) {
-			throw new Error('Not a valid item number, please try again') 
+			throw new Error('Not a valid item number, please try again');
 			// throws error if conditions are not true
 		}
 		else { // if all conditions are true then runs following code
@@ -305,7 +307,7 @@
 			// we add +1 to i+num because first value is included when using .slice
 			// and we do NOT want to include i+num
 
-			return list1.concat(list2);; // returns new array with both sliced lists added together with concat
+			return list1.concat(list2); // returns new array with both sliced lists added together with concat
 			// thus removing all items from i to i+num
 		}
 	}
@@ -393,7 +395,7 @@
 
 		if (i < 0) {
 			i = i * -1;
-			return list.slice(0, list.length-i);; // returns new array with given slice range of values
+			return list.slice(0, list.length-i); // returns new array with given slice range of values
 			// in this case , i is the number of items we want removed from the end of the array
 		}
 		else if (i > list.length) {
@@ -489,7 +491,7 @@
 	const spliceItem = (item, i, list) => {
 		// uses .slice but also included comments using .push, .unshift, .splice methods 
 		if (typeof item.item !== 'string' || typeof item.price !== 'number' || typeof item !== 'object') { 
-			throw new Error ('Input Error: try again')
+			throw new Error ('Input Error: try again');
 		}
 		else if (i > list.length) {
 			// list.push(item);  // pushing item to end of the list
@@ -580,7 +582,7 @@
 		// 1. First, we loop through an array of objects to verify each item in array is an object
 		for (let x=0; x < items.length; x++) {
 			if (typeof items[x] !== 'object') {
-				throw new Error ('Input Error: try again') // if it's not an object, throw error
+				throw new Error ('Input Error: try again'); // if it's not an object, throw error
 				// if all items are objects, then code will continue to run
 			} 
 		}
@@ -695,13 +697,13 @@
 		// for Loop to check if each object in items1 array is an object, if not throw error
 		for (let x=0; x < items1.length; x++) {
 			if (typeof items1[x] !== 'object') {
-				throw new Error ('Input Error: try again')
+				throw new Error ('Input Error: try again');
 			}
 		}
 		// for Loop to check if each obj in items2 array is an object, if not throw error
 		for (let x=0; x < items2.length; x++) {
 			if (typeof items2[x] !== 'object') {
-				throw new Error ('Input Error: try again')
+				throw new Error ('Input Error: try again');
 			}
 		}
 		// if both for loops pass, then concat items1 to items2
@@ -768,7 +770,7 @@
 		}
 		else if (i > list.length) {
 			const list1 = [];
-			const list2 = list.slice(0, list.length);;
+			const list2 = list.slice(0, list.length);
 			return [list1, list2];
 		}
 		else {
@@ -948,9 +950,9 @@
 			sumOfPrice += list[i].price;
 		}
 		const taxOfSum = (taxRate/100) * sumOfPrice;
-		// turns tax percentage to decimal then gets tax of sum of all items
+		// turns tax percentage to decimal then gets tax of the total sum
 		const finalCost = taxOfSum + sumOfPrice;
-		// adds sum of all items to the tax amount of that sum to return final cost
+		// adds total sum to the tax amount of that sum to return final cost
 		return finalCost;
 	}
 
