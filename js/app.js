@@ -533,26 +533,14 @@ const removeFirstItem = (list)=>{
 	// implement function here
 
 	const spliceItems = (items, i, list)=>{
-		let emptyItems = items.length === 0
-		let itemskeys = items.filter(item => typeof items[0]=== 'object' )
-		//let itemskeys = Object.keys(items);
-		let itemkeyss= Object.keys(item);
-		//let emptyItems = items.length === 0
-		if (itemkeyss.includes('item','price')){
-			let newList = list.splice(i-1,0,items)
-		}else{
-			throw new Error ('this is not the right object');
+		if( !Array.isArray(items)){
+			throw new Error ('not array');
 		}
-		if (i>list.length){
-			list.push(i)
-		}if (i<0){
-			list.push(i)
-		}if (emptyItems){
-			return list
+		for (let p= 0; p<items.length; p++){
+			if (typeof items[p].item==='undefine' && typeof items[p].price==='undefine'){
+				throw new Error ('not the right object')
+			}
 		}
-		
-	
-		return list
 	}
 	
 
@@ -841,9 +829,10 @@ const removeFirstItem = (list)=>{
 	// implement function here
 
 	const computeSum = (list)=>{
+		let sum =0
 		for (let i = 0; i< list.length;i++){
-			let sum = list[0].price + list[1].price
-			return sum
+			sum += list[i].price
+			//return sum
 		}
 		return sum
 	}
@@ -926,6 +915,26 @@ const removeFirstItem = (list)=>{
 
 	// implement function here
 
+	const computeSumInRange = (i,j,list)=>{
+		//let newList = list.slice(i+1,j-1);
+		
+		// if ( i> j){
+		// 	throw new Error (' error i > j');
+		// } 
+		
+		if (i > list.length || i < 0 || 
+			j > list.length || j < 0 || (i>j)){
+				throw new Error ('i and j out of range');
+		}
+
+		let sum = 0
+
+		for (i ; i <= j; i++){
+			sum += list[i].price
+		}
+				
+		return sum
+	}
 	// TEST
 	describe('15. computeSumInRange', () => {
 		it('should throw error if i > j', () => {
