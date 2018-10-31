@@ -792,6 +792,14 @@ console.log()
 	*/
 
 	// implement function here
+	const canExpressCheckout = (list =[]) =>{
+		if ( list.length < 10 ){
+			return true;
+		}
+		return false;
+	}
+
+
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
