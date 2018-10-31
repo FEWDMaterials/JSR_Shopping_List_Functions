@@ -705,6 +705,24 @@
 
 	// implement function here
 
+const splitListAt = (i,list) =>{
+	let list1 =list.slice(0,i+1)
+	let list2 = list.slice(i+1, list.length)
+	const splitItem = [list1,list2]
+	if (i<0){
+		list1 = list1.concat(list2)
+		list2 = list.slice(0,0)
+		return [list1,list2]
+	}
+	else if(i >list.length){
+	list2 = list2.concat(list1)
+	list1 = list.slice(0,0)
+	return [list1,list2]
+	}
+	return splitItem;
+}
+
+
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
@@ -787,11 +805,9 @@
 
 	
 	const canExpressCheckout = (list) => {
-		let numItem = [];
-		if(numItem < 10) {
-			return true;
+			return list.length < 10;
 		}
-	}
+	
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -822,12 +838,14 @@
 	// implement function here
 
 	const computeSum = (list) =>{
-		let sumPrices = []
-		for(i = 0; i < list; i++){
-			sumPrices ===+ list;
+		let sumPrices = 0
+		for(i = 0; i < list.length; i++){
+			sumPrices = sumPrices + list[i].price
 		}
 		return sumPrices;
 	}
+
+
 
 	// TEST
 	describe('13. computeSum', () => {
