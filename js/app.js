@@ -862,6 +862,15 @@
 
 	// implement function here
 
+	const canExpressCheckout = list => list.length < 10 ? true : false;
+		// alternative method using if statement shown below
+		// if (list.length < 10) {
+		// 	return true;
+		// }
+		// else {
+		// 	return false;
+		// }
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
