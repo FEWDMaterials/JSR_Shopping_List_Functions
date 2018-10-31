@@ -691,6 +691,23 @@
 
 	// implement function here
 
+	const combineLists = (items1, items2) => {
+		// for Loop to check if each object in items1 array is an object, if not throw error
+		for (let x=0; x < items1.length; x++) {
+			if (typeof items1[x] !== 'object') {
+				throw new Error ('Input Error: try again')
+			}
+		}
+		// for Loop to check if each obj in items2 array is an object, if not throw error
+		for (let x=0; x < items2.length; x++) {
+			if (typeof items2[x] !== 'object') {
+				throw new Error ('Input Error: try again')
+			}
+		}
+		// if both for loops pass, then concat items1 to items2
+		return items1.concat(items2);
+	}
+
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
