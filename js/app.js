@@ -751,7 +751,7 @@
             }
 		} else {
 			list1 = list.slice(0, i+1)
-			list2 = list.slice(i+1, 0)
+			list2 = list.slice(i+1)
 		}
         return [list1, list2];
     }
