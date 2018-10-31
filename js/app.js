@@ -23,7 +23,12 @@
 	*/
 
 	// implement function here
-
+	const newShoppingListItem = (item,price)=>{
+		
+	
+	return {item:item, price:price}
+	}	
+	
 	// TEST
 	describe('1. newShoppingListItem', () => {
 		it('should return an object with item and price attributes', () => {
@@ -51,7 +56,11 @@
 				- validate that the item is indeed a shoppingList item
 				- if shoppingList item is not passed in, throw error
 	*/
-
+	const addToShoppingList = (item, arr = []) => {
+	    arr.push(item)
+		
+		return arr
+		}
 	// implement function here
 
 	// TEST
@@ -84,7 +93,10 @@
 			if array has items, remove the LAST item
 				and then return the array
 	*/
-
+	const removeFromShoppingList = (arr) => {
+		arr.length === 0 ? arr : arr.pop()
+		return arr
+		}
 	// implement function here
 
 	// TEST
@@ -118,7 +130,10 @@
 			if array has items, remove the FIRST item
 				and then return the array
 	*/
-
+	const removeFirstItem = (arr) => {
+		arr.shift()
+		return arr
+		}
 	// implement function here
 
 	// TEST
@@ -156,7 +171,14 @@
 				- `i` is not number
 			^^ return error
 	*/
-
+	const removeNthItem = (i, arr) => {
+		if (i< 0 || i > arr.length || (typeof i)!== 'number'){
+			throw new Error("i is invalid")
+		}
+		arr.splice(i,i)
+		
+		return arr
+		}
 	// implement function here
 
 	// TEST
@@ -226,7 +248,13 @@
 				- `num` > length of list
 			^^ return error
 	*/
-
+	const removeNItems = ( i , num,arr) => {
+		if(i<0 || (typeof i) !== 'number' || (typeof num) !== 'number' || (i+num)>arr.length || num > arr.length){
+			throw new Error ('i or num are invalid')
+		}
+		arr.splice(i,i+num)
+		return arr
+		}
 	// implement function here
 
 	// TEST
@@ -305,7 +333,19 @@
 			- if `i` > 0 remove i number of items
 				from START of list
 	*/
+const smartRemoveItems = (i, arr) => {
+if (i<0){
+	arr.splice(arr.length-(i*-1))
+	return arr
+}
+if (i>0){
+arr.splice(0,i)
+return arr
+}
+return arr
 
+
+}
 	// implement function here
 
 	// TEST
@@ -383,7 +423,22 @@
 			- if i > length of list, just append
 			- if i < 0, just prepend
 	*/
+const spliceItem = (item, i, arr) => {
+	if((typeof item) !== 'object'){
+		throw new Error('error')
+	}
 
+if(i>arr.length){
+arr.push(item)
+return arr
+}
+if(i<0){
+arr.unshift(item)
+return arr
+}
+arr.splice(i,0,item)
+return arr
+}
 	// implement function here
 
 	// TEST
@@ -450,6 +505,33 @@
 			- if i < 0, just prepend
 			- if `items` is empty, return list
 	*/
+const spliceItems = (list,i,arr) => {
+
+	list.forEach(element => {
+		if ((typeof element) !== 'object'){
+			throw new Error('error')
+		}
+		
+	})
+	if(i>arr.length){
+		list.forEach((e,i,list) => {
+			arr.push(list[i])
+		})
+		
+		return arr
+		}
+		if(i<0){
+			list.forEach((e,i,list) => {
+		arr.unshift(list[i])
+	})
+		return arr
+		}
+
+		arr.splice(i,0,...list)
+		return arr
+		}
+
+
 
 	// implement function here
 
@@ -530,6 +612,22 @@
 			- return ONE list that contains items in
 			items1 THEN items in items2 as a single array
 	*/
+const combineLists = (items1,items2) => {
+	items1.forEach(element => {
+		if ((typeof element) !== 'object'){
+			throw new Error('error')
+		}
+		
+	})
+	items2.forEach(element => {
+		if ((typeof element) !== 'object'){
+			throw new Error('error')
+		}
+		
+	})
+return items1.concat(items2)
+}
+
 
 	// implement function here
 
@@ -577,32 +675,48 @@
 				is empty list
 			- if `i` > length of list, list1 is empty and `list2`
 				has all items
-
 			- always return a list that looks like this:
 				[list1, list2]
-
 	*/
-
+const splitListAt = (i, arr) => {
+	
+	if(i<0){
+		let listOne = arr
+		let listTwo = []
+		return [listOne,listTwo]
+	}
+	
+	if(i>arr.length){
+		let listOne = []
+		let listTwo = arr
+		return [listOne,listTwo]
+	}
+	
+		let listOne = arr.slice(0, i+2)
+		let listTwo = arr.slice(i+2,arr.length)
+	
+	return [listOne,listTwo]
+}
 	// implement function here
 
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
-			chai.assert.equal(list1[0].item, 'test')
-			chai.assert.equal(list1[0].price, 1)
-			chai.assert.equal(list1[1].item, 'test2')
-			chai.assert.equal(list1[1].price, 2)
-			chai.assert.equal(list2.length, 0)
+		chai.assert.equal(list1[0].item, 'test')
+		chai.assert.equal(list1[0].price, 1)
+		chai.assert.equal(list1[1].item, 'test2')
+		chai.assert.equal(list1[1].price, 2)
+		chai.assert.equal(list2.length, 0)
 
-		});
+	});
 
 		it('should put all items into list1 if i < 0', () => {
 			const [list1, list2] = splitListAt(-1, [{
@@ -662,7 +776,12 @@
 			if there are fewer than 10 items
 			in list, return true
 	*/
-
+const canExpressCheckout = (arr) => {
+	if(arr.length<10){
+		return true
+	}
+	return false
+}
 	// implement function here
 
 	// TEST
@@ -690,7 +809,15 @@
 			}
 			- sum all the price items and return value
 	*/
+const computeSum = (arr) => {
+	let sum = 0
+	arr.forEach((element)=>{
+    sum += element.price
+	})
 
+	return sum
+
+}
 	// implement function here
 
 	// TEST
@@ -722,11 +849,13 @@
 			- sum all the price items and return value AND
 				apply tax value
 			- note that tax is passed in as percent not decimal
-
 	*/
 
 	// implement function here
-
+const computeSumWithTax = (arr, taxRate) => {
+let subTotal = computeSum(arr)
+return subTotal+(subTotal*(taxRate/100))
+}
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
@@ -760,7 +889,25 @@
 			- if i > j, throw error
 			- if i or j not in range, throw error
 	*/
+const computeSumInRange = (i,j,arr) => {
+arr.forEach((element)=>{
+	if((typeof element) !== 'object'){
+		throw new Error('error')
+	}
+})
+if (i>j || i>arr.length || j > arr.length || i <0 || j< 0){
+	throw new Error('error')
+}
+	return (computeSum(arr.slice(i,j+2)))
 
+}
+
+console.log(computeSumInRange(1, 3, [
+	newShoppingListItem('test', 1),
+	newShoppingListItem('test2', 2),
+	newShoppingListItem('test3', 3),
+	newShoppingListItem('test4', 4)
+]))
 	// implement function here
 
 	// TEST
