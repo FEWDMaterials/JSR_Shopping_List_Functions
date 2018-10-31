@@ -838,8 +838,8 @@ const splitListAt = (i,list) =>{
 	// implement function here
 
 	const computeSum = (list) =>{
-		let sumPrices = 0
-		for(i = 0; i < list.length; i++){
+		let sumPrices = 0;
+		for(let i = 0; i < list.length; i++){
 			sumPrices = sumPrices + list[i].price
 		}
 		return sumPrices;
