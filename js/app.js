@@ -22,7 +22,13 @@
 					two decimal places
 	*/
 
-	// implement function here
+const newShoppingListItem = (item, price) => {
+	const itemInfo = {};
+	itemInfo['item'] = item;
+	itemInfo['price'] = price;
+	return itemInfo;
+}
+
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -52,7 +58,10 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	const addToShoppingList = (item, list=[]) => {
+		list.push(item);
+		return list;
+	}
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -85,7 +94,13 @@
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFromShoppingList = (list=[]) => {
+		if(list.length > 0){
+			list.pop();
+			return list;
+		}
+		if(list.length === 0) return list;
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -119,7 +134,14 @@
 				and then return the array
 	*/
 
-	// implement function here
+	const removeFirstItem = (list) => {
+		if(list.length > 0){
+			list.shift();
+			return list;
+		} if(list === 0){
+			return list;
+		}
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -157,7 +179,20 @@
 			^^ return error
 	*/
 
-	// implement function here
+	 const removeNthItem = (i, list) => {
+		if(i > list.length){
+			throw new Error('Invalid input. Number of item can\'t be greater than list amount');
+		} else if(i < 0){
+			throw new Error('Invalid input. Number of item can\'t be lesser than 0.');
+		} else if(typeof i !== 'number'){
+			throw new Error('Invalid input. Number of item must be a number.')
+		}
+	
+		const firstHalfArr = list.slice(0, i);
+		const secondHalfArr = list.slice(i + 1);
+		
+		return firstHalfArr.concat(secondHalfArr);
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -227,7 +262,21 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNItems = (i, num, list) => {
+		if(i > list.length || i + num > list.length){
+			throw new Error(`Invalid input. Number of item can't be greater than list amount`);
+		} else if(i < 0){
+			throw new Error(`Invalid input. Number of item can't be lesser than 0.`);
+		} else if(typeof i !== 'number'){
+			throw new Error(`Invalid input. Number of item must be a number.`);
+		}
+
+		const firstHalfArr = list.slice(0, i);
+		const secondHalfArr = list.slice(i + num + 1);
+
+		return firstHalfArr.concat(secondHalfArr);
+
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -306,7 +355,15 @@
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems = (i, list) => {
+		 if(i < 0){
+			return list.slice(0, i);
+		 }	if(i > list.length){
+			 return list;
+		 }	if(i > 0){
+			 return list.slice(i);
+		 }
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -384,7 +441,21 @@
 			- if i < 0, just prepend
 	*/
 
-	// implement function here
+	const spliceItem = (item, i, list) => {
+		if(!(typeof item === 'object')){
+			throw new Error('Invalid data type.')
+		}
+		if(i > list.length){
+			list.splice(i, 0, item);
+			return list;
+		} if(i < 0){
+			list.splice(0, 0, item);
+			return list;
+		}
+		list.splice(i, 0, item);
+		return list;
+	}
+
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -451,7 +522,32 @@
 			- if `items` is empty, return list
 	*/
 
-	// implement function here
+	const spliceItems = (items, i, list=[]) => {
+
+		items.forEach((currentElement) => {
+			if(typeof currentElement !== 'object'){
+				throw new Error('Invalid input')
+			}
+		})
+
+		if(items.length === 0){
+			return list;
+		}
+
+		if(i >= list.length){
+			let newList = list.concat(items);
+			return newList;
+		}
+
+		if(i < 0){
+			let newList1 = items.concat(list);
+			return newList1;
+		}
+
+		let newList2 = list.slice(0, i).concat(items).concat(list.slice(i));
+		return newList2;
+
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -531,7 +627,33 @@
 			items1 THEN items in items2 as a single array
 	*/
 
-	// implement function here
+	const combineLists = (items1, items2) => {
+		
+		for(let key in items1){
+			if(typeof items1[key] !== 'object'){
+				throw new Error('Invalid input')
+			}
+		}
+
+		for(let key in items2){
+			if(typeof items2[key] !== 'object'){
+				throw new Error('Invalid input')
+			}
+		}
+
+		let list = [];
+
+		for(let key in items1){
+			list.push(items1[key]);
+		}
+
+		for(let key in items2){
+			list.push(items2[key]);
+		}
+	
+		return list;
+
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -583,7 +705,30 @@
 
 	*/
 
-	// implement function here
+	const splitListAt = (i, list) => {
+		if(i < 0){
+			let newList = [];
+			let list1 = list;
+			let list2 = [];
+			newList.push(list1);
+			newList.push(list2);
+			return newList;
+		} else if(i > list.length){
+			let newList = [];
+			let list1 = [];
+			let list2 = list;
+			newList.push(list1);
+			newList.push(list2);
+			return newList;
+		} 
+		let list1 = list.slice(0, i + 1);
+		let list2 = list.slice(i + 1);
+		let newList = [];
+		newList.push(list1);
+		newList.push(list2);
+		return newList;
+
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -663,7 +808,7 @@
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout = list => list.length < 10 ? true:false;
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -691,7 +836,12 @@
 			- sum all the price items and return value
 	*/
 
-	// implement function here
+		const computeSum = (list) => {
+			return list.reduce((acc, currentElement) => {
+				acc += currentElement.price;
+				return acc;
+			}, 0);
+		}
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -725,7 +875,20 @@
 
 	*/
 
-	// implement function here
+	const computeSumWithTax = (list, taxRate=8.125) => {
+		
+		taxRate = taxRate / 100;
+
+		const sum = list.reduce((acc, currentElement) => {
+			acc += currentElement.price;
+			return acc;
+		}, 0);
+
+		let taxSum = sum * taxRate;
+
+		return sum + taxSum;
+
+	}	
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -761,7 +924,29 @@
 			- if i or j not in range, throw error
 	*/
 
-	// implement function here
+    const computeSumInRange = (startIdx, endIdx, list) => {
+		if(startIdx > endIdx){
+			throw new Error('Invalid input.');
+		} else if(startIdx > list.length || endIdx > list.length){
+			throw new Error('Invalid input.')
+		} 
+
+		let sum = 0;
+
+		for(let i = startIdx; i <= endIdx  ; i++){
+			const currentObj = list[i];
+			const currentKeys = Object.keys(currentObj);
+
+			for(let j = startIdx; j <= endIdx; j++){
+				if(typeof currentObj[currentKeys[j]] === 'number'){
+					sum += currentObj[currentKeys[j]];
+				}
+			}
+		}
+
+		return sum;
+
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
