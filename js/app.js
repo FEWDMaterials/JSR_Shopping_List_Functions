@@ -23,11 +23,18 @@
 	*/
 
 	const newShoppingListItem = (item, price) =>{
+		// created a newItem with an empty object
 		const newItem = {};
+		//assigned item and price to the empty object
 		newItem['item'] = item;
 		newItem['price'] = price;
-
+		// return newItem with item and price inside
 		return newItem;
+
+		// return {
+		// 	'item': item,
+		// 	'price': price
+		// }
 
 	}
 
@@ -62,10 +69,16 @@
 	// implement function here
 
 	const addToShoppingList = (item, list = []) =>{
+		//created a function and set newItem as a variable
+		//(.concat()) - right side item{} was added or combined to the list[]
 		const newItem = list.concat(item);	
+		// returned newItem
 		return newItem;
+		//return list.concat(item)
 
 	}
+
+	// one liner ------ const addToShoppingList = (item, list = []) => list.concat(item)
 
 	// TEST
 	describe('2. addToShoppingList', () => {
@@ -100,12 +113,13 @@
 
 	// implement function here
 
-	const removeFromShoppingList = (list = []) => {
-		
+	const removeFromShoppingList = (list) => {
+		// if array is 0 return it
 		if (list.length === 0){
 			return list
+			// else if array has items remove the LAST item
 		} else list.pop()
-
+		// return list/[]
 		return list 
 		
 	} 
@@ -144,13 +158,15 @@
 
 	// implement function here
 const removeFirstItem = (list = []) =>{
+	// if array is empty return it
 	if (list.length === 0 ){
 		return list
 	} else 
-
+// if array has items remove the FIRST item
 	list.shift()
 	return list
 }
+
 	// TEST
 	describe('4. removeFirstItem', () => {
 		it('should remove from the end of the list', () => {
@@ -189,16 +205,28 @@ const removeFirstItem = (list = []) =>{
 
 	// implement function here
 const removeNthItem = (i, list = []) => {
-
+	// error statement if any of these conditions are met throw an error
 	if ((i > list.length) || (i < 0) || (typeof i !== 'number')){
 	throw new Error('error message');
 }
-	
+	// remove i position
 	list.splice(i,1);
+	// return the modified array
 	return list
 }
 
+// const removeNItems = (i, list = []) => {
+    
 
+// 	if (i > list.length || i < 0 || typeof i !== 'number') {
+// 		throw new Error('error message');
+// } else
+// slice1 = list.slice(0,i);
+// slice2 = list.slice(i+1);
+// return slice1.concat(slice2)
+	 
+// }
+	
 	// TEST
 	describe('5. removeNthItem', () => {
 		it('should remove i-th item from list', () => {
@@ -269,18 +297,44 @@ const removeNthItem = (i, list = []) => {
 
 	// implement function here
 
+	// const removeNItems = (i, num, list) =>{
+	// 	// throw error if any of these conditions are met
+	// 	if (i < 0 || typeof i !== 'number' || i > list.length || i + num >list.length || num > list.length || typeof num !== 'number'){
+	// 		throw new error('error')
+	// 	}
+	// 	// 
+	// 	for(let i = 0; i < list.length; i++){
+	// 		list.pop()
+	// 	}
+
+
+	// 	return list
+
+	// }
+
+	// let a = [10,9,8,7,6,5,4,3,2,1,0,]
 	const removeNItems = (i, num, list) =>{
-		if (i < 0 || typeof i !== 'number' || i > list.length || i + num >list.length || num > list.length || typeof num !== 'number'){
+		// throw error if any of these conditions are met
+		if (i < 0 || typeof i !== 'number' || i > list.length || i + num > list.length || num > list.length || typeof num !== 'number'){
 			throw new error('error')
 		}
 		for(let i = 0; i < list.length; i++){
 			list.pop()
 		}
+		
+		// for(let i = 0; i < list.length; i++){
+		// 	list.pop()
+		// }
+        let slice1 = list.slice(0,i)
+        let slice2 = list.slice(i+1,num)
+		let slice3 = list.slice(num+1)
+			
 
+        //let slice2 = slice1.slice(list)
 
-		return list
+		return slice1.concat(slice3)
 
-	}
+    }
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -363,15 +417,18 @@ const removeNthItem = (i, list = []) => {
 
 	const smartRemoveItems = (i, list = []) =>{
 		if (i < 0){
-			list.pop(i)
+			list.pop()
 			return list
 		} else if (i > 0){
-			list.shift(i)
+			list.shift()
 			return list
 		} else (i > list.length);{
 		 return list
 		}
 	}
+
+	// use slice
+
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -653,12 +710,26 @@ return list;
 
 	// implement function here
 const combineLists = (items1 , items2) =>{
-	if (typeof items1 !== 'object' || typeof items2 !== 'number'){
-		throw new error ('Error'); 
-	} else
-		const newItem = items1.concat(items2);
-	return newItem
-		
+
+//let sumItem = []; 
+
+	for(let i = 0; i < items1.length; i++){
+		if(typeof items1[i] !== 'object'){
+			throw new error('must be object')
+		}
+	}
+
+	for(let i = 0; i < items2.length; i++){
+		if(typeof items2[i] !== 'object'){
+			throw new error('must be object')
+		}
+	}
+
+			
+	 return items1.concat(items2);
+	  
+
+	//  return sumItem;
 		
 }
 	// TEST
@@ -712,16 +783,34 @@ const combineLists = (items1 , items2) =>{
 	*/
 
 	// implement function here
-	const splitListAt = (i,list = []) =>{
-		const list1 = list.slice(0,i)
-		const list2 = list.slice(i+1)
-		if (i < 0) {
-		return list1
-		}else if (i > list.length){
-			return list2.slice()
-		} else
-		return [list1,list2]
-	}
+	const splitListAt = (i,list) =>{
+        
+		// let ea = []
+		 
+			 let list1 = list.slice(0,i+1)
+			 let list2 = list.slice(i+1)
+			 const splitItem = [list1,list2]
+			 // console.log(list1)
+			 // console.log(list2)
+			 // console.log('-------------------------------------')
+	 
+			  if (i < 0) {
+			  list1 = list1.concat(list2)
+			  list2 = list.slice(0,0)
+				 return [list1, list2]
+			  
+			  }else if (i > list.length){
+				 list2 = list2.concat(list1)
+				 list1 = list.slice(0,0)
+			   
+				 return [list1, list2]
+			  }
+		 
+	 
+	 
+	 return splitItem
+	 
+	 }
 
 
 	// TEST
@@ -835,6 +924,20 @@ const combineLists = (items1 , items2) =>{
 	*/
 
 	// implement function here
+	
+const computeSum = (list) =>{
+	//const arr = []
+	let sum = 0;
+	for(let i = 0; i < list.length; i ++){
+		   
+		   sum = sum + list[i].price
+			//arr.push(sum)
+			//console.log(sum)
+	}
+	return sum
+} 
+
+console.log(computeSum([1,2,3]))
 
 	// TEST
 	describe('13. computeSum', () => {
