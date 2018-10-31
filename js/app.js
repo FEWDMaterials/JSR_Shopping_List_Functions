@@ -29,6 +29,7 @@
 			price: price
 		}
 	}
+console.log(newShoppingListItem);
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -59,8 +60,8 @@
 
 	// implement function here
 const addToShoppingList = (itemAndprice, list = []) => { 
-	const newItem = list.concat(itemAndprice); // item & price are one item in []
-	return newItem;
+	const updatedList = list.concat(itemAndprice); // item & price are one item in []
+	return updatedList;
 	}
 
 	// TEST
@@ -261,10 +262,9 @@ const addToShoppingList = (itemAndprice, list = []) => {
 	const removeNItems = (i, num, list = []) => { 
 		if (i < 0 || i > list.length-1 || typeof i !== "number" || 
 		typeof num !== "number" || num > list.length || i+num > list.length) {
-			throw new Error('Error - please enter an item from the list.')
+			throw new Error('Error - please enter an item or items from the list.')
 		}
 		return list.slice(0,i).concat(list.slice(i+num+1));
-	
 	}
 	// TEST
 	describe('6. removeNItems', () => {
@@ -344,6 +344,21 @@ const addToShoppingList = (itemAndprice, list = []) => {
 	*/
 
 	// implement function here
+	
+	const smartRemoveItems = (i, list = []) => { 
+		if (i < 0) {
+			list.splice(i);
+		// list.slice(0,list.length+i)
+		}
+		else if (i > list.length) {
+		return list;
+		}
+		else if (i > 0) {
+		list.splice(0,i);
+			// list.shift(i,list.length-i )
+		}
+		return list;
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -422,6 +437,23 @@ const addToShoppingList = (itemAndprice, list = []) => {
 	*/
 
 	// implement function here
+const spliceItem = (item, i, list = []) => {
+	// item is an obj, e.g., incl. item&price
+	if ((typeof item) !== 'object')
+	throw new Error('Error - this should show item and price.');	
+	if (i > list.length) {
+	 	list.push(item);
+	 	return list;
+	}
+	if (i < 0) {
+	list.splice(0, 0, item)
+	 	return list;
+	 }
+	 else {
+		list.splice(i, 0, item)
+		return list;
+	}
+}
 
 	// TEST
 	describe('8. spliceItem', () => {
