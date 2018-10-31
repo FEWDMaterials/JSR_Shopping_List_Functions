@@ -899,6 +899,15 @@
 
 	// implement function here
 
+	const computeSum = (list) => {
+		let sumOfPrice = 0; // creates variable that will store item prices
+		for (let i = 0; i < list.length; i++) {
+			sumOfPrice += list[i].price; // loops through price property of each item object in arr
+			// then adds the property values together and stores final total in the sum variable
+		}
+		return sumOfPrice;
+	}
+
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
