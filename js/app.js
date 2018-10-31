@@ -486,6 +486,29 @@
 
 	// implement function here
 
+	const spliceItem = (item, i, list) => {
+		// uses .slice but also included comments using .push, .unshift, .splice methods 
+		if (typeof item.item !== 'string' || typeof item.price !== 'number' || typeof item !== 'object') { 
+			throw new Error ('Input Error: try again')
+		}
+		else if (i > list.length) {
+			// list.push(item);  // pushing item to end of the list
+			return list.slice(0).concat(item);
+		}
+		else if (i < 0) {
+			// list.unshift(item); // adds item to beginning of list
+			const list2 = list.slice(0);
+			list2.unshift(item);
+			return list2;
+		}
+		else {
+			// list.splice(i, 0, item); // inputting item at the i(nth) index of list
+			const list2 = list.slice(0);
+			list2.splice(i,0,item);
+			return list2;
+		}
+	}
+
 	// TEST
 	describe('8. spliceItem', () => {
 		it('should throw an error if item is not valid', () => {
