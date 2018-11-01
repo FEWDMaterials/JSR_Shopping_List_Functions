@@ -1,4 +1,4 @@
-(function() { // protect the lemmings!
+(function () { // protect the lemmings!
 
 	/* 1
 		@function newShoppingListItem
@@ -19,10 +19,17 @@
 			OPTIONAL:
 				- validate that item has fewer than 10 characters
 				- validate that price is less than 100 and has only
-					two decimal places
+					two decimal places # test
 	*/
 
-	// implement function here
+	// SOLUTION TO PROBLEM 1
+
+	const newShoppingListItem = (item, price) => {
+		return {
+			item,
+			price
+		}
+	}
 
 	// TEST
 	describe('1. newShoppingListItem', () => {
@@ -52,9 +59,15 @@
 				- if shoppingList item is not passed in, throw error
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 2
+
+	const addToShoppingList = (item, list = []) => {
+		list.push(item);
+		return list;
+	}
 
 	// TEST
+
 	describe('2. addToShoppingList', () => {
 
 		it('should return a list', () => {
@@ -85,7 +98,16 @@
 				and then return the array
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 3
+
+	const removeFromShoppingList = arr => {
+		if (arr.length === 0) {
+			return arr;
+		}
+		else if (arr.length > 0) {
+			return arr.slice(0, arr.length - 1);
+		}
+	}
 
 	// TEST
 	describe('3. removeFromShoppingList', () => {
@@ -119,7 +141,16 @@
 				and then return the array
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 4
+
+	const removeFirstItem = (arr) => {
+		if (arr.length === 0) {
+			return arr;
+		}
+		else if (arr.length > 0) {
+			return arr.slice(1);
+		}
+	}
 
 	// TEST
 	describe('4. removeFirstItem', () => {
@@ -157,7 +188,19 @@
 			^^ return error
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 5
+
+	const removeNthItem = (i, list) => {
+		if (typeof (i) !== "number" || i < 0 || i > list.length) {
+			throw new Error('invalid input')
+		}
+		if (i < list.length) {
+			let newList1 = list.slice(0, i)
+			let newList2 = list.slice(i + 1)
+			// all the indices before and after i
+			return newList1.concat(newList2);
+		}
+	}
 
 	// TEST
 	describe('5. removeNthItem', () => {
@@ -227,7 +270,17 @@
 			^^ return error
 	*/
 
-	// implement function here
+	// SOLUTION TO NUMBER 6
+
+	const removeNItems = (i, num, list) => {
+		if (typeof (i) !== "number" || typeof (num) !== "number" || i < 0 || i + num > list.length || num > list.length) {
+			throw new Error('invalid input')
+		}
+		let slice1 = list.slice(0, i)
+		let slice2 = list.slice(i + num + 1)
+
+		return slice1.concat(slice2);
+	}
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -306,7 +359,19 @@
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems = (i, list) => {
+		if (i < 0) {
+			list.splice(i);
+		}
+		else if (i > list.length) {
+			return list;
+		}
+		else if (i > 0) {
+			list.splice(0, i);
+		}
+
+		return list;
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -384,7 +449,21 @@
 			- if i < 0, just prepend
 	*/
 
-	// implement function here
+	const spliceItem = (item, i, list) => {
+		if (typeof (item) !== "object") {
+			throw new Error('invalid input')
+		}
+		if (i < 0) {
+			list.unshift(item);
+		}
+		else if (i > list.length) {
+			list.push(item);
+		}
+		else {
+			list.splice(i, 0, item)
+		}
+		return list;
+	}
 
 	// TEST
 	describe('8. spliceItem', () => {
@@ -451,7 +530,25 @@
 			- if `items` is empty, return list
 	*/
 
-	// implement function here
+	const spliceItems = (items, i, list) => {
+		for (let j = 0; j < items.length; j++) {
+
+			if (typeof (items[j]) !== "object") {
+				throw new Error('Invalid input');
+			}
+		}
+		if (i > list.length) {
+			list.push(...items);
+		}
+		if (i < 0) {
+			list.unshift(...items);
+		}
+		else if (list.length === 0) {
+			return list;
+		}
+		list.splice(i, 0, ...items);
+		return list;
+	}
 
 	// TEST
 	describe('9. spliceItems', () => {
@@ -460,7 +557,7 @@
 				spliceItems([{
 					'item': 'test',
 					'price': 1,
-				},'invalidItem'], 0, [])
+				}, 'invalidItem'], 0, [])
 			}, Error);
 		});
 
@@ -531,7 +628,40 @@
 			items1 THEN items in items2 as a single array
 	*/
 
-	// implement function here
+	// 	const combineLists = (items1, items2) => {
+	// 		const looper = (arr, arr2) => {
+	// 		for (let i = 0; i < arr.length; i++) {
+	// 			let element = arr[i]
+	// 			if (typeof(element) !== "object") {
+	// 				throw new Error('Invalid input')
+	// 			}
+	// 		}
+	// 		return arr;
+	// 	}
+	// 	looper(items1);
+	// 	looper(items2);
+	// }
+
+	const combineLists = (items1, items2) => {
+		let newArray = [];
+
+		for (let i = 0; i < items1.length; i++) {
+			let element1 = items1[i]
+			if (typeof (element1) !== "object") {
+				throw new Error('Invalid input')
+			}
+			for (let i = 0; i < items2.length; i++) {
+				let element2 = items2[i]
+				if (typeof (element2) !== "object") {
+					throw new Error('Invalid input')
+				}
+			}
+		}
+		let copiedItems1 = [...items1]
+		let copiedItems2 = [...items2]
+		newArray = newArray.concat(copiedItems1, copiedItems2);
+		return newArray;
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -540,7 +670,7 @@
 				combineLists([{
 					'item': 'test',
 					'price': 1,
-				},'invalidItem'], [{
+				}, 'invalidItem'], [{
 					'item': 'test2',
 					'price': 2,
 				}])
@@ -549,12 +679,12 @@
 
 		it('should return single list with items of both lists', () => {
 			const list = combineLists([{
-					'item': 'test',
-					'price': 1,
-				}], [{
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}], [{
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list[0].item, 'test')
 			chai.assert.equal(list[0].price, 1)
@@ -577,24 +707,38 @@
 				is empty list
 			- if `i` > length of list, list1 is empty and `list2`
 				has all items
-
+	
 			- always return a list that looks like this:
 				[list1, list2]
-
+	
 	*/
 
-	// implement function here
+	const splitListAt = (i, list = []) => {
+		let list1 = []
+		let list2 = []
+		if (i < 0) {
+			list1 = list
+		}
+		else if (i >= list.length) {
+			list2 = list
+		}
+		else {
+			list1 = list.slice(0, i + 1)
+			list2 = list.slice(i + 1)
+		}
+		return [list1, list2]
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list1[0].item, 'test')
 			chai.assert.equal(list1[0].price, 1)
@@ -606,12 +750,12 @@
 
 		it('should put all items into list1 if i < 0', () => {
 			const [list1, list2] = splitListAt(-1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list1[0].item, 'test')
 			chai.assert.equal(list1[0].price, 1)
@@ -623,12 +767,12 @@
 
 		it('should put all items into list2 if i > length of list', () => {
 			const [list1, list2] = splitListAt(100, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(list1.length, 0)
 			chai.assert.equal(list2[0].item, 'test')
@@ -641,12 +785,12 @@
 
 		it('should return two lists', () => {
 			const [list1, list2] = splitListAt(1, [{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.isArray(list1)
 			chai.assert.isArray(list2)
@@ -663,18 +807,22 @@
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout = (array) => {
+		if (array.length < 10) {
+			return true
+		}
+	}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
 			chai.assert.equal(canExpressCheckout([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]), true);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]), true);
 		})
 	});
 
@@ -691,18 +839,24 @@
 			- sum all the price items and return value
 	*/
 
-	// implement function here
+    const computeSum = (list=[]) => {
+        let sum = 0;
+        for (let i = 0; i < list.length; i++) {
+            sum += list[i].price;
+        }
+    return sum;
+}
 
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
 			const sum = computeSum([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}]);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}]);
 
 			chai.assert.equal(sum, 3);
 		});
@@ -722,7 +876,7 @@
 			- sum all the price items and return value AND
 				apply tax value
 			- note that tax is passed in as percent not decimal
-
+	
 	*/
 
 	// implement function here
@@ -731,15 +885,15 @@
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
 			const sum = computeSumWithTax([{
-					'item': 'test',
-					'price': 1,
-				}, {
-					'item': 'test2',
-					'price': 2,
-				}], 10);
+				'item': 'test',
+				'price': 1,
+			}, {
+				'item': 'test2',
+				'price': 2,
+			}], 10);
 
 			// stupid hack to prevent the 3.3000000000000003 error...
-			chai.assert.equal(Math.floor(100*sum)/100, 3.3);
+			chai.assert.equal(Math.floor(100 * sum) / 100, 3.3);
 		});
 	});
 
@@ -796,7 +950,7 @@
 		})
 
 		it('should sum all the price items FROM start index `i` and end index `j` and return value', () => {
-			const sum =  computeSumInRange(1, 3, [
+			const sum = computeSumInRange(1, 3, [
 				newShoppingListItem('test', 1),
 				newShoppingListItem('test2', 2),
 				newShoppingListItem('test3', 3),
