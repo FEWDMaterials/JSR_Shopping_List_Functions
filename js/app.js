@@ -776,7 +776,9 @@
 			in list, return true
 	*/
 
-
+	const canExpressCheckout = (list = array) => {
+		return list.length < 10
+	}
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
@@ -803,8 +805,13 @@
 			- sum all the price items and return value
 	*/
 
-	// implement function here
-
+	const computeSum = (list = []) => {
+		let sum = 0;
+		for (let i = 0; i < list.length; i++) {
+		sum += list[i].price
+		}
+		return sum
+	}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
