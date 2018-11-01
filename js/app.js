@@ -718,6 +718,21 @@ return items1.concat(...items2);;
 
 	// implement function here
 
+const splitListAt = (i,list) => {
+	let list1 = [];
+	let list2 = [];
+	if (i<0){
+		list1 = list
+	}
+	else if ( i > list.length){
+		list2 = list
+	}
+	else {
+		list1 = list.slice(0, i+1)
+		list2 = list.slice(i,list.length - 1)
+	}
+	return [list1,list2]
+}
 	// TEST
 	describe('11. splitListAt', () => {
 		it('should break list into two at index', () => {
