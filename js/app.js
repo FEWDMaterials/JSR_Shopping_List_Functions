@@ -521,7 +521,29 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
-
+const spliceItems = (items, i, list = []) => {
+	for (let i = 0; i < items.length; i++) {
+		if ((typeof items[i]) !== 'object') {
+	throw new Error('Error - this should show item and price.');
+	}
+}
+if (i < 0) {
+	list.unshift(...items)
+	return list;
+}
+if (i > list.length) {
+	list.push(...items);
+	return list;
+}
+if (i < 0) {
+	list.splice(0,0,...items);
+	return list;
+}
+else {
+	list.splice(i,0,...items)
+	return list;
+}
+}
 	// TEST
 	describe('9. spliceItems', () => {
 		it('should throw an error if item is not valid', () => {
@@ -601,7 +623,19 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
-
+	const combineLists = (items1, items2) => {
+		for (let i = 0; i < items1.length; i++) {
+			if ((typeof items1[i]) !== 'object') {
+				throw new Error('Error - this should show item and price.');
+			}}
+			for (let i = 0; i < items1.length; i++) {
+			if ((typeof items2[i]) !== 'object') {
+				throw new Error('Error - this should show item and price.');
+			}}
+	let newCombineLists = items1.concat(items2);
+	return newCombineLists;
+		}
+	
 	// TEST
 	describe('10. combineLists', () => {
 		it('should throw an error if item is not valid', () => {
@@ -653,6 +687,22 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
+const splitListAt = (i, list = []) => {
+ 	let list1 = []
+ 	let list2 = []
+
+	if (i < 0) {
+		list1 = list
+ 		}
+	else if (i >= list.length) {
+		list2 = list
+	}
+	else {
+		list1 = list.slice(0, i+1)
+ 		list2 = list.slice(i+1) 
+	}
+	return [list1, list2]
+}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -761,7 +811,13 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
-
+	const computeSum = (list = []) => {
+        let sum = 0;
+        for (let i = 0; i < list.length; i++) {
+            sum += list[i].price;
+        }
+    return sum;
+}
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
@@ -795,7 +851,14 @@ const spliceItem = (item, i, list = []) => {
 	*/
 
 	// implement function here
-
+const computeSumWithTax = (list, taxRate) => {
+        let sum = 0;
+        for(let i = 0; i < list.length; i++) {
+            sum += list[i].price;
+        }
+        const tax = (taxRate * sum) / 100;
+    return sum + tax;
+}
 	// TEST
 	describe('14. computeSumWithTax', () => {
 		it('should return sum of all item prices in array + taxes', () => {
