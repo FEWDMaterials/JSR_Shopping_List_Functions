@@ -813,6 +813,29 @@ const splitListAt = (i,list) => {
 
 	// implement function here
 
+	const canExpressCheckout= (list =[])=>{
+		if (list.length<10) {
+			 return true;
+		}
+		
+		return false;
+		}
+	
+		// TEST
+		describe('12. canExpressCheckout', () => {
+			it('should return true if num items < 10', () => {
+				chai.assert.equal(canExpressCheckout([{
+						'item': 'test',
+						'price': 1,
+					}, {
+						'item': 'test2',
+						'price': 2,
+					}]), true);
+			})
+		});
+	
+
+
 	// TEST
 	describe('12. canExpressCheckout', () => {
 		it('should return true if num items < 10', () => {
