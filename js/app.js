@@ -650,6 +650,21 @@
 	*/
 
 	// implement function here
+	
+
+const combineLists = (items1, items2) => {
+for ( let h = 0; h < items1.length; h++){ 
+  if ((typeof items1[h]) !== "object"){
+    throw new Error("Error!")
+    } 
+    if ( (typeof items2[h]) !== "object"){
+      throw new Error("Error!")
+  }
+
+}
+
+return items1.concat(...items2);;
+}
 
 	// TEST
 	describe('10. combineLists', () => {
