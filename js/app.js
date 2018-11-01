@@ -864,6 +864,16 @@ const splitListAt = (i,list) => {
 
 	// implement function here
 
+	const computeSum = (list)=>{
+        for (let l = 0; l< list.length;l++){
+            let sumation = list[0].price + list[1].price
+            return sumation
+        }
+        return sumation
+    }
+
+
+
 	// TEST
 	describe('13. computeSum', () => {
 		it('should return sum of all item prices in array', () => {
