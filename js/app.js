@@ -21,6 +21,12 @@
 				- validate that price is less than 100 and has only
 					two decimal places
 	*/
+const newShoppingListItem = (item, price) => {
+	return {
+	item: item,
+	price: price
+	}
+} 
 
 	// implement function here
 
