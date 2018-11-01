@@ -252,7 +252,15 @@
 			^^ return error
 	*/
 
-	// implement function here
+	const removeNItems = (i,num,list) => {
+		if (i + num > list.length || i < 0 || typeof num != "number" || num > list.length)
+		throw new Error
+		
+		list.splice(i,i+num); 
+		return list
+	}
+
+	
 
 	// TEST
 	describe('6. removeNItems', () => {
@@ -331,7 +339,24 @@
 				from START of list
 	*/
 
-	// implement function here
+	const smartRemoveItems = (i,list) => {
+		if (i < 0){
+			for (let j = 0; j > i; j--) {
+				list.pop()
+			}
+			return list
+		}
+		if (i > list.length) {
+			return list
+		}
+		if (i > 0) {
+			for (let k = 0; k < i; k++)
+			list.shift ()
+		}
+			return list
+	
+	
+	}
 
 	// TEST
 	describe('7. smartRemoveItems', () => {
@@ -556,7 +581,24 @@
 			items1 THEN items in items2 as a single array
 	*/
 
-	// implement function here
+	const combineLists = (items1, items2) => {
+		let arr = []
+		for (let i = 0; i < items1.length; i++) {
+			if (typeof items1[i] !== 'object'){
+				throw new Error ('not an object')
+			}
+				
+		}
+		for (let i = 0; i < items2.length; i++) {
+			if (typeof items2[i] !== 'object'){
+				throw new Error ('not an object')
+			}
+				
+		}
+		arr = arr.concat(items1)
+		arr = arr.concat(items2)
+		return arr
+	}
 
 	// TEST
 	describe('10. combineLists', () => {
@@ -608,7 +650,30 @@
 
 	*/
 
-	// implement function here
+	const splitListAt = (i,list=[]) => {
+		let listCopy = list.slice()
+		let emptyArr = []
+		let list1 = []
+		let list2 = []
+		if (i < 0) {
+			list1 = listCopy.slice()
+		} else if (i > listCopy.length){
+			list2 = listCopy.slice()
+		}	else {
+			for(let j = 0; j < listCopy.length; j++){
+				if (j <= i){
+				list1.push(listCopy[j])
+				}	
+				else if (j > i){
+				list2.push(listCopy[j])
+				}
+			}
+		}
+		emptyArr[0] = list1
+		emptyArr[1] = list2
+		
+		 return emptyArr
+	}
 
 	// TEST
 	describe('11. splitListAt', () => {
@@ -688,7 +753,9 @@
 			in list, return true
 	*/
 
-	// implement function here
+	const canExpressCheckout = (list = []) => {
+		return list.length < 10
+	}
 
 	// TEST
 	describe('12. canExpressCheckout', () => {
@@ -716,7 +783,14 @@
 			- sum all the price items and return value
 	*/
 
-	// implement function here
+		const computeSum = (list = []) => {
+			let sum = 0;
+			for (let i = 0; i < list.length; i++) {
+			sum += list[i].price
+			}
+			return sum
+		}
+
 
 	// TEST
 	describe('13. computeSum', () => {
@@ -743,14 +817,21 @@
 			{
 				'item': 'eggs',
 				'price': 1.59
-			}
+			} 
 			- sum all the price items and return value AND
 				apply tax value
 			- note that tax is passed in as percent not decimal
 
 	*/
 
-	// implement function here
+	const computeSumWithTax = (list = [],taxRate) => {
+		let sum  = computeSum(list)
+		let total = 0
+		total = sum + (sum*(taxRate/100))
+
+		return total
+	}
+
 
 	// TEST
 	describe('14. computeSumWithTax', () => {
@@ -786,7 +867,17 @@
 			- if i or j not in range, throw error
 	*/
 
-	// implement function here
+	const computeSumInRange = (i,j,list= []) => {
+		let sum = 0;
+		if (i>j || i > list.length || j > list.length)
+		throw new Error ('it is an error')
+		
+			for (i; i <= j; i++) {
+			sum += list[i].price
+			}
+
+			return sum
+	}
 
 	// TEST
 	describe('15. computeSumInRange', () => {
